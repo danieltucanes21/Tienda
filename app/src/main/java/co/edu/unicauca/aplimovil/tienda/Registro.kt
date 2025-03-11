@@ -102,7 +102,7 @@ fun CampoTexto(label: String, valor: MutableState<String>, esPassword: Boolean =
         onValueChange = { valor.value = it },
         label = { Text(label, color = Color.White) },
         textStyle = TextStyle(color = Color.White),
-        visualTransformation = if (esPassword) PasswordVisualTransformation() else VisualTransformation.None,
+       // visualTransformation = if (esPassword) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardOptions = if (esPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
         modifier = Modifier
             .fillMaxWidth()
