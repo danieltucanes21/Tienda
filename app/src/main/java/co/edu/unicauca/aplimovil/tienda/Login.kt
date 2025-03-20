@@ -36,7 +36,7 @@ fun LoginScreen() {
         ) {
             // Logo
             Image(
-                painter = painterResource(id = R.drawable.mindfulness2), // Asegúrate de tener el logo en res/drawable
+                painter = painterResource(id = R.drawable.ic_usuario), // Asegúrate de tener el logo en res/drawable
                 contentDescription = "Logo",
                 modifier = Modifier.size(120.dp)
             )
