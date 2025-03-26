@@ -1,0 +1,220 @@
+package co.edu.unicauca.aplimovil.tienda
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import edu.unicauca.apimovil.pixelplaza.ProductInfo
+import edu.unicauca.apimovil.pixelplaza.PublicType
+import edu.unicauca.apimovil.pixelplaza.Size
+import edu.unicauca.apimovil.pixelplaza.textBodyLarge
+import edu.unicauca.apimovil.pixelplaza.textBodyMedium
+import edu.unicauca.apimovil.pixelplaza.textBodySmall
+
+@Composable
+fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier) {
+    Card(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .padding(horizontal = 8.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondary),
+        shape = RoundedCornerShape(12.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
+        ) {
+            // Placeholder de la imagen
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight()
+                    .width(120.dp)
+                    .background(Color.Gray, shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)) // Fondo
+            ) {
+                Image(
+                    painter = product.painter,
+                    contentDescription = product.contentDescription,
+                    modifier = Modifier
+                        .fillMaxSize(),
+
+                    contentScale = ContentScale.Crop // Recorta para llenar el espacio
+                )
+            }
+
+            // Información del producto
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = product.description,
+                    fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+                    fontSize = textBodyLarge,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text(
+                    text = "Brand: ${product.brand}",
+                    fontSize = textBodySmall,
+                    color = MaterialTheme.colorScheme.onSecondary
+                )
+                Text(
+                    text = "Color: ${product.color}",
+                    fontSize = textBodySmall,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                )
+                Spacer(modifier = Modifier.weight(1f))
+                Text(
+                    text = "$${product.price}",
+                    fontSize = textBodyMedium,
+                    fontWeight = FontWeight.Bold,
+                    color = MaterialTheme.colorScheme.onSecondary,
+                )
+            }
+
+            // Ícono de eliminar
+            IconButton(
+                onClick = { /* Acción para eliminar */ },
+                modifier = Modifier.align(Alignment.CenterVertically)
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Delete,
+                    contentDescription = "Eliminar",
+                    tint = MaterialTheme.colorScheme.onSecondary
+                )
+            }
+        }
+    }
+}
+
+//@Preview
+@Composable
+fun ProductItemPreview () {
+    ProductItem(ProductInfo(
+        painter = painterResource(R.drawable.image_list_2),
+        contentDescription = "Vestido Rojo",
+        description = "Vestido elegante rojo con corte ajustado.",
+        price = 349.99,
+        color = "Rojo",
+        brand = "Zara",
+        sizes = listOf(Size.S, Size.M, Size.L),
+        specifications = "Poliéster y elastano, ideal para eventos",
+        score = 4,
+        publicType = PublicType.WOMEN
+    ))
+}
+
+//
+//@Composable
+//fun NavigationDrawer(
+//    navController: NavHostController,
+//    content: @Composable () -> Unit
+//) {
+//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+//    val scope = rememberCoroutineScope()
+//    var selectedItem by remember { mutableStateOf(0) }
+//
+//    val onItemClick: (Int) -> Unit = { index ->
+//        selectedItem = index
+//        scope.launch { drawerState.close() }
+//    }
+//
+//    ModalNavigationDrawer(
+//        drawerState = drawerState,
+//        gesturesEnabled = drawerState.isOpen,
+//        drawerContent = {
+//            Box(
+//                modifier = Modifier.fillMaxHeight(),
+//                contentAlignment = Alignment.CenterStart
+//            ) {
+//                ModalDrawerSheet(
+//                    modifier = Modifier
+//                        .width(72.dp)
+//                        .height(280.dp),
+//                    drawerShape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
+//                    drawerContainerColor = MaterialTheme.colorScheme.secondaryContainer
+//                ) {
+//                    Column(
+//                        modifier = Modifier.fillMaxSize(),
+//                        verticalArrangement = Arrangement.Center,
+//                        horizontalAlignment = Alignment.CenterHorizontally
+//                    ) {
+//                        NavigationIcon(
+//                            icon = Icons.Default.Home,
+//                            selected = selectedItem == 0,
+//                            onClick = {
+//                                onItemClick(0)
+//                                navController.navigate("home")
+//                            }
+//                        )
+//                        NavigationIcon(
+//                            icon = Icons.Default.ShoppingCart,
+//                            selected = selectedItem == 1,
+//                            onClick = {
+//                                onItemClick(1)
+//                                navController.navigate("cart")
+//                            }
+//                        )
+//                        NavigationIcon(
+//                            icon = Icons.Default.Check,
+//                            selected = selectedItem == 2,
+//                            onClick = {
+//                                onItemClick(2)
+//                                navController.navigate("purchaseHistory")
+//                            }
+//                        )
+//                        Spacer(modifier = Modifier.height(20.dp))
+//                        NavigationIcon(
+//                            icon = Icons.Default.CheckCircle,
+//                            selected = selectedItem == 3,
+//                            onClick = { onItemClick(3) }
+//                        )
+//                    }
+//                }
+//            }
+//        }
+//    ) {
+//        content()
+//    }
+//}
+//

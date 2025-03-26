@@ -6,13 +6,18 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -47,114 +52,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import co.edu.unicauca.aplimovil.tienda.ProductItem
 import co.edu.unicauca.aplimovil.tienda.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StoreScreenPreview () {
     val categoriesList = listOf("Mujeres", "Hombres", "Niños")
-    val productList = mutableListOf(
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_1), // Placeholder de imagen
-            contentDescription = "Camiseta Negra",
-            description = "Camiseta de algodón negra con diseño minimalista.",
-            price = 199.99,
-            color = "Negro",
-            brand = "Nike",
-            sizes = listOf(Size.S, Size.M, Size.L, Size.XL),
-            specifications = "100% algodón, transpirable",
-            score = 5,
-            publicType = PublicType.MEN
-        ),
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_2),
-            contentDescription = "Vestido Rojo",
-            description = "Vestido elegante rojo con corte ajustado.",
-            price = 349.99,
-            color = "Rojo",
-            brand = "Zara",
-            sizes = listOf(Size.S, Size.M, Size.L),
-            specifications = "Poliéster y elastano, ideal para eventos",
-            score = 4,
-            publicType = PublicType.WOMEN
-        ),
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_3),
-            contentDescription = "Pantalón Deportivo",
-            description = "Pantalón jogger cómodo para entrenamiento.",
-            price = 259.99,
-            color = "Gris",
-            brand = "Adidas",
-            sizes = listOf(Size.M, Size.L, Size.XL),
-            specifications = "Tela ligera, ajuste perfecto",
-            score = 5,
-            publicType = PublicType.MEN
-        ),
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_4),
-            contentDescription = "Blusa Blanca",
-            description = "Blusa formal de manga larga y corte clásico.",
-            price = 299.99,
-            color = "Blanco",
-            brand = "H&M",
-            sizes = listOf(Size.S, Size.M, Size.L, Size.XL),
-            specifications = "Tela fresca, ideal para oficina",
-            score = 4,
-            publicType = PublicType.WOMEN
-        ),
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_5),
-            contentDescription = "Zapatillas Running",
-            description = "Zapatillas deportivas con amortiguación superior.",
-            price = 499.99,
-            color = "Azul",
-            brand = "Nike",
-            sizes = listOf(Size.S, Size.M, Size.L, Size.XL, Size.XXL),
-            specifications = "Tecnología Air, suela antideslizante",
-            score = 5,
-            publicType = PublicType.MEN
-        ),
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_6),
-            contentDescription = "Sudadera con Capucha",
-            description = "Sudadera térmica con interior afelpado.",
-            price = 329.99,
-            color = "Negro",
-            brand = "Puma",
-            sizes = listOf(Size.M, Size.L, Size.XL),
-            specifications = "Material térmico, bolsillo frontal",
-            score = 4,
-            publicType = PublicType.WOMEN
-        ),
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_7),
-            contentDescription = "Abrigo Largo",
-            description = "Abrigo largo de invierno con botones metálicos.",
-            price = 699.99,
-            color = "Beige",
-            brand = "Mango",
-            sizes = listOf(Size.S, Size.M, Size.L),
-            specifications = "Lana y poliéster, ideal para frío intenso",
-            score = 5,
-            publicType = PublicType.WOMEN
-        ),
-        ProductInfo(
-            painter = painterResource(R.drawable.image_list_8),
-            contentDescription = "Chaqueta Deportiva Niño",
-            description = "Chaqueta impermeable para niños, con capucha.",
-            price = 279.99,
-            color = "Verde",
-            brand = "The North Face",
-            sizes = listOf(Size.S, Size.M, Size.L),
-            specifications = "Resistente al agua, transpirable",
-            score = 5,
-            publicType = PublicType.CHILD
-        )
-    )
-//    ShoppingScreen(productList)
+    val productList = generateData()
 
 
     var showMenu by remember { mutableStateOf(false) }
@@ -171,12 +80,12 @@ fun StoreScreenPreview () {
                         expanded = showMenu,
                         onDismissRequest = { showMenu = false }
                     ) {
-                        DropdownMenuItem(onClick = { /* Acción para la opción 1 */ }) {
-                            Text("Opción 1")
-                        }
-                        DropdownMenuItem(onClick = { /* Acción para la opción 2 */ }) {
-                            Text("Opción 2")
-                        }
+//                        DropdownMenuItem(onClick = { /* Acción para la opción 1 */ }) {
+//                            Text("Opción 1")
+//                        }
+//                        DropdownMenuItem(onClick = { /* Acción para la opción 2 */ }) {
+//                            Text("Opción 2")
+//                        }
                     }
                 },
                 actions = {
@@ -271,52 +180,78 @@ fun SearchBar() {
 
 @Composable
 fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier) {
-    Card(
+    Box(
         modifier = Modifier
-            .padding(8.dp),
-        colors = CardDefaults.cardColors(Color.Gray),
-        shape = RoundedCornerShape(8.dp)
+            .padding(8.dp)
     ) {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            Box()
-            {
-                Image(
-                    painter = product.painter,
-                    contentDescription = "Product Image",
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(160.dp),
-                    contentScale = ContentScale.Crop
-                )
-
-                // Botón "+"
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .align(alignment = Alignment.BottomCenter),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    IconButton(onClick = { /* TODO: Agregar al carrito */ }) {
-                        Icon(
-                            imageVector = Icons.Default.AddCircle,
-                            contentDescription = "Agregar",
-                            tint = Color(0xFF9C27B0)
-                        )
-                    }
+        Card(
+            modifier = Modifier
+                .wrapContentSize(),
+            colors = CardDefaults.cardColors(Color.Gray),
+            shape = RoundedCornerShape(8.dp)
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                Box {
+                    Image(
+                        painter = product.painter,
+                        contentDescription = "Product Image",
+                        modifier = Modifier
+                            .height(160.dp)
+                            .fillMaxWidth(),
+                        contentScale = ContentScale.Crop
+                    )
                 }
-            }
 
-            Text(
-                text = "$${product.price}",
-                fontWeight = FontWeight.Bold,
-                color = Color.White,
-                modifier = Modifier.padding(8.dp)
-            )
-            Text(
-                text = processText(product.description),
-                color = Color.White,
-                modifier = Modifier.padding(start = 8.dp, bottom = 8.dp)
+                Text(
+                    text = "$${product.price}",
+                    fontWeight = FontWeight.Bold,
+                    color = Color.White,
+                    modifier = Modifier.padding(8.dp)
+                )
+                Text(
+                    text = product.description,
+                    color = Color.White,
+                    modifier = Modifier.padding(horizontal = 8.dp),
+                    maxLines = 2,
+                    overflow = TextOverflow.Ellipsis
+                )
+            }
+        }
+
+        // Botón "+" solapado (mitad en imagen, mitad en precio)
+        IconButton(
+            onClick = { /* TODO: Agregar al carrito */ },
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .offset(y = (-48).dp)
+        ) {
+            Icon(
+                imageVector = Icons.Default.AddCircle,
+                contentDescription = "Agregar",
+                tint = Color(0xFF9C27B0),
+                modifier = Modifier.size(48.dp)
             )
         }
     }
+}
+
+
+@Preview
+@Composable
+fun ProductItemGridCardPreview () {
+    ProductItemGridCard(ProductInfo(
+        painter = painterResource(R.drawable.image_list_2),
+        contentDescription = "Vestido Rojo",
+        description = "Vestido elegante rojo con corte ajustado.",
+        price = 349.99,
+        color = "Rojo",
+        brand = "Zara",
+        sizes = listOf(Size.S, Size.M, Size.L),
+        specifications = "Poliéster y elastano, ideal para eventos",
+        score = 4,
+        publicType = PublicType.WOMEN
+    ))
 }

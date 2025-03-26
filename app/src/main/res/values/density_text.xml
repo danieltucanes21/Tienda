@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Tamaños para los textos de cuerpo -->
+    <dimen name="text_body_large">18.sp</dimen>
+    <dimen name="text_body_medium">16</dimen>
+    <dimen name="text_body_small">14</dimen>
+
+    <!-- Tamaños para los textos de titulos -->
+    <dimen name="text_title_large">42.sp</dimen>
+    <dimen name="text_title_medium">36.sp</dimen>
+    <dimen name="text_title_small">30.sp</dimen>
+
+    <!-- Tamaños para los textos de pantallas -->
+    <dimen name="text_display_large">42.sp</dimen>
+    <dimen name="text_display_medium">36.sp</dimen>
+    <dimen name="text_display_small">30.sp</dimen>
+
+    <!-- Tamaños para los textos de encabezados -->
+    <dimen name="text_headline_large">42sp</dimen>
+    <dimen name="text_headline_medium">36sp</dimen>
+    <dimen name="text_headline_small">30sp</dimen>
+
+    <!-- Tamaños para los textos de etiquetas -->
+    <dimen name="text_label_large">42sp</dimen>
+    <dimen name="text_label_medium">36sp</dimen>
+    <dimen name="text_label_small">30sp</dimen>
+
+</resources>
