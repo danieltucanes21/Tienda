@@ -12,19 +12,23 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -39,84 +43,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import co.edu.unicauca.aplimovil.tienda.ProductItem
+import androidx.navigation.compose.rememberNavController
+import co.edu.unicauca.aplimovil.tienda.components.ProductItem
 import co.edu.unicauca.aplimovil.tienda.R
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
-@Composable
-fun CartScreenPreview () {
-
-    val productList = generateData()
-
-
-    var showMenu by remember { mutableStateOf(false) }
-
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Pixel Plaza") },
-                navigationIcon = {
-                    IconButton(onClick = { showMenu = !showMenu }) {
-                        Icon(Icons.Default.Menu, contentDescription = "Menú")
-                    }
-                    DropdownMenu(
-                        expanded = showMenu,
-                        onDismissRequest = { showMenu = false }
-                    ) {
-//                        DropdownMenuItem(onClick = { /* Acción para la opción 1 */ }) {
-//                            Text("Opción 1")
-//                        }
-//                        DropdownMenuItem(onClick = { /* Acción para la opción 2 */ }) {
-//                            Text("Opción 2")
-//                        }
-                    }
-                },
-                actions = {
-                    Box(
-                        modifier = Modifier
-                            .size(60.dp)
-                            .padding(end = 8.dp),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Image(
-                            painter = painterResource(R.drawable.logo), // Reemplaza con tu recurso de logo
-                            contentDescription = "Logo",
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    }
-                }
-            )
-        }
-    ) { innerPadding ->
-        // Aplicar el innerPadding al contenido principal
-        CartScreen(
-            productList = productList,
-            modifier = Modifier.padding(innerPadding) // Aquí aplicamos el padding
-        )
-    }
-}
-
+import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
+import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
 
 @Composable
 fun CartScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier) {
     Column(
         modifier = modifier
             .fillMaxSize()
-            .background(Color.Black)
             .padding(16.dp) // Padding adicional para el contenido
     ) {
         // Título
         Text(
             text = "Carrito",
-            fontSize = 32.sp,
+            fontSize = textTitleLarge,
             fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.SansSerif,
-            letterSpacing = 14.sp,
-            color = Color.White,
+            fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
+            letterSpacing = letterSpacing,
+            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(bottom = 16.dp)
-                .align(alignment = Alignment.CenterHorizontally),
+                .align(alignment = Alignment.CenterHorizontally)
         )
 
         // Lista de productos con un weight para ocupar el espacio restante
@@ -134,6 +84,24 @@ fun CartScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modif
     }
 }
 
+@Preview
+@Composable
+fun CartScreenPreview () {
+    val productList = generateData()
+    val navController = rememberNavController()
+    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+
+    NavigationDrawer(navController = navController, drawerState = drawerState) {
+        ScreenWithAppBar(productList = productList,
+            drawerState = drawerState,
+            screen = { productList, modifier ->
+                CartScreen(
+                    productList = productList.toMutableList(),
+                    modifier = modifier
+                )
+            })
+    }
+}
 
 @Composable
 fun CartTotalSection(total: Double) {
@@ -141,26 +109,35 @@ fun CartTotalSection(total: Double) {
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp)
+            .background(MaterialTheme.colorScheme.surface)
+            .wrapContentSize(
+            )
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Text(text = "Monto total:", color = Color.White, fontSize = 18.sp)
-            Text(text = "$$total", color = Color.White, fontSize = 18.sp, fontWeight = FontWeight.Bold)
+            Text(
+                text = "Monto total:",
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = textLabelLarge,
+                fontFamily = MaterialTheme.typography.labelLarge.fontFamily)
+            Text(
+                text = "$$total",
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = textLabelLarge,
+                fontWeight = FontWeight.Bold,
+                fontFamily = MaterialTheme.typography.labelLarge.fontFamily)
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(
             onClick = { /* TODO: Acción de compra */ },
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF9C27B0)),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             modifier = Modifier.fillMaxWidth()
         ) {
-            Text(text = "Realizar compra", color = Color.White)
+            Text(text = "Realizar compra", color = MaterialTheme.colorScheme.onPrimary)
         }
     }
 }
-
-
-//tipos de letra conforma y robototo

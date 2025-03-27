@@ -26,9 +26,9 @@ val textHeadlineMedium = 36.sp
 val textHeadlineSmall = 30.sp
 
 // Tamaños para los textos de etiquetas
-val textLabelLarge = 32.sp
-val textLabelMedium = 30.sp
-val textLabelSmall = 28.sp
+val textLabelLarge = 16.sp
+val textLabelMedium = 14.sp
+val textLabelSmall = 10.sp
 
 val letterSpacing = 14.sp
 

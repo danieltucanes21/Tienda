@@ -1,4 +1,4 @@
-package co.edu.unicauca.aplimovil.tienda
+package co.edu.unicauca.aplimovil.tienda.screens
 
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
@@ -16,6 +16,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.edu.unicauca.aplimovil.tienda.R
+
 //import com.tu_paquete.R  // Asegúrate de importar correctamente tu archivo de recursos
 
 @Composable

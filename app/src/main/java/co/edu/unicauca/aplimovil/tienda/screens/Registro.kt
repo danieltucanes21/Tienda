@@ -1,4 +1,4 @@
-package co.edu.unicauca.aplimovil.tienda
+package co.edu.unicauca.aplimovil.tienda.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,6 +23,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.tooling.preview.Preview
+import co.edu.unicauca.aplimovil.tienda.R
 
 @Composable
 fun RegistroScreen() {

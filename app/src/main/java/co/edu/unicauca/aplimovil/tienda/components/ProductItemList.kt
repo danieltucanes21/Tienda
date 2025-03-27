@@ -1,20 +1,17 @@
-package co.edu.unicauca.aplimovil.tienda
+package co.edu.unicauca.aplimovil.tienda.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -29,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -37,7 +33,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import co.edu.unicauca.aplimovil.tienda.R
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.PublicType
 import edu.unicauca.apimovil.pixelplaza.Size
@@ -127,7 +123,7 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier) {
     }
 }
 
-//@Preview
+@Preview
 @Composable
 fun ProductItemPreview () {
     ProductItem(ProductInfo(
@@ -144,77 +140,3 @@ fun ProductItemPreview () {
     ))
 }
 
-//
-//@Composable
-//fun NavigationDrawer(
-//    navController: NavHostController,
-//    content: @Composable () -> Unit
-//) {
-//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-//    val scope = rememberCoroutineScope()
-//    var selectedItem by remember { mutableStateOf(0) }
-//
-//    val onItemClick: (Int) -> Unit = { index ->
-//        selectedItem = index
-//        scope.launch { drawerState.close() }
-//    }
-//
-//    ModalNavigationDrawer(
-//        drawerState = drawerState,
-//        gesturesEnabled = drawerState.isOpen,
-//        drawerContent = {
-//            Box(
-//                modifier = Modifier.fillMaxHeight(),
-//                contentAlignment = Alignment.CenterStart
-//            ) {
-//                ModalDrawerSheet(
-//                    modifier = Modifier
-//                        .width(72.dp)
-//                        .height(280.dp),
-//                    drawerShape = RoundedCornerShape(topEnd = 16.dp, bottomEnd = 16.dp),
-//                    drawerContainerColor = MaterialTheme.colorScheme.secondaryContainer
-//                ) {
-//                    Column(
-//                        modifier = Modifier.fillMaxSize(),
-//                        verticalArrangement = Arrangement.Center,
-//                        horizontalAlignment = Alignment.CenterHorizontally
-//                    ) {
-//                        NavigationIcon(
-//                            icon = Icons.Default.Home,
-//                            selected = selectedItem == 0,
-//                            onClick = {
-//                                onItemClick(0)
-//                                navController.navigate("home")
-//                            }
-//                        )
-//                        NavigationIcon(
-//                            icon = Icons.Default.ShoppingCart,
-//                            selected = selectedItem == 1,
-//                            onClick = {
-//                                onItemClick(1)
-//                                navController.navigate("cart")
-//                            }
-//                        )
-//                        NavigationIcon(
-//                            icon = Icons.Default.Check,
-//                            selected = selectedItem == 2,
-//                            onClick = {
-//                                onItemClick(2)
-//                                navController.navigate("purchaseHistory")
-//                            }
-//                        )
-//                        Spacer(modifier = Modifier.height(20.dp))
-//                        NavigationIcon(
-//                            icon = Icons.Default.CheckCircle,
-//                            selected = selectedItem == 3,
-//                            onClick = { onItemClick(3) }
-//                        )
-//                    }
-//                }
-//            }
-//        }
-//    ) {
-//        content()
-//    }
-//}
-//
