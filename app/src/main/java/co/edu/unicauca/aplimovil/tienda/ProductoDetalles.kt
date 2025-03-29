@@ -22,7 +22,7 @@ import co.edu.unicauca.aplimovil.tienda.R
 fun ProductoDetallesScreen(/*catalogo: Catalogo,*/ onBack: () -> Unit) {
     var tallaSeleccionada by remember { mutableStateOf<String?>(null) }
 
-    // Quemar datos del producto (esto luego vendrá de la clase Catalogo)
+
     val producto = Producto(
         id = 1,
         nombre = "Playera negra manga corta",
