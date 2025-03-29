@@ -132,11 +132,8 @@ fun TiendaApp() {
 
     if (productoSeleccionado == null) {
         ProductosScreen(onProductoClick = { productoSeleccionado = it })
-    } else {
-        ProductoDetallesScreen(producto = productoSeleccionado!!) {
-            productoSeleccionado = null
-        }
     }
+
 }
 
 @Preview(showBackground = true)
