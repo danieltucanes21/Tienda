@@ -16,12 +16,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
 
 //import com.tu_paquete.R  // Asegúrate de importar correctamente tu archivo de recursos
 
 @Composable
-fun LoginScreen() {
+fun LoginScreen(navController: NavHostController = rememberNavController()) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
 

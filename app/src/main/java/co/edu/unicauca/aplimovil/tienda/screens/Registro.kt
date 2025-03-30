@@ -4,7 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.PasswordVisualTransformation
+//import androidx.compose.foundation.text.input.PasswordVisualTransformation
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -25,9 +25,11 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 @Composable
-fun RegistroScreen() {
+fun RegistroScreen(navController: NavHostController = rememberNavController()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -52,7 +54,7 @@ fun RegistroScreen() {
             Text(
                 text = "Nueva cuenta",
                 fontSize = 24.sp,
-                style = MaterialTheme.typography.h6,
+//                style = MaterialTheme.typography.h6,
                 color = Color.White
             )
 
@@ -110,10 +112,10 @@ fun CampoTexto(label: String, valor: MutableState<String>, esPassword: Boolean =
             .fillMaxWidth()
             .background(Color.Black.copy(alpha = 0.3f), shape = RoundedCornerShape(10.dp))
             .padding(4.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.White,
-            unfocusedBorderColor = Color.Gray
-        )
+//        colors = TextFieldDefaults.outlinedTextFieldColors(
+//            focusedBorderColor = Color.White,
+//            unfocusedBorderColor = Color.Gray
+//        )
     )
 }
 

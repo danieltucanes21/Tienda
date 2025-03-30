@@ -18,10 +18,14 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+
+private const val s = "Elija un método de pago"
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasarelaScreen() {
+fun PasarelaScreen(navController: NavHostController = rememberNavController()) {
 
     var cardHolder by remember { mutableStateOf("") }
     var cardNumber by remember { mutableStateOf("") }
@@ -118,7 +122,9 @@ fun PasarelaScreen() {
                 onClick = { /* Acción de confirmar */ },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B5CF0)),
-                modifier = Modifier.fillMaxWidth().height(50.dp)
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
             ) {
                 Text("Confirmar", color = Color.White, fontSize = 18.sp)
             }

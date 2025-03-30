@@ -52,6 +52,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
@@ -80,7 +81,7 @@ fun StoreScreenPreview () {
 }
 
 @Composable
-fun StoreScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier) {
+fun StoreScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
     var selectedCategory by remember { mutableIntStateOf(0) }
     val categoriesList = listOf("Mujeres", "Hombres", "Niños")
 

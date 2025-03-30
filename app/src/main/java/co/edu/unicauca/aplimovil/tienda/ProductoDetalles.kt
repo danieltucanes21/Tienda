@@ -16,10 +16,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.foundation.lazy.grid.items
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
 
 @Composable
-fun ProductoDetallesScreen(/*catalogo: Catalogo,*/ onBack: () -> Unit) {
+fun ProductoDetallesScreen(navController: NavHostController = rememberNavController()) {
     var tallaSeleccionada by remember { mutableStateOf<String?>(null) }
 
 
@@ -121,5 +123,5 @@ fun ProductoDetallesScreen(/*catalogo: Catalogo,*/ onBack: () -> Unit) {
 @Composable
 fun PreviewProductoDetallesScreen() {
     //val catalogo = Catalogo( /* Aquí se quemaría un producto */ )
-    ProductoDetallesScreen() {}
+    ProductoDetallesScreen()
 }
