@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Tienda</string>
+
+    <string name="new_account">Nueva Cuenta</string>
+    <string name="description">Llena el siguiente formulario con tus datos personales. Crea una contraseña y registra una cuenta de correo electrónico.</string>
+    <string name="full_name">Nombre completo</string>
+    <string name="email">Correo electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="confirm_password">Confirmar contraseña</string>
+    <string name="create">Crear</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="sign_in_now">Iniciar sesión ahora</string>
+    <string name="sign_in">Iniciar sesión</string>
+    <string name="forgot_my_password">Olvidé mi contraseña</string>
+    <string name="continue_with">Continuar con</string>
+    <string name="main_logo">Logo principal</string>
+    <string name="facebook_logo">Facebook</string>
+    <string name="google_logo">Google</string>
+    <string name="user_logo">Logo de usuario</string>
 </resources>
