@@ -51,7 +51,7 @@ fun RegistroScreen() {
             Text(
                 text = "Nueva cuenta",
                 fontSize = 24.sp,
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.headlineLarge,
                 color = Color.White
             )
 

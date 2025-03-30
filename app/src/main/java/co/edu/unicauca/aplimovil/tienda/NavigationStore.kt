@@ -1,4 +1,4 @@
-package co.edu.unicauca.aplimovil.tienda.ui.theme
+package co.edu.unicauca.aplimovil.tienda
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -6,12 +6,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import co.edu.unicauca.aplimovil.tienda.Producto
-import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.screens.ProductoDetallesScreen
 import edu.unicauca.apimovil.pixelplaza.StoreScreen
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
-import edu.unicauca.apimovil.pixelplaza.ShoppingScreen
 import edu.unicauca.apimovil.pixelplaza.generateData
 
 
