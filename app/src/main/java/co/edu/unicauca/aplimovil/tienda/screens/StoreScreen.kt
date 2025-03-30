@@ -2,6 +2,7 @@ package edu.unicauca.apimovil.pixelplaza
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -52,6 +53,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
@@ -73,14 +75,15 @@ fun StoreScreenPreview () {
             screen = { productList, modifier ->
                 StoreScreen(
                     productList = productList.toMutableList(),
-                    modifier = modifier
+                    modifier = modifier,
+                    navController = navController
                 )
             })
     }
 }
 
 @Composable
-fun StoreScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier) {
+fun StoreScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier,navController: NavHostController) {
     var selectedCategory by remember { mutableIntStateOf(0) }
     val categoriesList = listOf("Mujeres", "Hombres", "Niños")
 
@@ -111,7 +114,10 @@ fun StoreScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modi
                     modifier = Modifier
                         .padding(4.dp)
                         .fillMaxWidth()
-                        .aspectRatio(0.75f)
+                        .aspectRatio(0.75f),
+                            onAddClick = {
+                        navController.navigate("productDetails/${product.id}")
+                    }
                 )
             }
         }

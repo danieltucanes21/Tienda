@@ -36,6 +36,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.edu.unicauca.aplimovil.tienda.ui.theme.AppNavigation
 import co.edu.unicauca.aplimovil.tienda.ui.theme.TiendaTheme
 
 class MainActivity : ComponentActivity() {
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TiendaTheme {
-                TiendaApp()
+                AppNavigation()
             }
         }
     }

@@ -1,5 +1,6 @@
 package edu.unicauca.apimovil.pixelplaza
 
+import android.widget.Button
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -26,10 +27,11 @@ import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.PixelPlazaAppBar
 import co.edu.unicauca.aplimovil.tienda.components.PixelPlazaScaffold
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
+import co.edu.unicauca.aplimovil.tienda.ui.theme.Screens
 import kotlinx.coroutines.launch
 
 @Composable
-fun ShoppingScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier) {
+fun ShoppingScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier, onClickButton: () -> Unit) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -52,8 +54,8 @@ fun ShoppingScreen(productList: MutableList<ProductInfo>, modifier: Modifier = M
         LazyColumn (
             modifier = Modifier.weight(1f)
         ) {
-            items(productList) {
-                ProductItem(it)
+            items(productList) { product ->
+                ProductItem(product = product, modifier = Modifier, onClickButton = onClickButton)
                 Spacer(modifier = Modifier.height(8.dp)) // Espaciado entre elementos
             }
         }
@@ -73,7 +75,8 @@ fun PreviewShoppingScreen() {
             screen = { productList, modifier ->
                 ShoppingScreen(
                     productList = productList.toMutableList(),
-                    modifier = modifier
+                    modifier = modifier,
+                    onClickButton = { navController.navigate(Screens.StoreScreen.name) }
                 )
         })
     }

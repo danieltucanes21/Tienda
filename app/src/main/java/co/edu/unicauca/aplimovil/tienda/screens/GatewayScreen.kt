@@ -1,4 +1,4 @@
-package co.edu.unicauca.aplimovil.tienda
+package co.edu.unicauca.aplimovil.tienda.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -18,6 +18,7 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import co.edu.unicauca.aplimovil.tienda.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +42,7 @@ fun PasarelaScreen() {
         ) {
             // Logo
             Image(
-                painter = painterResource(id = R.drawable.ic_usuario), 
+                painter = painterResource(id = R.drawable.ic_usuario),
                 contentDescription = "Logo",
                 modifier = Modifier.size(120.dp)
             )
