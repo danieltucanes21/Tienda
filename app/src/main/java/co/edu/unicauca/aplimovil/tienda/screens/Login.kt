@@ -11,6 +11,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.CampoTexto
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
@@ -21,7 +24,12 @@ import edu.unicauca.apimovil.pixelplaza.textTitleSmall
 
 
 @Composable
+
+fun LoginScreen(navController: NavHostController = rememberNavController()) {
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 fun LoginScreen() {
+
 
 
     val correo = remember { mutableStateOf("") }

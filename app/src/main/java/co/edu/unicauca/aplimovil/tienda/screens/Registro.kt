@@ -3,6 +3,10 @@ package co.edu.unicauca.aplimovil.tienda
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+
+import androidx.compose.foundation.text.KeyboardOptions
+//import androidx.compose.foundation.text.input.PasswordVisualTransformation
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,13 +21,17 @@ import androidx.compose.material3.Text
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+
 import co.edu.unicauca.aplimovil.tienda.ui.theme.surfaceLight
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
 import edu.unicauca.apimovil.pixelplaza.textTitleSmall
 
 @Composable
-fun RegistroScreen() {
+fun RegistroScreen(navController: NavHostController = rememberNavController()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -46,12 +54,19 @@ fun RegistroScreen() {
 
             // Texto de "Nueva cuenta"
             Text(
+
+                text = "Nueva cuenta",
+                fontSize = 24.sp,
+//                style = MaterialTheme.typography.h6,
+                color = Color.White
+
                 text = stringResource(R.string.new_account),
                 fontSize = textTitleSmall,
                 fontWeight = FontWeight.Bold,
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+
             )
 
             Spacer(modifier = Modifier.height(10.dp))
@@ -116,6 +131,29 @@ fun RegistroScreen() {
         }
     }
 }
+
+
+// Composable para los campos de entrada
+@Composable
+fun CampoTexto(label: String, valor: MutableState<String>, esPassword: Boolean = false) {
+    OutlinedTextField(
+        value = valor.value,
+        onValueChange = { valor.value = it },
+        label = { Text(label, color = Color.White) },
+        textStyle = TextStyle(color = Color.White),
+       // visualTransformation = if (esPassword) PasswordVisualTransformation() else VisualTransformation.None,
+        keyboardOptions = if (esPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(Color.Black.copy(alpha = 0.3f), shape = RoundedCornerShape(10.dp))
+            .padding(4.dp),
+//        colors = TextFieldDefaults.outlinedTextFieldColors(
+//            focusedBorderColor = Color.White,
+//            unfocusedBorderColor = Color.Gray
+//        )
+    )
+}
+
 
 
 
