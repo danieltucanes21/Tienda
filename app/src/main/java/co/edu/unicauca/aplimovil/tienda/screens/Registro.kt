@@ -20,7 +20,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import co.edu.unicauca.aplimovil.tienda.ui.theme.surfaceLight
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
-
 import edu.unicauca.apimovil.pixelplaza.textTitleSmall
 
 @Composable
