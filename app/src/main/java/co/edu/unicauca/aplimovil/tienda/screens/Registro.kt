@@ -4,12 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.foundation.text.input.PasswordVisualTransformation
-import androidx.compose.material.*
+
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.VisualTransformation
@@ -23,15 +22,25 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextFieldDefaults
+import androidx.compose.ui.res.stringResource
+
+import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
+
+import co.edu.unicauca.aplimovil.tienda.ui.theme.onSurfaceVariantDark
+
+import co.edu.unicauca.aplimovil.tienda.ui.theme.surfaceContainerLowLight
+import edu.unicauca.apimovil.pixelplaza.textBodyLarge
+import edu.unicauca.apimovil.pixelplaza.textBodySmall
+import edu.unicauca.apimovil.pixelplaza.textDisplaySmall
+import edu.unicauca.apimovil.pixelplaza.textTitleSmall
 
 @Composable
 fun RegistroScreen() {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(20.dp)
     ) {
         Column(
@@ -41,7 +50,7 @@ fun RegistroScreen() {
         ) {
             // Ícono de usuario
             Image(
-                painter = painterResource(id = R.drawable.ic_usuario), // Reemplázalo con tu recurso de imagen
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Usuario",
                 modifier = Modifier.size(80.dp)
             )
@@ -50,19 +59,19 @@ fun RegistroScreen() {
 
             // Texto de "Nueva cuenta"
             Text(
-                text = "Nueva cuenta",
-                fontSize = 24.sp,
-                style = MaterialTheme.typography.h6,
-                color = Color.White
+                text = stringResource(R.string.new_account),
+                fontSize = textTitleSmall,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurface
             )
 
             Spacer(modifier = Modifier.height(10.dp))
 
             // Descripción
             Text(
-                text = "Llena el siguiente formulario con tus datos personales. Crea una contraseña y registra una cuenta de correo electrónico.",
-                fontSize = 14.sp,
-                color = Color.White,
+                text = stringResource(R.string.description),
+                fontSize = textBodySmall,
+                color = MaterialTheme.colorScheme.onSurface,
                 textAlign = TextAlign.Center,
                 modifier = Modifier.padding(horizontal = 16.dp)
             )
@@ -75,12 +84,12 @@ fun RegistroScreen() {
             val password = remember { mutableStateOf("") }
             val confirmPassword = remember { mutableStateOf("") }
 
-            CampoTexto("Nombre completo", nombre)
-            CampoTexto("Correo electrónico", correo)
-            CampoTexto("Contraseña", password, true)
-            CampoTexto("Confirmar contraseña", confirmPassword, true)
+            CampoTexto("Nombre completo", nombre, modifier = Modifier.padding(bottom = 10.dp))
+            CampoTexto("Correo electrónico", correo, modifier = Modifier.padding(bottom = 10.dp))
+            CampoTexto("Contraseña", password, true, modifier = Modifier.padding(bottom = 10.dp))
+            CampoTexto("Confirmar contraseña", confirmPassword, true, modifier = Modifier.padding(bottom = 10.dp))
 
-            Spacer(modifier = Modifier.height(20.dp))
+            Spacer(modifier = Modifier.height(30.dp))
 
             // Botón de registro
             Button(
@@ -88,9 +97,9 @@ fun RegistroScreen() {
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),
-                colors = ButtonDefaults.buttonColors(Color(0xFF8A4FFF))
+                colors = ButtonDefaults.buttonColors(MaterialTheme.colorScheme.primary)
             ) {
-                Text(text = "Crear", fontSize = 18.sp, color = Color.White)
+                Text(text = "Crear", fontSize = textBodyLarge, color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }
@@ -98,22 +107,23 @@ fun RegistroScreen() {
 
 // Composable para los campos de entrada
 @Composable
-fun CampoTexto(label: String, valor: MutableState<String>, esPassword: Boolean = false) {
+fun CampoTexto(
+     label: String,
+     valor: MutableState<String>,
+     esPassword: Boolean = false,
+     modifier: Modifier = Modifier) {
     OutlinedTextField(
         value = valor.value,
         onValueChange = { valor.value = it },
-        label = { Text(label, color = Color.White) },
-        textStyle = TextStyle(color = Color.White),
-       // visualTransformation = if (esPassword) PasswordVisualTransformation() else VisualTransformation.None,
+        label = { Text(label, color = onSurfaceVariantDark) },
+        textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurface),
+        visualTransformation = if (esPassword) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardOptions = if (esPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
-            .background(Color.Black.copy(alpha = 0.3f), shape = RoundedCornerShape(10.dp))
+            .background(surfaceContainerLowLight, shape = RoundedCornerShape(10.dp))
             .padding(4.dp),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.White,
-            unfocusedBorderColor = Color.Gray
-        )
+       
     )
 }
 
