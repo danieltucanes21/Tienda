@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.edu.unicauca.aplimovil.tienda.R
 
-// Modelo de producto
+// Modelo de product
 data class Producto(
     val id: Int,
     val nombre: String,
