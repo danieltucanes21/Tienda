@@ -4,13 +4,11 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardOptions
-<<<<<<<<< Temporary merge branch 1:app/src/main/java/co/edu/unicauca/aplimovil/tienda/screens/Registro.kt
-=========
+
 //import androidx.compose.foundation.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 
 import androidx.compose.material.*
->>>>>>>>> Temporary merge branch 2:app/src/main/java/co/edu/unicauca/aplimovil/tienda/Registro.kt
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -58,11 +56,10 @@ fun RegistroScreen() {
             Text(
                 text = "Nueva cuenta",
                 fontSize = 24.sp,
-<<<<<<<<< Temporary merge branch 1:app/src/main/java/co/edu/unicauca/aplimovil/tienda/screens/Registro.kt
+
                 style = MaterialTheme.typography.headlineLarge,
-=========
                 style = MaterialTheme.typography.headlineSmall,
->>>>>>>>> Temporary merge branch 2:app/src/main/java/co/edu/unicauca/aplimovil/tienda/Registro.kt
+
                 color = Color.White
             )
 
