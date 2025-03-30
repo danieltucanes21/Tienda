@@ -38,8 +38,8 @@ fun RegistroScreen() {
         ) {
             // Ícono de usuario
             Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Usuario",
+                painter = painterResource(id = R.drawable.user),
+                contentDescription = stringResource(R.string.user_logo),
                 modifier = Modifier.size(110.dp)
             )
 
@@ -75,10 +75,26 @@ fun RegistroScreen() {
             val password = remember { mutableStateOf("") }
             val confirmPassword = remember { mutableStateOf("") }
 
-           CampoTexto(stringResource(R.string.full_name), nombre, modifier = Modifier.padding(bottom = 10.dp))
-            CampoTexto(stringResource(R.string.email),correo, modifier = Modifier.padding(bottom = 10.dp))
-            CampoTexto (stringResource(R.string.password), password, true, modifier = Modifier.padding(bottom = 10.dp))
-            CampoTexto(stringResource(R.string.confirm_password), confirmPassword, true, modifier = Modifier.padding(bottom = 10.dp))
+           CampoTexto(
+               label =stringResource(R.string.full_name),
+               valor = nombre,
+               modifier = Modifier.padding(bottom = 10.dp)
+           )
+            CampoTexto(
+                label =stringResource(R.string.email),
+                valor = correo,
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
+            CampoTexto (
+                label =stringResource(R.string.password),
+                valor = password, true,
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
+            CampoTexto(
+                label =stringResource(R.string.confirm_password),
+                valor = confirmPassword, true,
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
 
             Spacer(modifier = Modifier.height(30.dp))
 
@@ -102,7 +118,7 @@ fun RegistroScreen() {
     }
 }
 
-// Composable para los campos de entrada
+
 
 
 // Preview para ver la pantalla en Android Studio

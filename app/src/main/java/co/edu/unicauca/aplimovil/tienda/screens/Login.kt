@@ -40,7 +40,7 @@ fun LoginScreen() {
             // Logo
             Image(
                 painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Logo",
+                contentDescription = stringResource(R.string.main_logo),
                 modifier = Modifier.size(180.dp)
             )
 
@@ -64,8 +64,17 @@ fun LoginScreen() {
 
 
 
-            CampoTexto(stringResource(R.string.email), correo, modifier = Modifier.padding(bottom = 10.dp) )
-            CampoTexto(stringResource(R.string.password), password, modifier = Modifier.padding(bottom = 10.dp) )
+            CampoTexto(
+                label = stringResource(R.string.email),
+                valor = correo,
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
+
+            CampoTexto(
+                label =stringResource(R.string.password),
+                valor = password,
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -111,23 +120,23 @@ fun LoginScreen() {
             // Botones de Google y Facebook centrados
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center, // Centra los iconos
+                horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 IconButton(onClick = { /* Iniciar sesión con Google */ }) {
                     Image(
-                        painter = painterResource(id = R.drawable.google_icon), // Agrega tu ícono de Google en res/drawable
-                        contentDescription = "Google",
+                        painter = painterResource(id = R.drawable.google_icon),
+                        contentDescription = stringResource(R.string.google_logo),
                         modifier = Modifier.size(40.dp)
                     )
                 }
 
-                Spacer(modifier = Modifier.width(20.dp)) // Espacio entre los iconos
+                Spacer(modifier = Modifier.width(20.dp))
 
                 IconButton(onClick = { /* Iniciar sesión con Facebook */ }) {
                     Image(
-                        painter = painterResource(id = R.drawable.facebook), // Agrega tu ícono de Facebook en res/drawable
-                        contentDescription = "Facebook",
+                        painter = painterResource(id = R.drawable.facebook),
+                        contentDescription = stringResource(R.string.facebook_logo),
                         modifier = Modifier.size(40.dp)
                     )
                 }

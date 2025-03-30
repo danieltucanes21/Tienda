@@ -13,4 +13,8 @@
     <string name="sign_in">Iniciar sesión</string>
     <string name="forgot_my_password">Olvidé mi contraseña</string>
     <string name="continue_with">Continuar con</string>
+    <string name="main_logo">Logo principal</string>
+    <string name="facebook_logo">Facebook</string>
+    <string name="google_logo">Google</string>
+    <string name="user_logo">Logo de usuario</string>
 </resources>
