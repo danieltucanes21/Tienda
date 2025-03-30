@@ -3,32 +3,33 @@ package co.edu.unicauca.aplimovil.tienda.screens
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.*
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.*
-import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import co.edu.unicauca.aplimovil.tienda.R
+import co.edu.unicauca.aplimovil.tienda.components.CampoTexto
+import edu.unicauca.apimovil.pixelplaza.textBodyLarge
+import edu.unicauca.apimovil.pixelplaza.textBodyMedium
+import edu.unicauca.apimovil.pixelplaza.textBodySmall
+import edu.unicauca.apimovil.pixelplaza.textTitleSmall
 
-//import com.tu_paquete.R  // Asegúrate de importar correctamente tu archivo de recursos
+
 
 @Composable
 fun LoginScreen() {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
 
+
+    val correo = remember { mutableStateOf("") }
+    val password = remember { mutableStateOf("") }
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF111111))
+            .background(MaterialTheme.colorScheme.surface)
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -38,36 +39,33 @@ fun LoginScreen() {
         ) {
             // Logo
             Image(
-                painter = painterResource(id = R.drawable.ic_usuario), // Asegúrate de tener el logo en res/drawable
+                painter = painterResource(id = R.drawable.logo),
                 contentDescription = "Logo",
-                modifier = Modifier.size(120.dp)
+                modifier = Modifier.size(180.dp)
             )
 
             // Texto de bienvenida
-            Text("Bienvenido", fontSize = 30.sp, color = Color.White)
-            Text("Inicia sesión ahora", fontSize = 16.sp, color = Color.Gray)
+            Text(stringResource(R.string.welcome),
+                fontSize = textTitleSmall,
+                fontWeight = FontWeight.Bold,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+
+            )
+            Text(
+                text = stringResource(R.string.sign_in_now),
+                fontSize = textBodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+                
+            )
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            // Campo de correo electrónico
-            OutlinedTextField(
-                value = email,
-                onValueChange = { email = it },
-                label = { Text("Correo electrónico") },
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Email),
-                modifier = Modifier.fillMaxWidth()
-            )
 
-            Spacer(modifier = Modifier.height(8.dp))
 
-            // Campo de contraseña
-            OutlinedTextField(
-                value = password,
-                onValueChange = { password = it },
-                label = { Text("Contraseña") },
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Password),
-                modifier = Modifier.fillMaxWidth()
-            )
+            CampoTexto(stringResource(R.string.email), correo, modifier = Modifier.padding(bottom = 10.dp) )
+            CampoTexto(stringResource(R.string.password), password, modifier = Modifier.padding(bottom = 10.dp) )
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -75,29 +73,38 @@ fun LoginScreen() {
             Button(
                 onClick = { /* Acción de inicio de sesión */ },
                 shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B5CF0)),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 modifier = Modifier.fillMaxWidth().height(50.dp)
             ) {
-                Text("Iniciar sesión", color = Color.White, fontSize = 18.sp)
+                Text(stringResource(R.string.sign_in),
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = textBodyLarge,
+                    fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+                )
+
+
             }
 
             Spacer(modifier = Modifier.height(12.dp))
 
             // Texto "Olvidé mi contraseña"
-            ClickableText(
-                text = AnnotatedString("Olvidé mi contraseña"),
-                onClick = { /* Navegar a pantalla de recuperación */ },
-                style = TextStyle(color = Color(0xFF7B5CF0), fontSize = 14.sp, textAlign = TextAlign.Center)
+            Text(
+                text = stringResource(R.string.forgot_my_password),
+                fontSize = textBodyMedium,
+                color = MaterialTheme.colorScheme.onSurface,
+                fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+
             )
 
-            Spacer(modifier = Modifier.height(20.dp))
-
-            // Línea divisoria
-            Divider(color = Color.Gray, thickness = 1.dp, modifier = Modifier.fillMaxWidth(0.8f))
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Text("Continuar con", color = Color.Gray, fontSize = 14.sp)
+            Text(text = stringResource(R.string.continue_with),
+                color = MaterialTheme.colorScheme.onSurface,
+                fontSize = textBodySmall,
+                fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -129,6 +136,7 @@ fun LoginScreen() {
         }
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

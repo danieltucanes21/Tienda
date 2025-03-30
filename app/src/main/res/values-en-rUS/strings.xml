@@ -3,4 +3,14 @@
     <string name="app_name">Store</string>
     <string name="new_account">New account</string>
     <string name="description">Fill out the following form with your personal information. Create a password and register an email address.</string>
+    <string name="full_name">Full name</string>
+    <string name="email">E-mail</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
+    <string name="create">Create</string>
+    <string name="welcome">Welcome</string>
+    <string name="sign_in_now">Sign in now</string>
+    <string name="sign_in">Sign in</string>
+    <string name="forgot_my_password">Forgot my password</string>
+    <string name="continue_with">Continue with</string>
 </resources>
