@@ -48,7 +48,8 @@ fun AppNavHost(
                 screen = { productList, modifier ->
                     StoreScreen(
                         productList = productList.toMutableList(),
-                        modifier = modifier
+                        modifier = modifier,
+                        navController = navController
                     )
                 })
 //            ShoppingScreen(productList = productList, navController = navController)
@@ -87,14 +88,13 @@ fun AppNavHost(
         composable(Screen.Card.route) {
             PasarelaScreen(navController)
         }
-        composable(Screen.DetailProduct.route + "/{productId}") { backStackEntry ->
+        composable("DetailProduct/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-            ProductoDetallesScreen(
-                productId = productId,
-                productList = productList,
-                onBack = { navController.popBackStack() }
-            )
+            ProductoDetallesScreen(productId = productId, productList = productList) {
+                navController.popBackStack()
+            }
         }
+
 
     }
 }
