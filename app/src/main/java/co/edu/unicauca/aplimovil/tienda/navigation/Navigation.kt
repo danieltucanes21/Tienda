@@ -2,6 +2,7 @@ package co.edu.unicauca.aplimovil.tienda.navigation
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -11,14 +12,28 @@ import co.edu.unicauca.aplimovil.tienda.RegistroScreen
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
 import co.edu.unicauca.aplimovil.tienda.screens.LoginScreen
 import co.edu.unicauca.aplimovil.tienda.screens.PixelPlazaScreen
+import co.edu.unicauca.aplimovil.tienda.viewModel.NavigationViewModel
 import edu.unicauca.apimovil.pixelplaza.CartScreen
 import edu.unicauca.apimovil.pixelplaza.ShoppingScreen
 import edu.unicauca.apimovil.pixelplaza.StoreScreen
 import edu.unicauca.apimovil.pixelplaza.generateData
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 @Composable
-fun AppNavHost(navController : NavHostController,
-               drawerState : DrawerState) {
+fun AppNavHost(
+    navController: NavHostController,
+    drawerState: DrawerState,
+    viewModel: NavigationViewModel = viewModel()
+) {
+    Navigator.initialize(viewModel)
+
+    LaunchedEffect(Unit) {
+        viewModel.navigationEvents.collect { route ->
+            navController.navigate(route) {
+                launchSingleTop = true
+            }
+        }
+    }
     val productList = generateData()
     NavHost(navController = navController, startDestination = Screen.Start.route)
 
