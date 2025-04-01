@@ -26,11 +26,6 @@ import edu.unicauca.apimovil.pixelplaza.textTitleSmall
 @Composable
 
 fun LoginScreen(navController: NavHostController = rememberNavController()) {
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
-fun LoginScreen() {
-
-
 
     val correo = remember { mutableStateOf("") }
     val password = remember { mutableStateOf("") }
@@ -59,14 +54,14 @@ fun LoginScreen() {
                 color = MaterialTheme.colorScheme.onSurface,
                 fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
 
-            )
+                )
             Text(
                 text = stringResource(R.string.sign_in_now),
                 fontSize = textBodyMedium,
                 color = MaterialTheme.colorScheme.onSurface,
                 fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
-                
-            )
+
+                )
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -112,7 +107,7 @@ fun LoginScreen() {
                 color = MaterialTheme.colorScheme.onSurface,
                 fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
 
-            )
+                )
 
 
             Spacer(modifier = Modifier.height(12.dp))

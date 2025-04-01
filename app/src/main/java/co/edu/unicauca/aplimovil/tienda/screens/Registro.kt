@@ -52,23 +52,6 @@ fun RegistroScreen(navController: NavHostController = rememberNavController()) {
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            // Texto de "Nueva cuenta"
-            Text(
-
-                text = "Nueva cuenta",
-                fontSize = 24.sp,
-//                style = MaterialTheme.typography.h6,
-                color = Color.White
-
-                text = stringResource(R.string.new_account),
-                fontSize = textTitleSmall,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium,
-                color = MaterialTheme.colorScheme.onSurface,
-                fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
-
-            )
-
             Spacer(modifier = Modifier.height(10.dp))
 
             // Descripción
@@ -89,11 +72,11 @@ fun RegistroScreen(navController: NavHostController = rememberNavController()) {
             val password = remember { mutableStateOf("") }
             val confirmPassword = remember { mutableStateOf("") }
 
-           CampoTexto(
-               label =stringResource(R.string.full_name),
-               valor = nombre,
-               modifier = Modifier.padding(bottom = 10.dp)
-           )
+            CampoTexto(
+                label =stringResource(R.string.full_name),
+                valor = nombre,
+                modifier = Modifier.padding(bottom = 10.dp)
+            )
             CampoTexto(
                 label =stringResource(R.string.email),
                 valor = correo,
@@ -131,29 +114,6 @@ fun RegistroScreen(navController: NavHostController = rememberNavController()) {
         }
     }
 }
-
-
-// Composable para los campos de entrada
-@Composable
-fun CampoTexto(label: String, valor: MutableState<String>, esPassword: Boolean = false) {
-    OutlinedTextField(
-        value = valor.value,
-        onValueChange = { valor.value = it },
-        label = { Text(label, color = Color.White) },
-        textStyle = TextStyle(color = Color.White),
-       // visualTransformation = if (esPassword) PasswordVisualTransformation() else VisualTransformation.None,
-        keyboardOptions = if (esPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Black.copy(alpha = 0.3f), shape = RoundedCornerShape(10.dp))
-            .padding(4.dp),
-//        colors = TextFieldDefaults.outlinedTextFieldColors(
-//            focusedBorderColor = Color.White,
-//            unfocusedBorderColor = Color.Gray
-//        )
-    )
-}
-
 
 
 
