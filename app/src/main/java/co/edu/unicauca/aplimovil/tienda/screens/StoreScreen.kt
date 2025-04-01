@@ -74,7 +74,8 @@ fun StoreScreenPreview () {
             screen = { productList, modifier ->
                 StoreScreen(
                     productList = productList.toMutableList(),
-                    modifier = modifier
+                    modifier = modifier,
+                    navController = navController
                 )
             })
     }
@@ -112,7 +113,10 @@ fun StoreScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modi
                     modifier = Modifier
                         .padding(4.dp)
                         .fillMaxWidth()
-                        .aspectRatio(0.75f)
+                        .aspectRatio(0.75f),
+                    onAddClick = {
+                        navController.navigate("productDetails/${product.id}")
+                    }
                 )
             }
         }

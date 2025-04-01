@@ -1,4 +1,4 @@
-package co.edu.unicauca.aplimovil.tienda
+package co.edu.unicauca.aplimovil.tienda.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -19,13 +19,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-
-private const val s = "Elija un método de pago"
+import co.edu.unicauca.aplimovil.tienda.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasarelaScreen(navController: NavHostController = rememberNavController()) {
+fun PasarelaScreen(navController: NavHostController) {
 
     var cardHolder by remember { mutableStateOf("") }
     var cardNumber by remember { mutableStateOf("") }
@@ -45,7 +43,7 @@ fun PasarelaScreen(navController: NavHostController = rememberNavController()) {
         ) {
             // Logo
             Image(
-                painter = painterResource(id = R.drawable.ic_usuario), 
+                painter = painterResource(id = R.drawable.ic_usuario),
                 contentDescription = "Logo",
                 modifier = Modifier.size(120.dp)
             )
@@ -122,9 +120,7 @@ fun PasarelaScreen(navController: NavHostController = rememberNavController()) {
                 onClick = { /* Acción de confirmar */ },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B5CF0)),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(50.dp)
+                modifier = Modifier.fillMaxWidth().height(50.dp)
             ) {
                 Text("Confirmar", color = Color.White, fontSize = 18.sp)
             }
@@ -161,5 +157,5 @@ fun CampoTexto(
 @Preview(showBackground = true)
 @Composable
 fun PreviewPasarelaScreen() {
-    PasarelaScreen()
+    //PasarelaScreen(navController = NavHostController()) // Reemplaza null con un NavHostController válido si es necesario
 }

@@ -2,13 +2,11 @@ package co.edu.unicauca.aplimovil.tienda.navigation
 
 import androidx.compose.material3.DrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import co.edu.unicauca.aplimovil.tienda.PasarelaScreen
-import co.edu.unicauca.aplimovil.tienda.ProductoDetallesScreen
+import co.edu.unicauca.aplimovil.tienda.screens.PasarelaScreen
+import co.edu.unicauca.aplimovil.tienda.screens.ProductoDetallesScreen
 import co.edu.unicauca.aplimovil.tienda.RegistroScreen
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
 import co.edu.unicauca.aplimovil.tienda.screens.LoginScreen
@@ -41,7 +39,10 @@ fun AppNavHost(navController : NavHostController,
                 screen = { productList, modifier ->
                     ShoppingScreen(
                         productList = productList.toMutableList(),
-                        modifier = modifier
+                        modifier = modifier,
+                        onClickButton = {
+                            navController.navigate(Screen.Store.route)
+                        }
                     )
                 })
         }
@@ -65,8 +66,14 @@ fun AppNavHost(navController : NavHostController,
         composable(Screen.Card.route) {
             PasarelaScreen(navController)
         }
-        composable(Screen.DetailProduct.route) {
-            ProductoDetallesScreen(navController)
+        composable(Screen.DetailProduct.route + "/{productId}") { backStackEntry ->
+            val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
+            ProductoDetallesScreen(
+                productId = productId,
+                productList = productList,
+                onBack = { navController.popBackStack() }
+            )
         }
+
     }
 }
