@@ -42,7 +42,7 @@ import edu.unicauca.apimovil.pixelplaza.textBodyMedium
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
 
 @Composable
-fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier) {
+fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onClickButton: () -> Unit = {}) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -110,7 +110,7 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier) {
 
             // Ícono de eliminar
             IconButton(
-                onClick = { /* Acción para eliminar */ },
+                onClick = { onClickButton },
                 modifier = Modifier.align(Alignment.CenterVertically)
             ) {
                 Icon(
@@ -127,6 +127,7 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier) {
 @Composable
 fun ProductItemPreview () {
     ProductItem(ProductInfo(
+        id = 1,
         painter = painterResource(R.drawable.image_list_2),
         contentDescription = "Vestido Rojo",
         description = "Vestido elegante rojo con corte ajustado.",

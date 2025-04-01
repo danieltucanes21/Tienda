@@ -37,6 +37,7 @@ fun generateData () : MutableList<ProductInfo>
 {
     return mutableListOf(
         ProductInfo(
+            id = 0,
             painter = painterResource(R.drawable.image_list_1), // Placeholder de imagen
             contentDescription = "Camiseta Negra",
             description = "Camiseta de algodón negra con diseño minimalista.",
@@ -49,6 +50,7 @@ fun generateData () : MutableList<ProductInfo>
             publicType = PublicType.MEN
         ),
         ProductInfo(
+            id = 1,
             painter = painterResource(R.drawable.image_list_2),
             contentDescription = "Vestido Rojo",
             description = "Vestido elegante rojo con corte ajustado.",
@@ -61,6 +63,7 @@ fun generateData () : MutableList<ProductInfo>
             publicType = PublicType.WOMEN
         ),
         ProductInfo(
+            id = 2,
             painter = painterResource(R.drawable.image_list_3),
             contentDescription = "Pantalón Deportivo",
             description = "Pantalón jogger cómodo para entrenamiento.",
@@ -73,6 +76,7 @@ fun generateData () : MutableList<ProductInfo>
             publicType = PublicType.MEN
         ),
         ProductInfo(
+            id = 3,
             painter = painterResource(R.drawable.image_list_4),
             contentDescription = "Blusa Blanca",
             description = "Blusa formal de manga larga y corte clásico.",
@@ -85,6 +89,7 @@ fun generateData () : MutableList<ProductInfo>
             publicType = PublicType.WOMEN
         ),
         ProductInfo(
+            id = 4,
             painter = painterResource(R.drawable.image_list_5),
             contentDescription = "Zapatillas Running",
             description = "Zapatillas deportivas con amortiguación superior.",
@@ -97,6 +102,7 @@ fun generateData () : MutableList<ProductInfo>
             publicType = PublicType.MEN
         ),
         ProductInfo(
+            id = 5,
             painter = painterResource(R.drawable.image_list_6),
             contentDescription = "Sudadera con Capucha",
             description = "Sudadera térmica con interior afelpado.",
@@ -109,6 +115,7 @@ fun generateData () : MutableList<ProductInfo>
             publicType = PublicType.WOMEN
         ),
         ProductInfo(
+            id = 6,
             painter = painterResource(R.drawable.image_list_7),
             contentDescription = "Abrigo Largo",
             description = "Abrigo largo de invierno con botones metálicos.",
@@ -121,6 +128,7 @@ fun generateData () : MutableList<ProductInfo>
             publicType = PublicType.WOMEN
         ),
         ProductInfo(
+            id = 7,
             painter = painterResource(R.drawable.image_list_8),
             contentDescription = "Chaqueta Deportiva Niño",
             description = "Chaqueta impermeable para niños, con capucha.",

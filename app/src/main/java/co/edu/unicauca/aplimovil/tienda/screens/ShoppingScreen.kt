@@ -1,5 +1,6 @@
 package edu.unicauca.apimovil.pixelplaza
 
+import android.widget.Button
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -27,10 +28,11 @@ import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.PixelPlazaAppBar
 import co.edu.unicauca.aplimovil.tienda.components.PixelPlazaScaffold
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
+import co.edu.unicauca.aplimovil.tienda.navigation.Screens
 import kotlinx.coroutines.launch
 
 @Composable
-fun ShoppingScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
+fun ShoppingScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier, navController: NavHostController = rememberNavController(),onClickButton: () -> Unit) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -74,7 +76,8 @@ fun PreviewShoppingScreen() {
             screen = { productList, modifier ->
                 ShoppingScreen(
                     productList = productList.toMutableList(),
-                    modifier = modifier
+                    modifier = modifier,
+                    onClickButton = {navController.navigate(Screens.StoreScreen.name) }
                 )
         })
     }

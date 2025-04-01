@@ -142,15 +142,6 @@ fun PixelPlazaScreen() {
     }
 }
 
-@Composable
-fun TiendaApp() {
-    var productoSeleccionado by remember { mutableStateOf<Producto?>(null) }
-
-    if (productoSeleccionado == null) {
-        ProductosScreen(onProductoClick = { productoSeleccionado = it })
-    }
-
-}
 
 @Preview(showBackground = true)
 @Composable

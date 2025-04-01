@@ -38,7 +38,7 @@ import edu.unicauca.apimovil.pixelplaza.textLabelMedium
 import edu.unicauca.apimovil.pixelplaza.textLabelSmall
 
 @Composable
-fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier) {
+fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onAddClick: () -> Unit = {}) {
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -85,7 +85,7 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier) {
 
         // Botón "+" solapado (mitad en imagen, mitad en precio)
         IconButton(
-            onClick = { /* TODO: Agregar al carrito */ },
+            onClick = {onAddClick() },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .offset(y = (-48).dp)
@@ -106,6 +106,7 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier) {
 fun ProductItemGridCardPreview () {
     ProductItemGridCard(
         ProductInfo(
+        id = 1,
         painter = painterResource(R.drawable.image_list_2),
         contentDescription = "Vestido Rojo",
         description = "Vestido elegante rojo con corte ajustado.",
@@ -116,6 +117,8 @@ fun ProductItemGridCardPreview () {
         specifications = "Poliéster y elastano, ideal para eventos",
         score = 4,
         publicType = PublicType.WOMEN
-    )
+    ),
+        onAddClick = {/* TO DO */},
+        modifier = Modifier.fillMaxWidth(0.5f).height(300.dp) // Ajusta el tamaño del preview
     )
 }
