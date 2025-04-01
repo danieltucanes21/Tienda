@@ -30,7 +30,7 @@ fun ProductoDetallesScreen(productId: String, productList: List<ProductInfo>, on
         var tallaSeleccionada by remember { mutableStateOf<String?>(null) }
         val tallas = listOf("XS", "S", "M", "L", "XL", "UN", "5", "7", "9", "11", "13", "15")
 
-        LazyColumn(modifier = Modifier.fillMaxSize().background(Color.Black)) {
+        LazyColumn(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
             item {
                 Image(
                     painter = producto.painter,
@@ -42,12 +42,12 @@ fun ProductoDetallesScreen(productId: String, productList: List<ProductInfo>, on
 
             item {
                 Column(modifier = Modifier.padding(16.dp)) {
-                    Text(text = producto.contentDescription, fontSize = 24.sp, fontWeight = FontWeight.Bold, color = Color.White)
-                    Text(text = "$${producto.price}", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = Color(0xFF7B5CF0))
+                    Text(text = producto.contentDescription, fontSize = 24.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.onSurface)
+                    Text(text = "$${producto.price}", fontSize = 20.sp, fontWeight = FontWeight.Bold, color = MaterialTheme.colorScheme.primary)
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text(text = "Tallas", fontSize = 18.sp, color = Color.White)
+                    Text(text = "Tallas", fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface)
                     Spacer(modifier = Modifier.height(8.dp))
 
                     // **Grilla de Tallas**
@@ -56,44 +56,44 @@ fun ProductoDetallesScreen(productId: String, productList: List<ProductInfo>, on
                             Button(
                                 onClick = { tallaSeleccionada = talla },
                                 colors = ButtonDefaults.buttonColors(
-                                    containerColor = if (tallaSeleccionada == talla) Color(0xFF7B5CF0) else Color.DarkGray
+                                    containerColor = if (tallaSeleccionada == talla) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.secondary
                                 ),
                                 modifier = Modifier.padding(4.dp)
                             ) {
-                                Text(text = talla, color = Color.White)
+                                Text(text = talla, color = MaterialTheme.colorScheme.onSecondary)
                             }
                         }
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text("ESPECIFICACIONES", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
+                    Text("ESPECIFICACIONES", fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color.DarkGray, RoundedCornerShape(8.dp))
+                            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(8.dp))
                             .padding(12.dp)
                     ) {
                         Column {
-                            Text("• Corte ajustado", color = Color.White)
-                            Text("• Cuello redondo", color = Color.White)
-                            Text("• 100% en algodón", color = Color.White)
+                            Text("• Corte ajustado", color = MaterialTheme.colorScheme.onSecondary)
+                            Text("• Cuello redondo", color = MaterialTheme.colorScheme.onSecondary)
+                            Text("• 100% en algodón", color = MaterialTheme.colorScheme.onSecondary)
                         }
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text("CALIFICACIONES", fontSize = 18.sp, color = Color.White, fontWeight = FontWeight.Bold)
-                    Text("4.8 ★★★★★", fontSize = 16.sp, color = Color(0xFF7B5CF0))
+                    Text("CALIFICACIONES", fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface, fontWeight = FontWeight.Bold)
+                    Text("4.8 ★★★★★", fontSize = 16.sp, color = MaterialTheme.colorScheme.primary)
 
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Button(
                         onClick = { /* Agregar al carrito */ },
                         modifier = Modifier.fillMaxWidth().height(50.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B5CF0))
+                        colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                     ) {
-                        Text("Agregar al carrito", color = Color.White, fontSize = 18.sp)
+                        Text("Agregar al carrito", color = MaterialTheme.colorScheme.onPrimary, fontSize = 18.sp)
                     }
                 }
             }

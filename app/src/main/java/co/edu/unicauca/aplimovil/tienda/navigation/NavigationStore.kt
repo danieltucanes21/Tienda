@@ -19,6 +19,7 @@ import kotlin.collections.map
 fun AppNavigation(modifier: Modifier = Modifier) {
     val navController = rememberNavController()
     val productList = generateData()
+
     NavHost(navController = navController, startDestination = Screens.StoreScreen.name) {
         composable(route = Screens.StoreScreen.name) {
             StoreScreen(productList = productList, navController = navController)
@@ -29,9 +30,9 @@ fun AppNavigation(modifier: Modifier = Modifier) {
                 navController.popBackStack()
             }
         }
-
     }
 }
+
 
 @Composable
 fun convertToProducto(productInfo: ProductInfo): Producto {

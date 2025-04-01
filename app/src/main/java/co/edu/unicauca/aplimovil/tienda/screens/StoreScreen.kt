@@ -114,8 +114,8 @@ fun StoreScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modi
                         .padding(4.dp)
                         .fillMaxWidth()
                         .aspectRatio(0.75f),
-                    onAddClick = {
-                        navController.navigate("productDetails/${product.id}")
+                    onAddClick = { productId ->
+                        navController.navigate("DetailProduct/$productId")
                     }
                 )
             }

@@ -38,7 +38,7 @@ import edu.unicauca.apimovil.pixelplaza.textLabelMedium
 import edu.unicauca.apimovil.pixelplaza.textLabelSmall
 
 @Composable
-fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onAddClick: () -> Unit = {}) {
+fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onAddClick: (String) -> Unit = {}) {
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -85,7 +85,7 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onA
 
         // Botón "+" solapado (mitad en imagen, mitad en precio)
         IconButton(
-            onClick = {onAddClick() },
+            onClick = {onAddClick(product.id.toString()) },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .offset(y = (-48).dp)
