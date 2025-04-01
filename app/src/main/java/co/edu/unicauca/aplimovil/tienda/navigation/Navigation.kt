@@ -10,6 +10,7 @@ import co.edu.unicauca.aplimovil.tienda.screens.ProductoDetallesScreen
 import co.edu.unicauca.aplimovil.tienda.RegistroScreen
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
 import co.edu.unicauca.aplimovil.tienda.screens.LoginScreen
+import co.edu.unicauca.aplimovil.tienda.screens.PixelPlazaScreen
 import edu.unicauca.apimovil.pixelplaza.CartScreen
 import edu.unicauca.apimovil.pixelplaza.ShoppingScreen
 import edu.unicauca.apimovil.pixelplaza.StoreScreen
@@ -19,7 +20,12 @@ import edu.unicauca.apimovil.pixelplaza.generateData
 fun AppNavHost(navController : NavHostController,
                drawerState : DrawerState) {
     val productList = generateData()
-    NavHost(navController = navController, startDestination = Screen.Store.route) {
+    NavHost(navController = navController, startDestination = Screen.Start.route)
+
+    {
+        composable(Screen.Start.route) {
+            PixelPlazaScreen(navController)
+        }
         composable(Screen.Store.route) {
             ScreenWithAppBar(
                 productList = productList,
@@ -60,7 +66,7 @@ fun AppNavHost(navController : NavHostController,
         composable(Screen.Login.route) {
             LoginScreen(navController)
         }
-        composable(Screen.Signup.route) {
+        composable(Screen.SignUp.route) {
             RegistroScreen(navController)
         }
         composable(Screen.Card.route) {
