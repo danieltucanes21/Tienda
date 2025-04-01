@@ -20,6 +20,8 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import co.edu.unicauca.aplimovil.tienda.R
+import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
+import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -117,7 +119,7 @@ fun PasarelaScreen(navController: NavHostController) {
 
             // Botón de Confirmar
             Button(
-                onClick = { /* Acción de confirmar */ },
+                onClick = { Navigator.navigateTo(Screen.Store.route) },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B5CF0)),
                 modifier = Modifier.fillMaxWidth().height(50.dp)

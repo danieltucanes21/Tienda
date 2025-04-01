@@ -24,6 +24,8 @@ import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
+import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 
 import co.edu.unicauca.aplimovil.tienda.ui.theme.surfaceLight
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
@@ -97,7 +99,7 @@ fun RegistroScreen(navController: NavHostController = rememberNavController()) {
 
             // Botón de registro
             Button(
-                onClick = { /* Acción de registro */ },
+                onClick = { Navigator.navigateTo(Screen.Login.route) },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(50.dp),

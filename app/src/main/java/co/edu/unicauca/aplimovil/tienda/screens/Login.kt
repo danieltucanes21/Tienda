@@ -16,6 +16,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.CampoTexto
+import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
+import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
 import edu.unicauca.apimovil.pixelplaza.textBodyMedium
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
@@ -83,7 +85,7 @@ fun LoginScreen(navController: NavHostController = rememberNavController()) {
 
             // Botón de inicio de sesión
             Button(
-                onClick = { /* Acción de inicio de sesión */ },
+                onClick = { Navigator.navigateTo(Screen.Store.route) },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 modifier = Modifier.fillMaxWidth().height(50.dp)

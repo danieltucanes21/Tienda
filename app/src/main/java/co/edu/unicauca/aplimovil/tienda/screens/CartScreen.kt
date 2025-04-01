@@ -43,12 +43,16 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.components.ProductItem
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
+import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
+import co.edu.unicauca.aplimovil.tienda.navigation.Screen
+import co.edu.unicauca.aplimovil.tienda.viewModel.NavigationViewModel
 
 @Composable
 fun CartScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
@@ -106,6 +110,7 @@ fun CartScreenPreview () {
 
 @Composable
 fun CartTotalSection(total: Double) {
+    val viewModel: NavigationViewModel = viewModel()
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -134,7 +139,7 @@ fun CartTotalSection(total: Double) {
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(
-            onClick = { /* TODO: Acción de compra */ },
+            onClick = { Navigator.navigateTo(Screen.Card.route) },
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             modifier = Modifier.fillMaxWidth()
         ) {
