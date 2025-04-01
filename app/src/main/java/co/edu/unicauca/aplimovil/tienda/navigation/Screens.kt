@@ -6,5 +6,6 @@ enum class Screens(){
     ShoppingScreen,
     StoreScreen,
     SignUpScreen,
-    LogInScreen
+    LogInScreen,
+    StartScreen
 }
