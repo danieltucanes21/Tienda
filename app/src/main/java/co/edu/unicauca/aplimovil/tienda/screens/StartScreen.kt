@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DrawerValue
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
@@ -72,10 +73,10 @@ fun PixelPlazaScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.mindfulness2), // Reemplázalo con tu recurso
+                painter = painterResource(id = R.drawable.logo), // Reemplázalo con tu recurso
                 contentDescription = "Logo",
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(100.dp)
                     .clip(RoundedCornerShape(12.dp))
             )
 
@@ -97,20 +98,20 @@ fun PixelPlazaScreen(
             ) {
                 Button(
                     onClick = { navController.navigate(Screen.Store.route) },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color.Gray),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = "Ingresar", color = Color.White)
+                    Text(text = "Ingresar", color = MaterialTheme.colorScheme.onSecondary)
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Button(
                     onClick = { navController.navigate(Screen.SignUp.route) },
-                    colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B1FA2)), // Morado
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary), // Morado
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = "Registrarme", color = Color.White)
+                    Text(text = "Registrarme", color = MaterialTheme.colorScheme.onPrimary)
                 }
             }
         }

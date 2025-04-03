@@ -37,7 +37,7 @@ fun RegistroScreen(navController: NavHostController = rememberNavController()) {
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(surfaceLight)
+            .background(MaterialTheme.colorScheme.surface)
             .padding(20.dp)
     ) {
         Column(

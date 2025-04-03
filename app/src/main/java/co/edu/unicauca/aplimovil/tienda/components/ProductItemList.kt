@@ -48,7 +48,7 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onClickButt
             .fillMaxWidth()
             .wrapContentHeight()
             .padding(horizontal = 8.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondary),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
         shape = RoundedCornerShape(12.dp),
         elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
     ) {
@@ -85,26 +85,26 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onClickButt
                     fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,
                     fontSize = textBodyLarge,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSecondary,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                     maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
                     text = "Brand: ${product.brand}",
                     fontSize = textBodySmall,
-                    color = MaterialTheme.colorScheme.onSecondary
+                    color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Text(
                     text = "Color: ${product.color}",
                     fontSize = textBodySmall,
-                    color = MaterialTheme.colorScheme.onSecondary,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
                 Spacer(modifier = Modifier.weight(1f))
                 Text(
                     text = "$${product.price}",
                     fontSize = textBodyMedium,
                     fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.onSecondary,
+                    color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
             }
 
@@ -116,7 +116,7 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onClickButt
                 Icon(
                     imageVector = Icons.Default.Delete,
                     contentDescription = "Eliminar",
-                    tint = MaterialTheme.colorScheme.onSecondary
+                    tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
             }
         }

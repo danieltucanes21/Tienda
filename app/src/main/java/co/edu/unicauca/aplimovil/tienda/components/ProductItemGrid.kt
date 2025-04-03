@@ -22,7 +22,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -33,9 +32,6 @@ import co.edu.unicauca.aplimovil.tienda.R
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.PublicType
 import edu.unicauca.apimovil.pixelplaza.Size
-import edu.unicauca.apimovil.pixelplaza.textLabelLarge
-import edu.unicauca.apimovil.pixelplaza.textLabelMedium
-import edu.unicauca.apimovil.pixelplaza.textLabelSmall
 
 @Composable
 fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onAddClick: (String) -> Unit = {}) {

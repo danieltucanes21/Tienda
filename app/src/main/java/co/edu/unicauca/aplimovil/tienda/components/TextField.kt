@@ -32,14 +32,14 @@ fun CampoTexto(
     OutlinedTextField(
         value = valor.value,
         onValueChange = { valor.value = it },
-        label = { Text(label, color = onSurfaceVariantDark, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,) },
-        textStyle = TextStyle(color = onSurfaceLight, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,),
+        label = { Text(label, color = MaterialTheme.colorScheme.onSurfaceVariant, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,) },
+        textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurfaceVariant, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,),
 
         visualTransformation = if (esPassword) PasswordVisualTransformation() else VisualTransformation.None,
         keyboardOptions = if (esPassword) KeyboardOptions(keyboardType = KeyboardType.Password) else KeyboardOptions.Default,
         colors = TextFieldDefaults.colors(
-            focusedContainerColor = MaterialTheme.colorScheme.tertiary,
-            unfocusedContainerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+            focusedContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
             focusedIndicatorColor = Color.Transparent,  // Quita la línea en estado enfocado
             unfocusedIndicatorColor = Color.Transparent, // Quita la línea en estado no enfocado
             disabledIndicatorColor = Color.Transparent  // Quita la línea en estado deshabilitad
