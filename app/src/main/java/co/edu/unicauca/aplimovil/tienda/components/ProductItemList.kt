@@ -42,7 +42,7 @@ import edu.unicauca.apimovil.pixelplaza.textBodyMedium
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
 
 @Composable
-fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onClickButton: () -> Unit = {}) {
+fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onRemove: () -> Unit = {}) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -110,7 +110,7 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onClickButt
 
             // Ícono de eliminar
             IconButton(
-                onClick = { onClickButton },
+                onClick = { onRemove() },
                 modifier = Modifier.align(Alignment.CenterVertically)
             ) {
                 Icon(

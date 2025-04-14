@@ -18,6 +18,9 @@ import edu.unicauca.apimovil.pixelplaza.ShoppingScreen
 import edu.unicauca.apimovil.pixelplaza.StoreScreen
 import edu.unicauca.apimovil.pixelplaza.generateData
 import androidx.lifecycle.viewmodel.compose.viewModel
+import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
+import co.edu.unicauca.aplimovil.tienda.viewModel.ShoppingViewModel
+import co.edu.unicauca.aplimovil.tienda.viewModel.StoreViewModel
 
 @Composable
 fun AppNavHost(
@@ -25,6 +28,8 @@ fun AppNavHost(
     drawerState: DrawerState,
     viewModel: NavigationViewModel = viewModel()
 ) {
+    val cartViewModel: CartViewModel = viewModel()
+    val shoppingViewModel: ShoppingViewModel = viewModel()
     Navigator.initialize(viewModel)
 
     LaunchedEffect(Unit) {
@@ -60,11 +65,12 @@ fun AppNavHost(
                 drawerState = drawerState,
                 screen = { productList, modifier ->
                     ShoppingScreen(
-                        productList = productList.toMutableList(),
+                        initialProductList = productList.toMutableList(),
                         modifier = modifier,
-                        onClickButton = {
-                            navController.navigate(Screen.Store.route)
-                        }
+                        shoppingViewModel = shoppingViewModel
+//                        onClickButton = {
+//                            navController.navigate(Screen.Store.route)
+//                        }
                     )
                 })
         }
@@ -74,7 +80,8 @@ fun AppNavHost(
                 drawerState = drawerState,
                 screen = { productList, modifier ->
                     CartScreen(
-                        productList = productList.toMutableList(),
+                        initialProductList = productList.toMutableList(),
+                        cartViewModel = cartViewModel,
                         modifier = modifier
                     )
                 })
