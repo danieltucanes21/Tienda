@@ -1,6 +1,5 @@
 package co.edu.unicauca.aplimovil.tienda.navigation
 
-import androidx.navigation.NavHostController
 import co.edu.unicauca.aplimovil.tienda.viewModel.NavigationViewModel
 
 object Navigator {

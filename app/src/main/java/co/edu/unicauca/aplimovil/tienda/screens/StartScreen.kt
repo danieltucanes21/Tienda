@@ -98,20 +98,20 @@ fun PixelPlazaScreen(
             ) {
                 Button(
                     onClick = { navController.navigate(Screen.Store.route) },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = "Ingresar", color = MaterialTheme.colorScheme.onSecondary)
+                    Text(text = "Ingresar", color = MaterialTheme.colorScheme.onPrimary)
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Button(
                     onClick = { navController.navigate(Screen.SignUp.route) },
-                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary), // Morado
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary), // Morado
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = "Registrarme", color = MaterialTheme.colorScheme.onPrimary)
+                    Text(text = "Registrarme", color = MaterialTheme.colorScheme.onSecondary)
                 }
             }
         }
