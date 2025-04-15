@@ -21,6 +21,9 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
 import co.edu.unicauca.aplimovil.tienda.viewModel.ShoppingViewModel
 import co.edu.unicauca.aplimovil.tienda.viewModel.StoreViewModel
+import edu.unicauca.apimovil.pixelplaza.generateBuy
+import edu.unicauca.apimovil.pixelplaza.generateCart
+import edu.unicauca.apimovil.pixelplaza.user
 
 @Composable
 fun AppNavHost(
@@ -40,6 +43,11 @@ fun AppNavHost(
         }
     }
     val productList = generateData()
+
+    val user = user
+    val cartList = generateCart(user)
+    val buyList = generateBuy(user, cartList)
+
     NavHost(navController = navController, startDestination = Screen.Start.route)
 
     {
@@ -54,33 +62,30 @@ fun AppNavHost(
                     StoreScreen(
                         productList = productList.toMutableList(),
                         modifier = modifier,
-                        navController = navController
+                        navController = navController,
+                        cartViewModel = cartViewModel
                     )
                 })
-//            ShoppingScreen(productList = productList, navController = navController)
         }
         composable(Screen.Shopping.route) {
             ScreenWithAppBar(
-                productList = productList,
+                productList = buyList,
                 drawerState = drawerState,
-                screen = { productList, modifier ->
+                screen = { buyList, modifier ->
                     ShoppingScreen(
-                        initialProductList = productList.toMutableList(),
+                        initialBuyList = buyList.toMutableList(),
                         modifier = modifier,
                         shoppingViewModel = shoppingViewModel
-//                        onClickButton = {
-//                            navController.navigate(Screen.Store.route)
-//                        }
                     )
                 })
         }
         composable(Screen.Cart.route) {
             ScreenWithAppBar(
-                productList = productList,
+                productList = cartList,
                 drawerState = drawerState,
-                screen = { productList, modifier ->
+                screen = { cartList, modifier ->
                     CartScreen(
-                        initialProductList = productList.toMutableList(),
+                        initialCartList = cartList.toMutableList(),
                         cartViewModel = cartViewModel,
                         modifier = modifier
                     )

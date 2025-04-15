@@ -4,6 +4,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.sp
 import co.edu.unicauca.aplimovil.tienda.R
+import co.edu.unicauca.aplimovil.tienda.models.ProductBuy
+import co.edu.unicauca.aplimovil.tienda.models.ProductCart
+import co.edu.unicauca.aplimovil.tienda.models.User
+import java.sql.Date
+import java.util.Calendar
 
 // Tamaños para los textos de cuerpo
 val textBodyLarge = 18.sp
@@ -139,6 +144,63 @@ fun generateData () : MutableList<ProductInfo>
             specifications = "Resistente al agua, transpirable",
             score = 5,
             publicType = PublicType.CHILD
+        )
+    )
+}
+
+
+
+// Función para generar una compra
+fun generateBuy(user: User, cart: MutableList<ProductCart>): MutableList<ProductBuy> {
+    val currentDate = Date(Calendar.getInstance().timeInMillis)
+    return cart.map { productCart ->
+        ProductBuy(
+            idOwner = user.id,
+            product = productCart.product,
+            quantity = productCart.quantity,
+            selectedSize = productCart.selectedSize,
+            dateAdded = currentDate
+        )
+    }.toMutableList()
+}
+
+// Datos de ejemplo para un usuario
+val user = User(
+    id = 1,
+    email = "usuario@example.com",
+    password = "password123",
+    name = "Juan Pérez",
+    phone = "3001234567",
+    address = "Calle 123 #45-67, Bogotá"
+)
+
+// Función para generar un carrito de compras con los productos de ejemplo
+@Composable
+fun generateCart(user: User): MutableList<ProductCart> {
+    val products = generateData()
+    val currentDate = Date(Calendar.getInstance().timeInMillis)
+
+    return mutableListOf(
+        ProductCart(
+            idOwner = user.id,
+            product = products[0], // Camiseta Negra
+            quantity = 2,
+            selectedSize = "M",
+            dateAdded = currentDate
+        ),
+        ProductCart(
+            idOwner = user.id,
+            product = products[4], // Zapatillas Running
+            quantity = 1,
+            selectedSize = "L",
+            dateAdded = currentDate
+        ),
+        ProductCart(
+            idOwner = user.id,
+            product = products[6], // Abrigo Largo
+            quantity = 1,
+            selectedSize = "S",
+            dateAdded = currentDate
         )
     )
 }

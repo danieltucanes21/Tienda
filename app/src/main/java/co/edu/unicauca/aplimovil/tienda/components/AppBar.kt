@@ -93,10 +93,10 @@ fun PixelPlazaScaffold(
 
 //This composable let you combine a screen with de app bar
 @Composable
-fun ScreenWithAppBar(
-    productList: List<ProductInfo>,
+fun <T> ScreenWithAppBar(
+    productList: List<T>,
     drawerState: DrawerState,
-    screen: @Composable (List<ProductInfo>, Modifier) -> Unit
+    screen: @Composable (List<T>, Modifier) -> Unit
 ) {
     val scope = rememberCoroutineScope()
 

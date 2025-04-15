@@ -2,6 +2,8 @@ package co.edu.unicauca.aplimovil.tienda.viewModel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import co.edu.unicauca.aplimovil.tienda.models.ProductBuy
+import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +17,7 @@ class ShoppingViewModel : ViewModel() {
     val uiState: StateFlow<ShoppingUiState> = _uiState.asStateFlow()
 
     // Initialize with products
-    fun loadProducts(products: List<ProductInfo>) {
+    fun loadProducts(products: List<ProductBuy>) {
         _uiState.update {
             it.copy(
                 products = products,
@@ -39,7 +41,7 @@ class ShoppingViewModel : ViewModel() {
         }
     }
 
-    fun removeProduct(product: ProductInfo) {
+    fun removeProduct(product: ProductBuy) {
         _uiState.update { currentState ->
             val newList = currentState.products.toMutableList().apply { remove(product) }
             currentState.copy(

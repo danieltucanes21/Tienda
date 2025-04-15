@@ -56,6 +56,7 @@ import co.edu.unicauca.aplimovil.tienda.components.ProductItem
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
+import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
@@ -63,16 +64,16 @@ import co.edu.unicauca.aplimovil.tienda.viewModel.NavigationViewModel
 
 @Composable
 fun CartScreen(
-    initialProductList: List<ProductInfo>,
+    initialCartList: List<ProductCart>,
     modifier: Modifier = Modifier,
     cartViewModel: CartViewModel = viewModel()
 ) {
     val cartUiState by cartViewModel.uiState.collectAsState()
 
     // Inicializar solo si está vacío
-    LaunchedEffect(initialProductList) {
+    LaunchedEffect(initialCartList) {
         if (cartUiState.products.isEmpty()) {
-            cartViewModel.updateProductList(initialProductList)
+            cartViewModel.updateProductList(initialCartList)
         }
     }
 
@@ -92,7 +93,7 @@ fun CartScreen(
 
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(cartUiState.products) { product ->
-                ProductItem(product) {
+                ProductItem(product.product) {
                     cartViewModel.removeProduct(product)
                 }
                 Spacer(modifier = Modifier.height(8.dp))

@@ -46,24 +46,25 @@ import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.PixelPlazaAppBar
 import co.edu.unicauca.aplimovil.tienda.components.PixelPlazaScaffold
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
+import co.edu.unicauca.aplimovil.tienda.models.ProductBuy
+import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import co.edu.unicauca.aplimovil.tienda.navigation.Screens
 import co.edu.unicauca.aplimovil.tienda.viewModel.ShoppingViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun ShoppingScreen(
-    initialProductList: List<ProductInfo>,
+    initialBuyList: List<ProductBuy>,
     modifier: Modifier = Modifier,
-    navController: NavHostController = rememberNavController(),
     shoppingViewModel: ShoppingViewModel = viewModel()
 ) {
     val uiState by shoppingViewModel.uiState.collectAsState()
 //    val context = LocalContext.current
 
     // Initialize products
-    LaunchedEffect(initialProductList) {
+    LaunchedEffect(initialBuyList) {
         if (uiState.products.isEmpty()) {
-            shoppingViewModel.loadProducts(initialProductList)
+            shoppingViewModel.loadProducts(initialBuyList)
         }
     }
 
@@ -134,14 +135,6 @@ fun ShoppingScreen(
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                     )
                     Spacer(modifier = Modifier.height(16.dp))
-//                    Button(
-//                        onClick = onClickButton,
-//                        colors = ButtonDefaults.buttonColors(
-//                            containerColor = MaterialTheme.colorScheme.primary
-//                        )
-//                    ) {
-//                        Text("Ir a la tienda")
-//                    }
                 }
             }
         } else {
@@ -151,7 +144,7 @@ fun ShoppingScreen(
             ) {
                 items(uiState.products) { product ->
                     ProductItem(
-                        product = product
+                        product = product.product
                     ) {
                         shoppingViewModel.removeProduct(product)
                     }
@@ -166,18 +159,18 @@ fun ShoppingScreen(
 @Preview
 @Composable
 fun PreviewShoppingScreen() {
-    val productList = generateData()
+    val productCart = generateCart(user)
+    val productBuy = generateBuy(user, productCart)
     val navController = rememberNavController()
     val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
 
     NavigationDrawer(navController = navController, drawerState = drawerState) {
-        ScreenWithAppBar(productList = productList,
+        ScreenWithAppBar(productList = productBuy,
             drawerState = drawerState,
             screen = { productList, modifier ->
                 ShoppingScreen(
-                    initialProductList = productList.toMutableList(),
-                    modifier = modifier,
-//                    onClickButton = {navController.navigate(Screens.StoreScreen.name) }
+                    initialBuyList = productList.toMutableList(),
+                    modifier = modifier
                 )
         })
     }

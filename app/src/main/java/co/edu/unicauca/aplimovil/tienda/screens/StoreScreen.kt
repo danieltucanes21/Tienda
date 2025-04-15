@@ -66,6 +66,7 @@ import co.edu.unicauca.aplimovil.tienda.components.SearchBar
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 import co.edu.unicauca.aplimovil.tienda.navigation.Screens
+import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
 import co.edu.unicauca.aplimovil.tienda.viewModel.StoreViewModel
 
 @Preview
@@ -93,9 +94,10 @@ fun StoreScreen(
     productList: List<ProductInfo>,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
-    viewModel: StoreViewModel = viewModel()
+    storeViewModel: StoreViewModel = viewModel(),
+    cartViewModel: CartViewModel = viewModel()
 ) {
-    val uiState by viewModel.uiState.collectAsState()
+    val uiState by storeViewModel.uiState.collectAsState()
     val categories = listOf(
         "Todos" to null,
         "Mujeres" to PublicType.WOMEN,
@@ -106,7 +108,7 @@ fun StoreScreen(
     // Initialize once
     LaunchedEffect(Unit) {
         if (uiState.products.isEmpty()) {
-            viewModel.initialize(productList)
+            storeViewModel.initialize(productList)
         }
     }
 
@@ -114,8 +116,8 @@ fun StoreScreen(
         // Search bar
         SearchBar(
             query = uiState.searchQuery,
-            onQueryChange = { viewModel.search(it) },
-            onClear = { viewModel.clearSearch() },
+            onQueryChange = { storeViewModel.search(it) },
+            onClear = { storeViewModel.clearSearch() },
             onProfileClick = { Navigator.navigateTo(Screen.Login.route) }
         )
 
@@ -127,7 +129,7 @@ fun StoreScreen(
             categories.forEachIndexed { index, (title, category) ->
                 Tab(
                     selected = uiState.selectedCategory == category,
-                    onClick = { viewModel.filterByCategory(category) },
+                    onClick = { storeViewModel.filterByCategory(category) },
                     text = {
                         Text(
                             title,
@@ -171,9 +173,10 @@ fun StoreScreen(
                                 .padding(4.dp)
                                 .fillMaxWidth()
                                 .aspectRatio(0.75f),
-                            onAddClick = { productId ->
+                            onImageClick = { productId ->
                                 navController.navigate("DetailProduct/$productId")
-                            }
+                            },
+                            onAddClick = {cartViewModel.addProduct(it)}
                         )
                     }
                 }

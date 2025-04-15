@@ -29,12 +29,16 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.edu.unicauca.aplimovil.tienda.R
+import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.PublicType
 import edu.unicauca.apimovil.pixelplaza.Size
+import edu.unicauca.apimovil.pixelplaza.user
+import java.sql.Date
+import java.util.Calendar
 
 @Composable
-fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onAddClick: (String) -> Unit = {}) {
+fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onAddClick: (ProductCart) -> Unit = {}, onImageClick: (String) -> Unit = {}) {
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -81,7 +85,8 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onA
 
         // Botón "+" solapado (mitad en imagen, mitad en precio)
         IconButton(
-            onClick = {onAddClick(product.id.toString()) },
+            onClick = {onAddClick(ProductCart(user.id, product, 1, product.sizes[0].name, Date(
+                Calendar.getInstance().timeInMillis))) },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
                 .offset(y = (-48).dp)
