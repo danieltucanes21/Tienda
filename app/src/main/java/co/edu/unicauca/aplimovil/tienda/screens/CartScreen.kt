@@ -1,6 +1,5 @@
 package edu.unicauca.apimovil.pixelplaza
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,13 +11,18 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.Card
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -30,6 +34,8 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -50,74 +56,78 @@ import co.edu.unicauca.aplimovil.tienda.components.ProductItem
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
+import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
+import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
 import co.edu.unicauca.aplimovil.tienda.viewModel.NavigationViewModel
 
 @Composable
-fun CartScreen(productList: MutableList<ProductInfo>, modifier: Modifier = Modifier, navController: NavHostController = rememberNavController()) {
+fun CartScreen(
+    initialCartList: List<ProductCart>,
+    modifier: Modifier = Modifier,
+    cartViewModel: CartViewModel = viewModel()
+) {
+    val cartUiState by cartViewModel.uiState.collectAsState()
+
+    // Inicializar solo si está vacío
+    LaunchedEffect(initialCartList) {
+        if (cartUiState.products.isEmpty()) {
+            cartViewModel.updateProductList(initialCartList)
+        }
+    }
+
     Column(
         modifier = modifier
             .fillMaxSize()
-            .padding(16.dp) // Padding adicional para el contenido
+            .padding(16.dp)
     ) {
-        // Título
         Text(
-            text = "Carrito",
+            text = "Carrito (${cartUiState.itemCount} items)",
             fontSize = textTitleLarge,
             fontWeight = FontWeight.Bold,
-            fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
-            letterSpacing = letterSpacing,
-            color = MaterialTheme.colorScheme.onSurface,
             modifier = Modifier
                 .padding(bottom = 16.dp)
-                .align(alignment = Alignment.CenterHorizontally)
+                .align(Alignment.CenterHorizontally)
         )
 
-        // Lista de productos con un weight para ocupar el espacio restante
-        LazyColumn(
-            modifier = Modifier.weight(1f) // Ocupa el espacio restante
-        ) {
-            items(productList) {
-                ProductItem(it)
-                Spacer(modifier = Modifier.height(8.dp)) // Espaciado entre elementos
+        LazyColumn(modifier = Modifier.weight(1f)) {
+            items(cartUiState.products) { product ->
+                ProductItem(product.product) {
+                    cartViewModel.removeProduct(product)
+                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
         }
 
-        // Sección del total de la compra
-        CartTotalSection(total = productList.sumOf { it.price })
-    }
-}
+        CartTotalSection(
+            total = cartUiState.totalAmount,
+            isLoading = cartUiState.isCheckoutProcessing,
+            onCheckout = { cartViewModel.proceedToCheckout() }
+        )
 
-@Preview
-@Composable
-fun CartScreenPreview () {
-    val productList = generateData()
-    val navController = rememberNavController()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
-    NavigationDrawer(navController = navController, drawerState = drawerState) {
-        ScreenWithAppBar(productList = productList,
-            drawerState = drawerState,
-            screen = { productList, modifier ->
-                CartScreen(
-                    productList = productList.toMutableList(),
-                    modifier = modifier
-                )
-            })
+        if (cartUiState.isCheckoutComplete) {
+            CheckoutCompleteDialog(
+                onDismiss = {
+                    cartViewModel.resetCheckoutState()
+                    Navigator.navigateTo(Screen.Store.route)
+                }
+            )
+        }
     }
 }
 
 @Composable
-fun CartTotalSection(total: Double) {
-    val viewModel: NavigationViewModel = viewModel()
+fun CartTotalSection(
+    total: Double,
+    isLoading: Boolean,
+    onCheckout: () -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp)
             .background(MaterialTheme.colorScheme.surface)
-            .wrapContentSize(
-            )
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
@@ -127,23 +137,44 @@ fun CartTotalSection(total: Double) {
                 text = "Monto total:",
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = textLabelLarge,
-                fontFamily = MaterialTheme.typography.labelLarge.fontFamily)
+                fontFamily = MaterialTheme.typography.labelLarge.fontFamily
+            )
             Text(
-                text = "$$total",
+                text = "$${"%.2f".format(total)}",
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = textLabelLarge,
                 fontWeight = FontWeight.Bold,
-                fontFamily = MaterialTheme.typography.labelLarge.fontFamily)
+                fontFamily = MaterialTheme.typography.labelLarge.fontFamily
+            )
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Button(
-            onClick = { Navigator.navigateTo(Screen.Card.route) },
+            onClick = onCheckout,
             colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier.fillMaxWidth(),
+            enabled = !isLoading && total > 0
         ) {
-            Text(text = "Realizar compra", color = MaterialTheme.colorScheme.onPrimary)
+            if (isLoading) {
+                CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
+            } else {
+                Text(text = "Realizar compra", color = MaterialTheme.colorScheme.onPrimary)
+            }
         }
     }
+}
+
+@Composable
+fun CheckoutCompleteDialog(onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(text = "Compra completada") },
+        text = { Text(text = "¡Gracias por tu compra!") },
+        confirmButton = {
+            Button(onClick = onDismiss) {
+                Text(text = "Aceptar")
+            }
+        }
+    )
 }
