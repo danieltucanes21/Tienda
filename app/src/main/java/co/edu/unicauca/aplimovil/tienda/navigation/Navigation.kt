@@ -91,9 +91,9 @@ fun AppNavHost(
                     )
                 })
         }
-        composable(Screen.Login.route) {
+        /*composable(Screen.Login.route) {
             LoginScreen(navController)
-        }
+        }*/
         composable(Screen.SignUp.route) {
             RegistroScreen(navController)
         }

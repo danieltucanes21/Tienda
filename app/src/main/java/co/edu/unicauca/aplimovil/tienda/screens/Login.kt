@@ -11,13 +11,13 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.CampoTexto
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
+import co.edu.unicauca.aplimovil.tienda.viewModel.UserDetails
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
 import edu.unicauca.apimovil.pixelplaza.textBodyMedium
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
@@ -27,10 +27,10 @@ import edu.unicauca.apimovil.pixelplaza.textTitleSmall
 
 @Composable
 
-fun LoginScreen(navController: NavHostController = rememberNavController()) {
+fun LoginScreen(navController: NavHostController = rememberNavController(), onValueChange: (UserDetails) -> Unit = {}, userDetails: UserDetails) {
 
-    val correo = remember { mutableStateOf("") }
-    val password = remember { mutableStateOf("") }
+    val correo = ""
+    val password = ""
     Box(
         modifier = Modifier
             .fillMaxSize()
@@ -72,13 +72,15 @@ fun LoginScreen(navController: NavHostController = rememberNavController()) {
             CampoTexto(
                 label = stringResource(R.string.email),
                 valor = correo,
-                modifier = Modifier.padding(bottom = 10.dp)
+                modifier = Modifier.padding(bottom = 10.dp),
+                onValueChange = {onValueChange(userDetails.copy(userName = it))},
             )
 
             CampoTexto(
                 label =stringResource(R.string.password),
                 valor = password,
-                modifier = Modifier.padding(bottom = 10.dp)
+                modifier = Modifier.padding(bottom = 10.dp),
+                onValueChange = {onValueChange(userDetails.copy(userName = it))}
             )
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -155,5 +157,5 @@ fun LoginScreen(navController: NavHostController = rememberNavController()) {
 @Preview(showBackground = true)
 @Composable
 fun PreviewLoginScreen() {
-    LoginScreen()
+    //LoginScreen()
 }
