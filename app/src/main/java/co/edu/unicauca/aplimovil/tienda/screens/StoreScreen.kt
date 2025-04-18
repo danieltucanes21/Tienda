@@ -66,8 +66,11 @@ import co.edu.unicauca.aplimovil.tienda.components.SearchBar
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 import co.edu.unicauca.aplimovil.tienda.navigation.Screens
+import co.edu.unicauca.aplimovil.tienda.viewModel.AppViewModelProvider
 import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
+import co.edu.unicauca.aplimovil.tienda.viewModel.ProductViewModel
 import co.edu.unicauca.aplimovil.tienda.viewModel.StoreViewModel
+
 
 @Preview
 @Composable
@@ -81,7 +84,7 @@ fun StoreScreenPreview () {
             drawerState = drawerState,
             screen = { productList, modifier ->
                 StoreScreen(
-                    productList = productList.toMutableList(),
+                    //productList = productList.toMutableList(),
                     modifier = modifier,
                     navController = navController
                 )
@@ -91,13 +94,14 @@ fun StoreScreenPreview () {
 
 @Composable
 fun StoreScreen(
-    productList: List<ProductInfo>,
+    //productList: List<ProductInfo>,
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     storeViewModel: StoreViewModel = viewModel(),
+    productViewModel: ProductViewModel = viewModel(factory = AppViewModelProvider.Factory),
     cartViewModel: CartViewModel = viewModel()
 ) {
-    val uiState by storeViewModel.uiState.collectAsState()
+    val uiState = productViewModel.productUiState
     val categories = listOf(
         "Todos" to null,
         "Mujeres" to PublicType.WOMEN,
@@ -108,7 +112,7 @@ fun StoreScreen(
     // Initialize once
     LaunchedEffect(Unit) {
         if (uiState.products.isEmpty()) {
-            storeViewModel.initialize(productList)
+            //storeViewModel.initialize(productList)
         }
     }
 
@@ -116,8 +120,8 @@ fun StoreScreen(
         // Search bar
         SearchBar(
             query = uiState.searchQuery,
-            onQueryChange = { storeViewModel.search(it) },
-            onClear = { storeViewModel.clearSearch() },
+            onQueryChange = { productViewModel.search(it) },
+            onClear = {productViewModel.search("") },
             onProfileClick = { Navigator.navigateTo(Screen.Login.route) }
         )
 
@@ -129,7 +133,7 @@ fun StoreScreen(
             categories.forEachIndexed { index, (title, category) ->
                 Tab(
                     selected = uiState.selectedCategory == category,
-                    onClick = { storeViewModel.filterByCategory(category) },
+                    onClick = { productViewModel.filterByCategory(category) },
                     text = {
                         Text(
                             title,

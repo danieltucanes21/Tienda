@@ -21,6 +21,7 @@ import co.edu.unicauca.aplimovil.tienda.R
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.PublicType
 import edu.unicauca.apimovil.pixelplaza.Size
+import coil.compose.rememberAsyncImagePainter
 
 @Composable
 fun ProductoDetallesScreen(productId: String, productList: List<ProductInfo>, onBack: () -> Unit) {
@@ -33,7 +34,8 @@ fun ProductoDetallesScreen(productId: String, productList: List<ProductInfo>, on
         LazyColumn(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
             item {
                 Image(
-                    painter = producto.painter,
+                    //painter = producto.painter,
+                    painter = rememberAsyncImagePainter(producto.painter),
                     contentDescription = producto.contentDescription,
                     modifier = Modifier.fillMaxWidth().height(300.dp),
                     contentScale = ContentScale.Crop
@@ -112,7 +114,8 @@ fun PreviewProductoDetallesScreen() {
     val productList = listOf(
         ProductInfo(
             id = 1,
-            painter = painterResource(id = R.drawable.ic_usuario),  // Cargar imagen como Painter
+            //painter = painterResource(id = R.drawable.ic_usuario),  // Cargar imagen como Painter
+            painter = "https://assets.dfb.de/uploads/000/289/444/custom_style_1_mitera_hannah-ursula.jpg?1692690626",
             contentDescription = "Producto 1",
             description = "Descripción del Producto 1",
             price = 100.0,
@@ -125,7 +128,8 @@ fun PreviewProductoDetallesScreen() {
         ),
         ProductInfo(
             id = 2,
-            painter = painterResource(id = R.drawable.ic_usuario),
+            //painter = painterResource(id = R.drawable.ic_usuario),
+            painter = "https://th.bing.com/th/id/OIP.UAiTfjoZB_J1ISwqrzhgWgHaHa?w=481&h=481&rs=1&pid=ImgDetMain",
             contentDescription = "Producto 2",
             description = "Descripción del Producto 2",
             price = 200.0,
