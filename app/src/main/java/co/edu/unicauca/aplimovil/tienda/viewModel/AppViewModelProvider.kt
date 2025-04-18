@@ -20,7 +20,11 @@ object AppViewModelProvider {
                 tiendaApplication().container.usersRepository
             )
         }
-
+        initializer {
+            ProductViewModel(
+                tiendaApplication().container.productRepository
+            )
+        }
 
     }
 }

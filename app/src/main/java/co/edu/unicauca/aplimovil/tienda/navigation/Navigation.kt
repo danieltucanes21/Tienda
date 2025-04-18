@@ -60,7 +60,7 @@ fun AppNavHost(
                 drawerState = drawerState,
                 screen = { productList, modifier ->
                     StoreScreen(
-                        productList = productList.toMutableList(),
+                        //productList = productList.toMutableList(),
                         modifier = modifier,
                         navController = navController,
                         cartViewModel = cartViewModel

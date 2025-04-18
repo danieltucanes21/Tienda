@@ -59,12 +59,23 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.ui.text.google.fonts)
 
+    // Retrofit
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation("io.coil-kt:coil-compose:2.7.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0")
+
+
     // Room (usando variable de versión del proyecto raíz)
     implementation("androidx.room:room-runtime:${rootProject.extra["room_version"]}")
     implementation("androidx.room:room-ktx:${rootProject.extra["room_version"]}")
     //ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
 
     ksp("androidx.room:room-compiler:${rootProject.extra["room_version"]}")
+
+    implementation ("androidx.compose.runtime:runtime:1.x.x")
+
 
 
     testImplementation(libs.junit)

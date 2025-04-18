@@ -37,6 +37,7 @@ import co.edu.unicauca.aplimovil.tienda.R
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.PublicType
 import edu.unicauca.apimovil.pixelplaza.Size
+import coil.compose.rememberAsyncImagePainter
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
 import edu.unicauca.apimovil.pixelplaza.textBodyMedium
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
@@ -65,7 +66,8 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onRemove: (
                     .background(Color.Gray, shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)) // Fondo
             ) {
                 Image(
-                    painter = product.painter,
+                    //painter = product.painter,
+                    painter = rememberAsyncImagePainter(model = product.painter),
                     contentDescription = product.contentDescription,
                     modifier = Modifier
                         .fillMaxSize(),
@@ -128,7 +130,8 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onRemove: (
 fun ProductItemPreview () {
     ProductItem(ProductInfo(
         id = 1,
-        painter = painterResource(R.drawable.image_list_2),
+        //painter = painterResource(R.drawable.image_list_2),
+        painter = "https://th.bing.com/th/id/OIP.UAiTfjoZB_J1ISwqrzhgWgHaHa?w=481&h=481&rs=1&pid=ImgDetMain",
         contentDescription = "Vestido Rojo",
         description = "Vestido elegante rojo con corte ajustado.",
         price = 349.99,
