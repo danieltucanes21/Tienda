@@ -14,15 +14,20 @@ object AppViewModelProvider {
             RegisterViewModel(
                 tiendaApplication().container.usersRepository
             )
-
-
         }
+        initializer {
+            LoginViewModel(
+                tiendaApplication().container.usersRepository
+            )
+        }
+
+
     }
 }
 
 /**
  * Extension function to queries for [Application] object and returns an instance of
- * [TiendaApplication].
+ * [23wsaTiendaApplication].
  */
 fun CreationExtras.tiendaApplication(): TiendaApplication =
     (this[AndroidViewModelFactory.APPLICATION_KEY] as TiendaApplication)

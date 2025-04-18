@@ -27,4 +27,7 @@ interface UsersRepository {
      * Update user in the data source
      */
     suspend fun updateUser(user: User)
+
+
+    suspend fun login(email: String, password: String) :Boolean
 }

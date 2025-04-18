@@ -25,4 +25,7 @@ interface UserDao {
     @Query("SELECT * from users ORDER BY email ASC")
     fun getAllUsers(): Flow<List<User>>
 
+    @Query("SELECT * FROM users WHERE email = :email AND password = :password")
+    suspend fun login(email: String, password: String): User?
+
 }

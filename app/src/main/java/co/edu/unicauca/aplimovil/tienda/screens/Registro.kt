@@ -33,6 +33,7 @@ import co.edu.unicauca.aplimovil.tienda.viewModel.UserDetails
 import co.edu.unicauca.aplimovil.tienda.viewModel.UserUiState
 import edu.unicauca.apimovil.pixelplaza.textBodyLarge
 import edu.unicauca.apimovil.pixelplaza.textBodySmall
+import edu.unicauca.apimovil.pixelplaza.user
 import kotlinx.coroutines.launch
 
 @Composable
@@ -52,8 +53,13 @@ fun RegistroScreen(
             onUserValueChange = viewModel::updateUiState,
             onSaveClick = {
                 coroutineScope.launch {
-                    viewModel.saveUser()
+                    val isValid = viewModel.saveUser() // Este método debería devolver `true` o `false`
+
+                    if (isValid) {
+                        Navigator.navigateTo(Screen.Login.route)
+                    }
                 }
+
             },
         )
 
@@ -74,7 +80,7 @@ fun RegisterBody(
         HeaderRegistro()
 
         FormularioRegistro(
-            userDetails = userUiState.userDetails,
+            userUiState = userUiState,
             onValueChange = onUserValueChange
 
         )
@@ -116,34 +122,79 @@ fun HeaderRegistro(){
 @Composable
 fun FormularioRegistro(
 
-    userDetails: UserDetails,
+    userUiState: UserUiState,
     modifier: Modifier = Modifier,
     onValueChange: (UserDetails) -> Unit = {},
     enabled: Boolean = true,
 
 ){
+
     CampoTexto(
         label =stringResource(R.string.full_name),
-        valor = userDetails.userName,
-        onValueChange = {onValueChange(userDetails.copy(userName = it))},
+        valor = userUiState.userDetails.userName,
+        onValueChange = {onValueChange(userUiState.userDetails.copy(userName = it))},
         modifier = Modifier.padding(bottom = 10.dp)
     )
+    userUiState.validationErrors.userNameError?.let {errorResId->
+        Text(
+            text = stringResource(id = errorResId),
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, bottom = 8.dp)
+        )
+    }
+
     CampoTexto(
         label =stringResource(R.string.email),
-        valor = userDetails.email,
+        valor = userUiState.userDetails.email,
         modifier = Modifier.padding(bottom = 10.dp),
-        onValueChange = {onValueChange(userDetails.copy(email = it))}
+        onValueChange = {onValueChange(userUiState.userDetails.copy(email = it))}
     )
+
+    userUiState.validationErrors.emailError?.let {errorResId->
+        Text(
+            text = stringResource(id = errorResId),
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, bottom = 8.dp)
+        )
+    }
     CampoTexto (
         label =stringResource(R.string.password),
-        valor = userDetails.password, true,
-        modifier = Modifier.padding(bottom = 10.dp)
-    ) { onValueChange(userDetails.copy(password = it)) }
+        valor = userUiState.userDetails.password, true,
+        modifier = Modifier.padding(bottom = 10.dp),
+        onValueChange = {onValueChange(userUiState.userDetails.copy(password = it))}
+    )
+    userUiState.validationErrors.passwordError?.let {errorResId->
+        Text(
+            text = stringResource(id = errorResId),
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, bottom = 8.dp)
+        )
+    }
     CampoTexto(
         label =stringResource(R.string.confirm_password),
-        valor = userDetails.confirmPassword, true,
-        modifier = Modifier.padding(bottom = 10.dp)
-    ) { onValueChange(userDetails.copy(confirmPassword = it)) }
+        valor = userUiState.userDetails.confirmPassword, true,
+        modifier = Modifier.padding(bottom = 10.dp),
+        onValueChange = { onValueChange(userUiState.userDetails.copy(confirmPassword = it)) }
+    )
+    userUiState.validationErrors.confirmPasswordError?.let {errorResId->
+        Text(
+            text = stringResource(id = errorResId),
+            color = MaterialTheme.colorScheme.error,
+            style = MaterialTheme.typography.bodySmall,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(start = 8.dp, bottom = 8.dp)
+        )
+    }
 
 }
 
