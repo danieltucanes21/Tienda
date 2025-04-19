@@ -163,6 +163,7 @@ fun generateBuy(user: User, cart: MutableList<ProductCart>): MutableList<Product
     val currentDate = Date(Calendar.getInstance().timeInMillis)
     return cart.map { productCart ->
         ProductBuy(
+            idBuy = productCart.idCart,
             idOwner = user.id,
             product = productCart.product,
             quantity = productCart.quantity,
@@ -190,6 +191,7 @@ fun generateCart(user: User): MutableList<ProductCart> {
 
     return mutableListOf(
         ProductCart(
+            idCart = 0,
             idOwner = user.id,
             product = products[0], // Camiseta Negra
             quantity = 2,
@@ -197,6 +199,7 @@ fun generateCart(user: User): MutableList<ProductCart> {
             dateAdded = currentDate
         ),
         ProductCart(
+            idCart = 1,
             idOwner = user.id,
             product = products[4], // Zapatillas Running
             quantity = 1,
@@ -204,6 +207,7 @@ fun generateCart(user: User): MutableList<ProductCart> {
             dateAdded = currentDate
         ),
         ProductCart(
+            idCart = 2,
             idOwner = user.id,
             product = products[6], // Abrigo Largo
             quantity = 1,

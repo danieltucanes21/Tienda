@@ -95,6 +95,7 @@ class CartViewModel(
         viewModelScope.launch {
             try {
                 val cartItem = CartItem(
+                    id = product.idCart,
                     userId = product.idOwner,
                     productId = product.product.id,
                     quantity = product.quantity
@@ -148,6 +149,7 @@ class CartViewModel(
                 delay(2000) // Simular tiempo de procesamiento
 
                 // Limpiar el carrito después del pago exitoso
+
                 clearCart(userId)
 
                 _uiState.update {
@@ -170,5 +172,9 @@ class CartViewModel(
     // Resetear estado de pago
     fun resetCheckoutState() {
         _uiState.update { it.copy(isCheckoutComplete = false) }
+    }
+
+    fun checkoutToDisplay() {
+        _uiState.update { it.copy(isCheckoutComplete = true) }
     }
 }

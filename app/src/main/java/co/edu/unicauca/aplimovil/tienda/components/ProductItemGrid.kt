@@ -93,7 +93,7 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onA
 
         // Botón "+" solapado (mitad en imagen, mitad en precio)
         IconButton(
-            onClick = {onAddClick(ProductCart(user.id, product, 1, product.sizes[0].name, Date(
+            onClick = {onAddClick(ProductCart(idOwner = user.id, product = product, quantity = 1, selectedSize = product.sizes[0].name, dateAdded =  Date(
                 Calendar.getInstance().timeInMillis))) },
             modifier = Modifier
                 .align(Alignment.BottomCenter)
