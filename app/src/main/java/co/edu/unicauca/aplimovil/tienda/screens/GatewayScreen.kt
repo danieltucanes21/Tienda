@@ -10,6 +10,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.KeyboardType
@@ -18,14 +19,30 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
+import co.edu.unicauca.aplimovil.tienda.viewModel.AppViewModelProvider
+import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
+import edu.unicauca.apimovil.pixelplaza.user
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun PasarelaScreen(navController: NavHostController) {
+fun PasarelaScreen(
+    navController: NavHostController,
+    cartViewModel: CartViewModel = viewModel(factory = AppViewModelProvider.Factory)
+) {
+    val cartUiState by cartViewModel.uiState.collectAsState()
+
+    var showDialog by remember { mutableStateOf(false) }
+
+    LaunchedEffect(cartUiState.isCheckoutComplete) {
+        if (cartUiState.isCheckoutComplete) {
+            showDialog = true
+        }
+    }
 
     var cardHolder by remember { mutableStateOf("") }
     var cardNumber by remember { mutableStateOf("") }
@@ -119,12 +136,29 @@ fun PasarelaScreen(navController: NavHostController) {
 
             // Botón de Confirmar
             Button(
-                onClick = { Navigator.navigateTo(Screen.Store.route) },
+                onClick = {
+                    cartViewModel.checkoutToDisplay()
+                },
                 shape = RoundedCornerShape(10.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B5CF0)),
                 modifier = Modifier.fillMaxWidth().height(50.dp)
             ) {
                 Text("Confirmar", color = Color.White, fontSize = 18.sp)
+            }
+
+            if (showDialog) {
+                CheckoutCompleteDialog(
+                    onAccept = {
+                        cartViewModel.proceedToCheckout(userId = user.id)
+                        showDialog = false
+                        cartViewModel.resetCheckoutState()
+                        navController.navigate(Screen.Store.route) // Usar navController directamente
+                    },
+                    onDismiss = {
+                        showDialog = false
+                        cartViewModel.resetCheckoutState()
+                    }
+                )
             }
         }
     }
@@ -153,6 +187,26 @@ fun CampoTexto(
             focusedBorderColor = Color.White,
             unfocusedBorderColor = Color.Gray
         )
+    )
+}
+
+
+@Composable
+fun CheckoutCompleteDialog(onAccept: () -> Unit, onDismiss: () -> Unit) {
+    AlertDialog(
+        onDismissRequest = onDismiss,
+        title = { Text(text = "Compra completada") },
+        text = { Text(text = "¡Gracias por tu compra!") },
+        confirmButton = {
+            Button(onClick = onAccept) {
+                Text(text = "Aceptar")
+            }
+        },
+        dismissButton = {
+            Button(onClick = onDismiss) {
+                Text(text = "Cancelar")
+            }
+        }
     )
 }
 

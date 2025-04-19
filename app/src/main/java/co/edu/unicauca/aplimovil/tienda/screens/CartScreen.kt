@@ -1,5 +1,6 @@
 package edu.unicauca.apimovil.pixelplaza
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -63,6 +64,7 @@ fun CartScreen(
         LazyColumn(modifier = Modifier.weight(1f)) {
             items(cartUiState.products) { product ->
                 ProductItem(product.product) {
+                    Log.i("App", "Producto a eliminar: $product")
                     cartViewModel.removeProduct(product)
                 }
                 Spacer(modifier = Modifier.height(8.dp))
@@ -134,18 +136,4 @@ fun CartTotalSection(
             }
         }
     }
-}
-
-@Composable
-fun CheckoutCompleteDialog(onDismiss: () -> Unit) {
-    AlertDialog(
-        onDismissRequest = onDismiss,
-        title = { Text(text = "Compra completada") },
-        text = { Text(text = "¡Gracias por tu compra!") },
-        confirmButton = {
-            Button(onClick = onDismiss) {
-                Text(text = "Aceptar")
-            }
-        }
-    )
 }

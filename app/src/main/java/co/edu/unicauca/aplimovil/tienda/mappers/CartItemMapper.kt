@@ -10,6 +10,7 @@ class CartItemMapper {
     companion object {
         fun toProductCart(product: ProductInfo, cartItem: CartItem): ProductCart {
             return ProductCart(
+                idCart = cartItem.id,
                 idOwner = cartItem.userId,
                 product = product,
                 quantity = cartItem.quantity,

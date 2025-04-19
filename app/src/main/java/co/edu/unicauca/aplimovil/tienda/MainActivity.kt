@@ -1,6 +1,7 @@
 package co.edu.unicauca.aplimovil.tienda
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -37,6 +38,7 @@ class MainActivity : ComponentActivity() {
             val productDao = AppDatabase.getDatabase(applicationContext).productDao()
             val products = productDao.getAllProducts()
             println("Productos en la base de datos: $products")
+            Log.i("App", "Productos extraídos: ${products.toString()}")
         }
     }
 }
