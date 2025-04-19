@@ -11,5 +11,7 @@ data class CartUiState(
     val totalAmount: Double = 0.0,
     val itemCount: Int = 0,
     val isCheckoutProcessing: Boolean = false,
-    val isCheckoutComplete: Boolean = false
+    val isCheckoutComplete: Boolean = false,
+    val isLoading: Boolean = false,
+    val error: String? = null
 )

@@ -99,7 +99,7 @@ fun StoreScreen(
     navController: NavHostController = rememberNavController(),
     storeViewModel: StoreViewModel = viewModel(),
     productViewModel: ProductViewModel = viewModel(factory = AppViewModelProvider.Factory),
-    cartViewModel: CartViewModel = viewModel()
+    cartViewModel: CartViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val uiState = productViewModel.productUiState
     val categories = listOf(

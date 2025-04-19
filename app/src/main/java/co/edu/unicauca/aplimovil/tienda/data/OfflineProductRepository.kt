@@ -8,4 +8,8 @@ class OfflineProductRepository (private val productDao: ProductDao) : ProductRep
     override suspend fun getAllProducts(): List<Product> {
         return productDao.getAllProducts()
     }
+
+    override suspend fun getProductById(productId: Int): Product? {
+        return productDao.getProductById(productId = productId)
+    }
 }

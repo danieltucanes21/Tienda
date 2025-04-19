@@ -31,7 +31,6 @@ fun AppNavHost(
     drawerState: DrawerState,
     viewModel: NavigationViewModel = viewModel()
 ) {
-    val cartViewModel: CartViewModel = viewModel()
     val shoppingViewModel: ShoppingViewModel = viewModel()
     Navigator.initialize(viewModel)
 
@@ -62,8 +61,7 @@ fun AppNavHost(
                     StoreScreen(
                         //productList = productList.toMutableList(),
                         modifier = modifier,
-                        navController = navController,
-                        cartViewModel = cartViewModel
+                        navController = navController
                     )
                 })
         }
@@ -85,8 +83,7 @@ fun AppNavHost(
                 drawerState = drawerState,
                 screen = { cartList, modifier ->
                     CartScreen(
-                        initialCartList = cartList.toMutableList(),
-                        cartViewModel = cartViewModel,
+                        userId = user.id,
                         modifier = modifier
                     )
                 })

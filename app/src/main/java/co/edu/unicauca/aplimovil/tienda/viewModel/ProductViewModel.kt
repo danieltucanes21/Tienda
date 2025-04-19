@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.edu.unicauca.aplimovil.tienda.data.Product
 import co.edu.unicauca.aplimovil.tienda.data.ProductRepository
+import co.edu.unicauca.aplimovil.tienda.mappers.ProductMapper
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.PublicType
 import edu.unicauca.apimovil.pixelplaza.Size
@@ -30,7 +31,7 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
             try {
                 val productsFromDb = productRepository.getAllProducts()
                 println("Productos cargados en ViewModel: $productsFromDb") // Registro de depuración
-                val productsUi = productsFromDb.map { it.toProductInfo() }
+                val productsUi = productsFromDb.map { ProductMapper.toProductInfo(it) }
 
                 productUiState = productUiState.copy(
                     products = productsUi,
@@ -65,21 +66,5 @@ class ProductViewModel(private val productRepository: ProductRepository) : ViewM
             }
         )
     }
-}
-
-fun Product.toProductInfo(): ProductInfo {
-    return ProductInfo(
-        id = id,
-        painter = imageUrl, // ahora el painter es un String URL, NO un objeto painter
-        contentDescription = description,
-        description = description,
-        price = price.toDouble(),
-        color = color,
-        brand = brand,
-        sizes = listOf(Size.valueOf(size.uppercase())), // ¡IMPORTANTE! convertir String a enum  o se va  a la m
-        specifications = specifications,
-        score = score.toIntOrNull() ?: 0, // convierte el String score a Int
-        publicType = PublicType.valueOf(publicType.uppercase())
-    )
 }
 
