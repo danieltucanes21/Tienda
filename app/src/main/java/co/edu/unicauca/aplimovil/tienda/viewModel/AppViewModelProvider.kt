@@ -25,7 +25,12 @@ object AppViewModelProvider {
                 tiendaApplication().container.productRepository
             )
         }
-
+        initializer {
+            CartViewModel(
+                tiendaApplication().container.cartItemRepository,
+                tiendaApplication().container.productRepository
+            )
+        }
     }
 }
 

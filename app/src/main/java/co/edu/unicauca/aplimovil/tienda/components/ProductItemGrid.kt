@@ -37,6 +37,7 @@ import edu.unicauca.apimovil.pixelplaza.user
 import java.sql.Date
 import java.util.Calendar
 import android.R.attr.contentDescription
+import androidx.compose.foundation.clickable
 import androidx.compose.runtime.remember
 import coil.compose.rememberAsyncImagePainter
 
@@ -58,10 +59,11 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onA
                 modifier = Modifier
                     .fillMaxWidth()
             ) {
-                Box {
+                Box(
+                    modifier = Modifier.clickable { onImageClick(product.id.toString()) }
+                ) {
                     Image(
                         painter = rememberAsyncImagePainter(product.painter),
-
                         contentDescription = product.contentDescription,
                         modifier = Modifier
                             .height(160.dp)
