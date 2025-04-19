@@ -1,17 +1,15 @@
 package co.edu.unicauca.aplimovil.tienda.viewModel
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import co.edu.unicauca.aplimovil.tienda.data.CartItem
 import co.edu.unicauca.aplimovil.tienda.data.CartItemRepository
 import co.edu.unicauca.aplimovil.tienda.data.ProductRepository
+import co.edu.unicauca.aplimovil.tienda.data.PurchaseHistoryRepository
+import co.edu.unicauca.aplimovil.tienda.mappers.BuyItemMapper
 import co.edu.unicauca.aplimovil.tienda.mappers.CartItemMapper
 import co.edu.unicauca.aplimovil.tienda.mappers.ProductMapper
 import co.edu.unicauca.aplimovil.tienda.models.ProductCart
-import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -21,6 +19,7 @@ import kotlinx.coroutines.launch
 
 class CartViewModel(
     private val cartItemRepository: CartItemRepository,
+    private val purchaseHistoryRepository: PurchaseHistoryRepository,
     private val productRepository: ProductRepository
 ) : ViewModel() {
     // Estado centralizado
@@ -119,11 +118,14 @@ class CartViewModel(
     }
 
     // Limpiar el carrito
-    fun clearCart(userId: Int) {
+    private fun clearCart(userId: Int) {
         viewModelScope.launch {
             try {
                 val userCartItems = cartItemRepository.getCartItemsByUser(userId)
-                userCartItems.forEach { cartItemRepository.deleteCartItem(it) }
+                userCartItems.forEach {
+                    // TODO todavía está en fase de prueba
+                    purchaseHistoryRepository.insertPurchaseHistory(BuyItemMapper.toPurchaseHistory(it))
+                    cartItemRepository.deleteCartItem(it) }
 
                 _uiState.update {
                     it.copy(

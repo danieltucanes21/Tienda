@@ -1,7 +1,6 @@
 package co.edu.unicauca.aplimovil.tienda.viewModel
 
 import co.edu.unicauca.aplimovil.tienda.models.ProductCart
-import edu.unicauca.apimovil.pixelplaza.ProductInfo
 
 /**
  * Data class that represents the cart UI state

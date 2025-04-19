@@ -31,7 +31,6 @@ fun AppNavHost(
     drawerState: DrawerState,
     viewModel: NavigationViewModel = viewModel()
 ) {
-    val shoppingViewModel: ShoppingViewModel = viewModel()
     Navigator.initialize(viewModel)
 
     LaunchedEffect(Unit) {
@@ -71,9 +70,8 @@ fun AppNavHost(
                 drawerState = drawerState,
                 screen = { buyList, modifier ->
                     ShoppingScreen(
-                        initialBuyList = buyList.toMutableList(),
-                        modifier = modifier,
-                        shoppingViewModel = shoppingViewModel
+                        userId = user.id,
+                        modifier = modifier
                     )
                 })
         }

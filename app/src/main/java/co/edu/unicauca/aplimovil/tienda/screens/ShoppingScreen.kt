@@ -49,23 +49,21 @@ import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
 import co.edu.unicauca.aplimovil.tienda.models.ProductBuy
 import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import co.edu.unicauca.aplimovil.tienda.navigation.Screens
+import co.edu.unicauca.aplimovil.tienda.viewModel.AppViewModelProvider
 import co.edu.unicauca.aplimovil.tienda.viewModel.ShoppingViewModel
 import kotlinx.coroutines.launch
 
 @Composable
 fun ShoppingScreen(
-    initialBuyList: List<ProductBuy>,
+    userId: Int,
     modifier: Modifier = Modifier,
-    shoppingViewModel: ShoppingViewModel = viewModel()
+    shoppingViewModel: ShoppingViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val uiState by shoppingViewModel.uiState.collectAsState()
-//    val context = LocalContext.current
 
     // Initialize products
-    LaunchedEffect(initialBuyList) {
-        if (uiState.products.isEmpty()) {
-            shoppingViewModel.loadProducts(initialBuyList)
-        }
+    LaunchedEffect(userId) {
+        shoppingViewModel.loadProducts(userId)
     }
 
     // Handle loading state
@@ -100,7 +98,7 @@ fun ShoppingScreen(
             )
 
             IconButton(
-                onClick = { shoppingViewModel.refresh() },
+                onClick = { shoppingViewModel.refresh(userId) },
                 modifier = Modifier.size(24.dp)
             ) {
                 Icon(
@@ -156,22 +154,22 @@ fun ShoppingScreen(
 }
 
 
-@Preview
-@Composable
-fun PreviewShoppingScreen() {
-    val productCart = generateCart(user)
-    val productBuy = generateBuy(user, productCart)
-    val navController = rememberNavController()
-    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-
-    NavigationDrawer(navController = navController, drawerState = drawerState) {
-        ScreenWithAppBar(productList = productBuy,
-            drawerState = drawerState,
-            screen = { productList, modifier ->
-                ShoppingScreen(
-                    initialBuyList = productList.toMutableList(),
-                    modifier = modifier
-                )
-        })
-    }
-}
+//@Preview
+//@Composable
+//fun PreviewShoppingScreen() {
+//    val productCart = generateCart(user)
+//    val productBuy = generateBuy(user, productCart)
+//    val navController = rememberNavController()
+//    val drawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
+//
+//    NavigationDrawer(navController = navController, drawerState = drawerState) {
+//        ScreenWithAppBar(productList = productBuy,
+//            drawerState = drawerState,
+//            screen = { productList, modifier ->
+//                ShoppingScreen(
+//                    initialBuyList = productList.toMutableList(),
+//                    modifier = modifier
+//                )
+//        })
+//    }
+//}

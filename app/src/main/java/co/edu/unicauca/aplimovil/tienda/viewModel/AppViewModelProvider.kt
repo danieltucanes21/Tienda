@@ -12,23 +12,30 @@ object AppViewModelProvider {
 
         initializer {
             RegisterViewModel(
-                tiendaApplication().container.usersRepository
+                usersRepository = tiendaApplication().container.usersRepository
             )
         }
         initializer {
             LoginViewModel(
-                tiendaApplication().container.usersRepository
+                repository = tiendaApplication().container.usersRepository
             )
         }
         initializer {
             ProductViewModel(
-                tiendaApplication().container.productRepository
+                productRepository = tiendaApplication().container.productRepository
             )
         }
         initializer {
             CartViewModel(
-                tiendaApplication().container.cartItemRepository,
-                tiendaApplication().container.productRepository
+                cartItemRepository = tiendaApplication().container.cartItemRepository,
+                purchaseHistoryRepository = tiendaApplication().container.purchaseHistoryRepository,
+                productRepository = tiendaApplication().container.productRepository
+            )
+        }
+        initializer {
+            ShoppingViewModel(
+                purchaseHistoryRepository = tiendaApplication().container.purchaseHistoryRepository,
+                productRepository = tiendaApplication().container.productRepository
             )
         }
     }
