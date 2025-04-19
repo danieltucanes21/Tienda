@@ -36,9 +36,14 @@ import edu.unicauca.apimovil.pixelplaza.Size
 import edu.unicauca.apimovil.pixelplaza.user
 import java.sql.Date
 import java.util.Calendar
+import android.R.attr.contentDescription
+import androidx.compose.runtime.remember
+import coil.compose.rememberAsyncImagePainter
+
 
 @Composable
 fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onAddClick: (ProductCart) -> Unit = {}, onImageClick: (String) -> Unit = {}) {
+
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -55,7 +60,8 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onA
             ) {
                 Box {
                     Image(
-                        painter = product.painter,
+                        painter = rememberAsyncImagePainter(product.painter),
+
                         contentDescription = product.contentDescription,
                         modifier = Modifier
                             .height(160.dp)
@@ -107,18 +113,19 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onA
 fun ProductItemGridCardPreview () {
     ProductItemGridCard(
         ProductInfo(
-        id = 1,
-        painter = painterResource(R.drawable.image_list_2),
-        contentDescription = "Vestido Rojo",
-        description = "Vestido elegante rojo con corte ajustado.",
-        price = 349.99,
-        color = "Rojo",
-        brand = "Zara",
-        sizes = listOf(Size.S, Size.M, Size.L),
-        specifications = "Poliéster y elastano, ideal para eventos",
-        score = 4,
-        publicType = PublicType.WOMEN
-    ),
+            id = 1,
+            //painter = painterResource(id = R.drawable.image_list_3).toString(), // Reemplaza 'sample_image' con el recurso adecuado
+            painter = "https://assets.dfb.de/uploads/000/289/444/custom_style_1_mitera_hannah-ursula.jpg?1692690626",
+            contentDescription = "Vestido Rojo",
+            description = "Vestido elegante rojo con corte ajustado.",
+            price = 349.99,
+            color = "Rojo",
+            brand = "Zara",
+            sizes = listOf(Size.S, Size.M, Size.L),
+            specifications = "Poliéster y elastano, ideal para eventos",
+            score = 4,
+            publicType = PublicType.WOMEN
+        ),
         onAddClick = {/* TO DO */},
         modifier = Modifier.fillMaxWidth(0.5f).height(300.dp) // Ajusta el tamaño del preview
     )

@@ -22,7 +22,8 @@ fun AppNavigation(modifier: Modifier = Modifier) {
 
     NavHost(navController = navController, startDestination = Screens.StoreScreen.name) {
         composable(route = Screens.StoreScreen.name) {
-            StoreScreen(productList = productList, navController = navController)
+            //StoreScreen(productList = productList, navController = navController)
+            StoreScreen(navController = navController)
         }
         composable("productDetails/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
@@ -37,15 +38,15 @@ fun AppNavigation(modifier: Modifier = Modifier) {
 @Composable
 fun convertToProducto(productInfo: ProductInfo): Producto {
     val imageResourceId = when (productInfo.painter) {
-        painterResource(R.drawable.image_list_1) -> R.drawable.image_list_1
-        painterResource(R.drawable.image_list_2) -> R.drawable.image_list_2
-        painterResource(R.drawable.image_list_3) -> R.drawable.image_list_3
-        painterResource(R.drawable.image_list_4) -> R.drawable.image_list_4
-        painterResource(R.drawable.image_list_5) -> R.drawable.image_list_5
-        painterResource(R.drawable.image_list_6) -> R.drawable.image_list_6
-        painterResource(R.drawable.image_list_7) -> R.drawable.image_list_7
-        painterResource(R.drawable.image_list_8) -> R.drawable.image_list_8
-        else -> R.drawable.ic_usuario // Default image resource
+        "https://assets.dfb.de/uploads/000/289/444/custom_style_1_mitera_hannah-ursula.jpg?1692690626" -> R.drawable.image_list_1
+        "https://th.bing.com/th/id/OIP.UAiTfjoZB_J1ISwqrzhgWgHaHa?w=481&h=481&rs=1&pid=ImgDetMain" -> R.drawable.image_list_2
+        "https://th.bing.com/th/id/OIP.73sQuBGcuzn0EVEmGvKlZAHaH5?w=900&h=960&rs=1&pid=ImgDetMain" -> R.drawable.image_list_3
+        "https://earthfullyliving.com/wp-content/uploads/2022/08/extending-clothes-life-sustainable-fashion-200x300.jpg" -> R.drawable.image_list_4
+        "https://images.fashionmodeldirectory.com/images/models/74993/lulu-reynolds-557589-squaremedium.jpg" -> R.drawable.image_list_5
+        "https://images.unsplash.com/photo-1590799822755-4ec061a6b2a5?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" -> R.drawable.image_list_6
+        "https://i.scdn.co/image/ab67616d00001e02e254f7cd902eda979b28c012" -> R.drawable.image_list_7
+        "https://jm-moda.si/wp-content/uploads/2019/05/16-2-2-256x256.jpg" -> R.drawable.image_list_8
+        else -> R.drawable.ic_usuario // Imagen por defecto
     }
     return Producto(
         id = productInfo.id,

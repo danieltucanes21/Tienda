@@ -27,6 +27,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -101,17 +102,17 @@ fun PixelPlazaScreen(
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = "Ingresar", color = MaterialTheme.colorScheme.onPrimary)
+                    Text(text = stringResource(R.string.ingresar), color = MaterialTheme.colorScheme.onPrimary)
                 }
 
                 Spacer(modifier = Modifier.width(8.dp))
 
                 Button(
-                    onClick = { navController.navigate(Screen.SignUp.route) },
+                    onClick = { navController.navigate(Screen.Login.route) },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.secondary), // Morado
                     modifier = Modifier.weight(1f)
                 ) {
-                    Text(text = "Registrarme", color = MaterialTheme.colorScheme.onSecondary)
+                    Text(stringResource(R.string.sign_in) , color = MaterialTheme.colorScheme.onSecondary)
                 }
             }
         }

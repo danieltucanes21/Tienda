@@ -43,7 +43,8 @@ fun generateData () : MutableList<ProductInfo>
     return mutableListOf(
         ProductInfo(
             id = 0,
-            painter = painterResource(R.drawable.image_list_1), // Placeholder de imagen
+            //painter = painterResource(R.drawable.image_list_1), // Placeholder de imagen
+            painter = "https://assets.dfb.de/uploads/000/289/444/custom_style_1_mitera_hannah-ursula.jpg?1692690626",
             contentDescription = "Camiseta Negra",
             description = "Camiseta de algodón negra con diseño minimalista.",
             price = 199.99,
@@ -56,7 +57,8 @@ fun generateData () : MutableList<ProductInfo>
         ),
         ProductInfo(
             id = 1,
-            painter = painterResource(R.drawable.image_list_2),
+            //painter = painterResource(R.drawable.image_list_2),
+            painter = "https://th.bing.com/th/id/OIP.UAiTfjoZB_J1ISwqrzhgWgHaHa?w=481&h=481&rs=1&pid=ImgDetMain",
             contentDescription = "Vestido Rojo",
             description = "Vestido elegante rojo con corte ajustado.",
             price = 349.99,
@@ -69,7 +71,8 @@ fun generateData () : MutableList<ProductInfo>
         ),
         ProductInfo(
             id = 2,
-            painter = painterResource(R.drawable.image_list_3),
+            //painter = painterResource(R.drawable.image_list_3),
+            painter = "https://th.bing.com/th/id/OIP.73sQuBGcuzn0EVEmGvKlZAHaH5?w=900&h=960&rs=1&pid=ImgDetMain",
             contentDescription = "Pantalón Deportivo",
             description = "Pantalón jogger cómodo para entrenamiento.",
             price = 259.99,
@@ -82,7 +85,8 @@ fun generateData () : MutableList<ProductInfo>
         ),
         ProductInfo(
             id = 3,
-            painter = painterResource(R.drawable.image_list_4),
+            //painter = painterResource(R.drawable.image_list_4),
+            painter = "https://earthfullyliving.com/wp-content/uploads/2022/08/extending-clothes-life-sustainable-fashion-200x300.jpg",
             contentDescription = "Blusa Blanca",
             description = "Blusa formal de manga larga y corte clásico.",
             price = 299.99,
@@ -95,7 +99,8 @@ fun generateData () : MutableList<ProductInfo>
         ),
         ProductInfo(
             id = 4,
-            painter = painterResource(R.drawable.image_list_5),
+            //painter = painterResource(R.drawable.image_list_5),
+            painter = "https://images.fashionmodeldirectory.com/images/models/74993/lulu-reynolds-557589-squaremedium.jpg",
             contentDescription = "Zapatillas Running",
             description = "Zapatillas deportivas con amortiguación superior.",
             price = 499.99,
@@ -108,7 +113,8 @@ fun generateData () : MutableList<ProductInfo>
         ),
         ProductInfo(
             id = 5,
-            painter = painterResource(R.drawable.image_list_6),
+            //painter = painterResource(R.drawable.image_list_6),
+            painter = "https://images.unsplash.com/photo-1590799822755-4ec061a6b2a5?q=80&w=1374&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
             contentDescription = "Sudadera con Capucha",
             description = "Sudadera térmica con interior afelpado.",
             price = 329.99,
@@ -121,7 +127,8 @@ fun generateData () : MutableList<ProductInfo>
         ),
         ProductInfo(
             id = 6,
-            painter = painterResource(R.drawable.image_list_7),
+            //painter = painterResource(R.drawable.image_list_7),
+            painter = "https://i.scdn.co/image/ab67616d00001e02e254f7cd902eda979b28c012",
             contentDescription = "Abrigo Largo",
             description = "Abrigo largo de invierno con botones metálicos.",
             price = 699.99,
@@ -134,7 +141,8 @@ fun generateData () : MutableList<ProductInfo>
         ),
         ProductInfo(
             id = 7,
-            painter = painterResource(R.drawable.image_list_8),
+            //painter = painterResource(R.drawable.image_list_8),
+            painter = "https://jm-moda.si/wp-content/uploads/2019/05/16-2-2-256x256.jpg",
             contentDescription = "Chaqueta Deportiva Niño",
             description = "Chaqueta impermeable para niños, con capucha.",
             price = 279.99,

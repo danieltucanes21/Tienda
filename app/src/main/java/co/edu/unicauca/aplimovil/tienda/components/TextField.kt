@@ -9,7 +9,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
@@ -19,19 +18,19 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import co.edu.unicauca.aplimovil.tienda.RegistroScreen
-import co.edu.unicauca.aplimovil.tienda.ui.theme.onSurfaceLight
-import co.edu.unicauca.aplimovil.tienda.ui.theme.onSurfaceVariantDark
 
 @Composable
 fun CampoTexto(
     label: String,
-    valor: MutableState<String>,
+    valor: String,
     esPassword: Boolean = false,
-    modifier: Modifier = Modifier
-) {
+    modifier: Modifier = Modifier,
+    onValueChange: (String) -> Unit,
+
+    ) {
     OutlinedTextField(
-        value = valor.value,
-        onValueChange = { valor.value = it },
+        value = valor,
+        onValueChange = onValueChange,
         label = { Text(label, color = MaterialTheme.colorScheme.onSurfaceVariant, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,) },
         textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurfaceVariant, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,),
 
