@@ -31,6 +31,10 @@ object AppViewModelProvider {
                 tiendaApplication().container.productRepository
             )
         }
+        initializer {
+            CreditCardViewModel(tiendaApplication().container.creditCardRepository)
+        }
+
     }
 }
 

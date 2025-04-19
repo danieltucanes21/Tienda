@@ -11,6 +11,7 @@ interface AppContainer {
     val purchaseRepository: PurchaseRepository
     val purchaseHistoryRepository: PurchaseHistoryRepository
     val cartItemRepository: CartItemRepository
+    val creditCardRepository: CreditCardRepository
 }
 
 /**
@@ -38,6 +39,9 @@ class AppDataContainer(private val context: Context) : AppContainer {
     }
     override val cartItemRepository: CartItemRepository by lazy {
         OfflineCartItemRepository(database.cartItemDao())
+    }
+    override val creditCardRepository: CreditCardRepository by lazy {
+        OfflineCreditCardRepository(database.creditCardDao()) // Agregar aquí
     }
 
 }
