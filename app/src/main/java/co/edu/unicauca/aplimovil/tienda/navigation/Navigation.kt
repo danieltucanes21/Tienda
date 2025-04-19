@@ -61,7 +61,7 @@ fun AppNavHost(
                     StoreScreen(
                         //productList = productList.toMutableList(),
                         modifier = modifier,
-                        navController = navController
+//                        navController = navController
                     )
                 })
         }

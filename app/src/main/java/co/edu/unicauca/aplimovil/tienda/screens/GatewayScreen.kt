@@ -134,11 +134,11 @@ fun PasarelaScreen(navController: NavHostController) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CampoTexto(
+    modifier: Modifier = Modifier,
     label: String,
     valor: String,
     keyboardType: KeyboardType = KeyboardType.Text,
     isPassword: Boolean = false,
-    modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit
 ) {
     OutlinedTextField(

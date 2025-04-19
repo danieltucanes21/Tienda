@@ -72,18 +72,19 @@ fun CartScreen(
         CartTotalSection(
             total = cartUiState.totalAmount,
             isLoading = cartUiState.isCheckoutProcessing,
-            onCheckout = { cartViewModel.proceedToCheckout(userId = userId) }
+            onCheckout = { // cartViewModel.proceedToCheckout(userId = userId)
+                Navigator.navigateTo(Screen.Card.route) }
 
         )
 
-        if (cartUiState.isCheckoutComplete) {
-            CheckoutCompleteDialog(
-                onDismiss = {
-                    cartViewModel.resetCheckoutState()
-                    Navigator.navigateTo(Screen.Store.route)
-                }
-            )
-        }
+//        if (cartUiState.isCheckoutComplete) {
+//            CheckoutCompleteDialog(
+//                onDismiss = {
+//                    cartViewModel.resetCheckoutState()
+//                    Navigator.navigateTo(Screen.Store.route)
+//                }
+//            )
+//        }
     }
 }
 

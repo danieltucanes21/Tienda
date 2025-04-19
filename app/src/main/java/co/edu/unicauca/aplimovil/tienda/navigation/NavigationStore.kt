@@ -23,7 +23,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
     NavHost(navController = navController, startDestination = Screens.StoreScreen.name) {
         composable(route = Screens.StoreScreen.name) {
             //StoreScreen(productList = productList, navController = navController)
-            StoreScreen(navController = navController)
+//            StoreScreen(navController = navController)
         }
         composable("productDetails/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
