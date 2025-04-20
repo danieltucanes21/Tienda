@@ -38,6 +38,11 @@ object AppViewModelProvider {
                 productRepository = tiendaApplication().container.productRepository
             )
         }
+        initializer {
+            ProductDetailViewModel (
+                productRepository = tiendaApplication().container.productRepository
+            )
+        }
     }
 }
 

@@ -27,7 +27,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         }
         composable("productDetails/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-            ProductoDetallesScreen(productId = productId, productList = productList) {
+            ProductoDetallesScreen(productId = productId) {
                 navController.popBackStack()
             }
         }

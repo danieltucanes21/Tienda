@@ -18,9 +18,6 @@ import edu.unicauca.apimovil.pixelplaza.ShoppingScreen
 import edu.unicauca.apimovil.pixelplaza.StoreScreen
 import edu.unicauca.apimovil.pixelplaza.generateData
 import androidx.lifecycle.viewmodel.compose.viewModel
-import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
-import co.edu.unicauca.aplimovil.tienda.viewModel.ShoppingViewModel
-import co.edu.unicauca.aplimovil.tienda.viewModel.StoreViewModel
 import edu.unicauca.apimovil.pixelplaza.generateBuy
 import edu.unicauca.apimovil.pixelplaza.generateCart
 import edu.unicauca.apimovil.pixelplaza.user
@@ -97,7 +94,7 @@ fun AppNavHost(
         }
         composable("DetailProduct/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-            ProductoDetallesScreen(productId = productId, productList = productList) {
+            ProductoDetallesScreen(productId = productId) {
                 navController.popBackStack()
             }
         }
