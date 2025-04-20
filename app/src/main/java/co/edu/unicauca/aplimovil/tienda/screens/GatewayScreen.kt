@@ -1,5 +1,6 @@
 package co.edu.unicauca.aplimovil.tienda.screens
 
+import android.R.attr.digits
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,38 +22,64 @@ import androidx.compose.ui.unit.sp
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import co.edu.unicauca.aplimovil.tienda.R
+import co.edu.unicauca.aplimovil.tienda.data.CreditCardRepository
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 import co.edu.unicauca.aplimovil.tienda.viewModel.AppViewModelProvider
 import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
 import edu.unicauca.apimovil.pixelplaza.user
+import co.edu.unicauca.aplimovil.tienda.data.CreditCard
+import android.widget.Toast
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PasarelaScreen(
     navController: NavHostController,
-    cartViewModel: CartViewModel = viewModel(factory = AppViewModelProvider.Factory)
+    cartViewModel: CartViewModel = viewModel(factory = AppViewModelProvider.Factory),
+    creditCardViewModel: co.edu.unicauca.aplimovil.tienda.viewModel.CreditCardViewModel = viewModel(factory = AppViewModelProvider.Factory)
 ) {
     val cartUiState by cartViewModel.uiState.collectAsState()
-
+    val savedCard by creditCardViewModel.cardState.collectAsState()
+    val context = LocalContext.current
     var showDialog by remember { mutableStateOf(false) }
 
-    LaunchedEffect(cartUiState.isCheckoutComplete) {
-        if (cartUiState.isCheckoutComplete) {
-            showDialog = true
-        }
-    }
 
     var cardHolder by remember { mutableStateOf("") }
     var cardNumber by remember { mutableStateOf("") }
     var expiryDate by remember { mutableStateOf("") }
     var ccv by remember { mutableStateOf("") }
 
+    val coroutineScope = rememberCoroutineScope()
+
+    // Rellenar los datos una sola vez cuando se cargue la tarjeta
+    LaunchedEffect(savedCard) {
+        savedCard?.let {
+            cardHolder = it.cardHolder
+            cardNumber = it.cardNumber
+            expiryDate = it.expiryDate
+            ccv = it.ccv
+        }
+    }
+
+    // Mostrar dialog si se completa el pago
+    LaunchedEffect(cartUiState.isCheckoutComplete) {
+        if (cartUiState.isCheckoutComplete) {
+            showDialog = true
+        }
+    }
+    //
+    LaunchedEffect(Unit) {
+        creditCardViewModel.loadCardForUser(user.id)
+    }
+
+
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.Black)
+            .background(MaterialTheme.colorScheme.background)
+
             .padding(16.dp),
         contentAlignment = Alignment.Center
     ) {
@@ -70,7 +97,7 @@ fun PasarelaScreen(
             Spacer(modifier = Modifier.height(16.dp))
 
             // Título
-            Text("Elija un método de pago", fontSize = 20.sp, color = Color.White)
+            Text("Elija un método de pago", fontSize = 20.sp, color = MaterialTheme.colorScheme.onBackground)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -119,7 +146,20 @@ fun PasarelaScreen(
                     valor = expiryDate,
                     keyboardType = KeyboardType.Number,
                     modifier = Modifier.weight(0.7f)
-                ) { expiryDate = it }
+                ) {// expiryDate = it
+                    input ->
+                    // Filtrar solo dígitos
+                    val digitsOnly = input.filter { it.isDigit() }
+                    // Formatear como MM/AA
+                    val formatted = when {
+                        digitsOnly.length >= 3 -> digitsOnly.take(2) + "/" + digitsOnly.drop(2).take(2)
+                        else -> digitsOnly
+                    }
+
+                    if (formatted.length <= 5) {
+                        expiryDate = formatted
+                    }
+                }
 
                 Spacer(modifier = Modifier.width(8.dp))
 
@@ -129,7 +169,9 @@ fun PasarelaScreen(
                     keyboardType = KeyboardType.NumberPassword,
                     isPassword = true,
                     modifier = Modifier.weight(0.3f)
-                ) { ccv = it }
+                ) { ccv = it
+
+                }
             }
 
             Spacer(modifier = Modifier.height(24.dp))
@@ -137,13 +179,39 @@ fun PasarelaScreen(
             // Botón de Confirmar
             Button(
                 onClick = {
+                    if (cardHolder.isBlank() || cardNumber.length != 16 || expiryDate.length != 5 || ccv.length != 3) {
+                        Toast.makeText(context, "Por favor completa todos los campos correctamente", Toast.LENGTH_SHORT).show()
+                        return@Button
+                    }
+
+                    val newCard = CreditCard(
+                        userId = user.id,
+                        cardHolder = cardHolder,
+                        cardNumber = cardNumber,
+                        expiryDate = expiryDate,
+                        ccv = ccv
+                    )
+
+                    // Guardar la tarjeta desde el ViewModel
+                    creditCardViewModel.saveCard(newCard)
+
+                    // Realizar checkout
                     cartViewModel.checkoutToDisplay()
+
+                    // Mostrar diálogo de confirmación
+                    showDialog = true
                 },
                 shape = RoundedCornerShape(10.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF7B5CF0)),
-                modifier = Modifier.fillMaxWidth().height(50.dp)
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp)
             ) {
-                Text("Confirmar", color = Color.White, fontSize = 18.sp)
+                Text(
+                    text = "Confirmar",
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    fontSize = 18.sp
+                )
             }
 
             if (showDialog) {
@@ -178,15 +246,19 @@ fun CampoTexto(
     OutlinedTextField(
         value = valor,
         onValueChange = onValueChange,
-        label = { Text(label, color = Color.White) },
-        textStyle = TextStyle(color = Color.White),
+        label = { Text(label, color = MaterialTheme.colorScheme.onSurfaceVariant, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily,) },
+        textStyle = TextStyle(color = MaterialTheme.colorScheme.onSurfaceVariant, fontFamily = MaterialTheme.typography.bodyLarge.fontFamily),
+
         keyboardOptions = KeyboardOptions.Default.copy(keyboardType = keyboardType),
         visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
         modifier = modifier.fillMaxWidth(),
-        colors = TextFieldDefaults.outlinedTextFieldColors(
-            focusedBorderColor = Color.White,
-            unfocusedBorderColor = Color.Gray
-        )
+        colors = TextFieldDefaults.colors(
+            focusedContainerColor = MaterialTheme.colorScheme.tertiaryContainer,
+            unfocusedContainerColor = MaterialTheme.colorScheme.secondaryContainer,
+            focusedIndicatorColor = Color.Transparent,  // Quita la línea en estado enfocado
+            unfocusedIndicatorColor = Color.Transparent, // Quita la línea en estado no enfocado
+            disabledIndicatorColor = Color.Transparent  // Quita la línea en estado deshabilitad
+        ),
     )
 }
 
@@ -208,10 +280,4 @@ fun CheckoutCompleteDialog(onAccept: () -> Unit, onDismiss: () -> Unit) {
             }
         }
     )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewPasarelaScreen() {
-    //PasarelaScreen(navController = NavHostController()) // Reemplaza null con un NavHostController válido si es necesario
 }
