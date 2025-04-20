@@ -12,8 +12,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [User::class, Product::class, CartItem::class, Purchase::class, PurchaseHistory::class],
-    version = 1, exportSchema = false
+    entities = [User::class, Product::class, CartItem::class, Purchase::class, PurchaseHistory::class, CreditCard::class],
+    version = 2, exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase(){
     abstract fun userDao(): UserDao
@@ -21,6 +21,7 @@ abstract class AppDatabase : RoomDatabase(){
     abstract fun cartItemDao(): CartItemDao
     abstract fun purchaseDao(): PurchaseDao
     abstract fun purchaseHistoryDao(): PurchaseHistoryDao
+    abstract fun creditCardDao(): CreditCardDao
 
     companion object {
         @Volatile
