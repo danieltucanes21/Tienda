@@ -30,4 +30,6 @@ interface UsersRepository {
 
 
     suspend fun login(email: String, password: String) :Boolean
+
+    suspend fun login2(email: String, password: String) :User?
 }

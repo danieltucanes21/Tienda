@@ -21,6 +21,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import edu.unicauca.apimovil.pixelplaza.generateBuy
 import edu.unicauca.apimovil.pixelplaza.generateCart
 import edu.unicauca.apimovil.pixelplaza.user
+import android.util.Log
 
 @Composable
 fun AppNavHost(
@@ -38,8 +39,6 @@ fun AppNavHost(
         }
     }
     val productList = generateData()
-
-    val user = user
     val cartList = generateCart(user)
     val buyList = generateBuy(user, cartList)
 
@@ -73,6 +72,7 @@ fun AppNavHost(
                 })
         }
         composable(Screen.Cart.route) {
+            Log.i("MyApp", "enviado al carrito: $user")
             ScreenWithAppBar(
                 productList = cartList,
                 drawerState = drawerState,
