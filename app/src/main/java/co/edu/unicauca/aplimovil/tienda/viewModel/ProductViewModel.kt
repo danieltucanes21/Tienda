@@ -5,12 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import co.edu.unicauca.aplimovil.tienda.data.Product
 import co.edu.unicauca.aplimovil.tienda.data.ProductRepository
 import co.edu.unicauca.aplimovil.tienda.mappers.ProductMapper
-import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.PublicType
-import edu.unicauca.apimovil.pixelplaza.Size
 import kotlinx.coroutines.launch
 
 

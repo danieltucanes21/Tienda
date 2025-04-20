@@ -8,7 +8,10 @@ import co.edu.unicauca.aplimovil.tienda.models.ProductBuy
 import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import co.edu.unicauca.aplimovil.tienda.models.User
 import java.sql.Date
+import java.text.ParseException
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 // Tamaños para los textos de cuerpo
 val textBodyLarge = 18.sp
@@ -36,6 +39,32 @@ val textLabelMedium = 14.sp
 val textLabelSmall = 10.sp
 
 val letterSpacing = 14.sp
+
+fun getStringFromNewDate(): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    return dateFormat.format(Date(Calendar.getInstance().timeInMillis))
+}
+
+fun getActuallyDate(): Date {
+    return Date(Calendar.getInstance().timeInMillis)
+}
+
+fun getStringFromDate(date: Date): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+    return dateFormat.format(date)
+}
+
+
+fun getDateFromString(dateString: String): Date? {
+    return try {
+        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
+        val parsedDate = dateFormat.parse(dateString)
+        parsedDate?.let { Date(it.time) }
+    } catch (e: ParseException) {
+        null
+    }
+}
+
 
 @Composable
 fun generateData () : MutableList<ProductInfo>

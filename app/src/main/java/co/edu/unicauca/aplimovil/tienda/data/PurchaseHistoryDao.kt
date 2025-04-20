@@ -2,6 +2,7 @@ package co.edu.unicauca.aplimovil.tienda.data
 
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
@@ -12,4 +13,7 @@ interface PurchaseHistoryDao {
 
     @Query("SELECT * FROM purchase_history WHERE userId = :userId")
     suspend fun getPurchaseHistoryByUser(userId: Int): List<PurchaseHistory>
+
+    @Delete
+    suspend fun deletePurchaseHistory(purchaseHistory: PurchaseHistory)
 }

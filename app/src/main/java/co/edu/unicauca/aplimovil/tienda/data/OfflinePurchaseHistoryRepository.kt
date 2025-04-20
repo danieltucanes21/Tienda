@@ -8,4 +8,8 @@ class OfflinePurchaseHistoryRepository (private val purchaseHistoryDao: Purchase
     override suspend fun getPurchaseHistoryByUser(userId: Int): List<PurchaseHistory> {
         return purchaseHistoryDao.getPurchaseHistoryByUser(userId)
     }
+
+    override suspend fun deletePurchaseHistory(purchaseHistory: PurchaseHistory) {
+        purchaseHistoryDao.deletePurchaseHistory(purchaseHistory)
+    }
 }
