@@ -203,13 +203,10 @@ fun generateBuy(user: User, cart: MutableList<ProductCart>): MutableList<Product
 }
 
 // Datos de ejemplo para un usuario
-val user = User(
-    id = 1,
+var user = User(
+    id = 0,
     email = "usuario@example.com",
-    password = "password123",
-    name = "Juan Pérez",
-    phone = "3001234567",
-    address = "Calle 123 #45-67, Bogotá"
+    name = "Juan Pérez"
 )
 
 // Función para generar un carrito de compras con los productos de ejemplo

@@ -266,12 +266,12 @@ fun LoginWithButtons(){
 }
 
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewLoginScreen() {
-    LoginBody(loginUiState = LoginUiState(
-        LoginDetails(
-
-        )
-    ), onLoginClick = {}, onLoginValueChange = {})
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun PreviewLoginScreen() {
+//    LoginBody(loginUiState = LoginUiState(
+//        LoginDetails(
+//
+//        )
+//    ), onLoginClick = {}, onLoginValueChange = {})
+//}

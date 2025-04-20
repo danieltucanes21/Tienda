@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
             val productDao = AppDatabase.getDatabase(applicationContext).productDao()
             val products = productDao.getAllProducts()
             println("Productos en la base de datos: $products")
-            Log.i("App", "Productos extraídos: ${products.toString()}")
+            Log.i("MyApp", "Productos extraídos: ${products.toString()}")
         }
     }
 }
