@@ -22,6 +22,7 @@ import edu.unicauca.apimovil.pixelplaza.generateBuy
 import edu.unicauca.apimovil.pixelplaza.generateCart
 import edu.unicauca.apimovil.pixelplaza.user
 import android.util.Log
+import co.edu.unicauca.aplimovil.tienda.screens.AboutScreen
 
 @Composable
 fun AppNavHost(
@@ -91,6 +92,16 @@ fun AppNavHost(
         }
         composable(Screen.Card.route) {
             PasarelaScreen(navController)
+        }
+        composable(Screen.About.route) {
+            ScreenWithAppBar(
+                productList = productList,
+                drawerState = drawerState,
+                screen = { productList, modifier ->
+                    AboutScreen(
+                        modifier = modifier
+                    )
+                })
         }
         composable("DetailProduct/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable

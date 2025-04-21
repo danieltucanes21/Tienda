@@ -25,6 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import co.edu.unicauca.aplimovil.tienda.R
+import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
+import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import kotlinx.coroutines.launch
 
@@ -55,7 +57,10 @@ fun PixelPlazaAppBar(
             Box(
                 modifier = Modifier
                     .size(60.dp)
-                    .padding(end = 8.dp),
+                    .padding(end = 8.dp)
+                    .clickable {
+                        Navigator.navigateTo(Screen.About.route)
+                    },
                 contentAlignment = Alignment.Center
             ) {
                 Image(

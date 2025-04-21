@@ -78,15 +78,6 @@ fun CartScreen(
                 Navigator.navigateTo(Screen.Card.route) }
 
         )
-
-//        if (cartUiState.isCheckoutComplete) {
-//            CheckoutCompleteDialog(
-//                onDismiss = {
-//                    cartViewModel.resetCheckoutState()
-//                    Navigator.navigateTo(Screen.Store.route)
-//                }
-//            )
-//        }
     }
 }
 
