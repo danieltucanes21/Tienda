@@ -53,6 +53,7 @@ import androidx.compose.runtime.LaunchedEffect
 
 @Composable
 fun ProductoDetallesScreen(
+    userId: Int,
     productId: String,
     cartViewModel: CartViewModel = viewModel(factory = AppViewModelProvider.Factory),
     productDetailViewModel: ProductDetailViewModel = viewModel(factory = AppViewModelProvider.Factory),
@@ -104,8 +105,14 @@ fun ProductoDetallesScreen(
                 },
                 confirmButton = {
                     Button(onClick = {
+                        if (userId == 0) {
+                            Toast.makeText(context, "Debes iniciar sesión para agregar productos al carrito", Toast.LENGTH_SHORT).show()
+                            productDetailViewModel.showQuantityDialog(false)
+                            return@Button
+                        }
+
                         val productCart = ProductCart(
-                            idOwner = user.id,
+                            idOwner = userId,
                             product = producto,
                             quantity = uiState.quantity,
                             selectedSize = uiState.selectedSize!!,
@@ -214,6 +221,10 @@ fun ProductoDetallesScreen(
 
                     Button(
                         onClick = {
+                            if (userId == 0) {
+                                Toast.makeText(context, "Debes iniciar sesión para agregar productos al carrito", Toast.LENGTH_SHORT).show()
+                                return@Button
+                            }
                             if (uiState.selectedSize == null) {
                                 Toast.makeText(context, "Por favor selecciona una talla", Toast.LENGTH_SHORT).show()
                                 return@Button

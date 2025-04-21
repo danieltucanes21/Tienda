@@ -105,7 +105,7 @@ fun AppNavHost(
         }
         composable("DetailProduct/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-            ProductoDetallesScreen(productId = productId) {
+            ProductoDetallesScreen(userId = user.id, productId = productId) {
                 navController.popBackStack()
             }
         }
