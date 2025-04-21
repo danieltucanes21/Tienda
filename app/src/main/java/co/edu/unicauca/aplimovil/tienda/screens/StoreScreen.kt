@@ -1,5 +1,7 @@
 package edu.unicauca.apimovil.pixelplaza
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -18,8 +20,13 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -59,7 +66,6 @@ fun StoreScreenPreview () {
 
 @Composable
 fun StoreScreen(
-    //productList: List<ProductInfo>,
     modifier: Modifier = Modifier,
     storeViewModel: StoreViewModel = viewModel(),
     productViewModel: ProductViewModel = viewModel(factory = AppViewModelProvider.Factory),
@@ -73,6 +79,10 @@ fun StoreScreen(
         "Niños" to PublicType.CHILD
     )
 
+    // Estado para controlar el foco del SearchBar
+    val focusManager = LocalFocusManager.current
+    var searchActive by remember { mutableStateOf(false) }
+
     // Initialize once
     LaunchedEffect(Unit) {
         if (uiState.products.isEmpty()) {
@@ -80,14 +90,44 @@ fun StoreScreen(
         }
     }
 
-    Column(modifier = modifier.fillMaxSize()) {
+    // Modificador para detectar clicks fuera del SearchBar
+    val clickModifier = if (searchActive) {
+        Modifier
+            .fillMaxSize()
+            .clickable(
+                interactionSource = remember { MutableInteractionSource() },
+                indication = null
+            ) {
+                focusManager.clearFocus()
+                searchActive = false
+            }
+    } else {
+        Modifier
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .then(clickModifier)
+    ) {
         // Search bar
         SearchBar(
             query = uiState.searchQuery,
             onQueryChange = { productViewModel.search(it) },
-            onClear = {productViewModel.search("") },
-            onProfileClick = { Navigator.navigateTo(Screen.Login.route) }
+            onClear = {
+                productViewModel.search("")
+                focusManager.clearFocus()
+                searchActive = false
+            },
+            onProfileClick = { Navigator.navigateTo(Screen.Login.route) },
+            onActiveChange = { active ->
+                searchActive = active
+                if (!active) {
+                    focusManager.clearFocus()
+                }
+            }
         )
+
 
         // Category tabs
         TabRow(

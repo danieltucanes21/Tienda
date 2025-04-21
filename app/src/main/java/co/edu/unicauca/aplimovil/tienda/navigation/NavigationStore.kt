@@ -12,6 +12,7 @@ import co.edu.unicauca.aplimovil.tienda.screens.ProductoDetallesScreen
 import edu.unicauca.apimovil.pixelplaza.StoreScreen
 import edu.unicauca.apimovil.pixelplaza.ProductInfo
 import edu.unicauca.apimovil.pixelplaza.generateData
+import edu.unicauca.apimovil.pixelplaza.user
 import kotlin.collections.map
 
 
@@ -27,7 +28,7 @@ fun AppNavigation(modifier: Modifier = Modifier) {
         }
         composable("productDetails/{productId}") { backStackEntry ->
             val productId = backStackEntry.arguments?.getString("productId") ?: return@composable
-            ProductoDetallesScreen(productId = productId) {
+            ProductoDetallesScreen(user.id, productId = productId) {
                 navController.popBackStack()
             }
         }
