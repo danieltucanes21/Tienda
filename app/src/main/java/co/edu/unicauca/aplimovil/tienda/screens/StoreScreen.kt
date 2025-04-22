@@ -27,11 +27,13 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.ProductItemGridCard
 import co.edu.unicauca.aplimovil.tienda.components.ScreenWithAppBar
@@ -73,10 +75,10 @@ fun StoreScreen(
 ) {
     val uiState = productViewModel.productUiState
     val categories = listOf(
-        "Todos" to null,
-        "Mujeres" to PublicType.WOMEN,
-        "Hombres" to PublicType.MEN,
-        "Niños" to PublicType.CHILD
+        stringResource(R.string.todos) to null,
+        stringResource(R.string.mujeres) to PublicType.WOMEN,
+        stringResource(R.string.hombres) to PublicType.MEN,
+        stringResource(R.string.ni_os) to PublicType.CHILD
     )
 
     // Estado para controlar el foco del SearchBar
@@ -166,7 +168,7 @@ fun StoreScreen(
             }
             uiState.filteredProducts.isEmpty() -> {
                 Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                    Text("No se encontraron productos", style = MaterialTheme.typography.bodyLarge)
+                    Text(stringResource(R.string.no_se_encontraron_productos), style = MaterialTheme.typography.bodyLarge)
                 }
             }
             else -> {

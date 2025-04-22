@@ -50,6 +50,8 @@ import java.sql.Date
 import java.util.Calendar
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.res.stringResource
+import co.edu.unicauca.aplimovil.tienda.R
 
 @Composable
 fun ProductoDetallesScreen(
@@ -87,12 +89,13 @@ fun ProductoDetallesScreen(
         if (uiState.showQuantityDialog) {
             AlertDialog(
                 onDismissRequest = { productDetailViewModel.showQuantityDialog(false) },
-                title = { Text("Agregar al carrito") },
+                title = { Text(stringResource(R.string.agregar_al_carrito)) },
                 text = {
                     Column {
-                        Text("Talla seleccionada: ${uiState.selectedSize}")
+                        val selectedSize = uiState.selectedSize ?: "N/A"
+                        Text(stringResource(R.string.selected_size_label, selectedSize))
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Ingresa la cantidad deseada:")
+                        Text(stringResource(R.string.ingresa_la_cantidad_deseada))
                         OutlinedTextField(
                             value = uiState.quantity.toString(),
                             onValueChange = { newValue ->
@@ -106,7 +109,7 @@ fun ProductoDetallesScreen(
                 confirmButton = {
                     Button(onClick = {
                         if (userId == 0) {
-                            Toast.makeText(context, "Debes iniciar sesión para agregar productos al carrito", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(context, context.getString(R.string.debes_iniciar_sesion), Toast.LENGTH_SHORT).show()
                             productDetailViewModel.showQuantityDialog(false)
                             return@Button
                         }
@@ -120,25 +123,30 @@ fun ProductoDetallesScreen(
                         )
                         cartViewModel.addProduct(productCart)
                         productDetailViewModel.showQuantityDialog(false)
-                        Toast.makeText(context, "Producto agregado al carrito", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,
+                            context.getString(R.string.producto_agregado_al_carrito), Toast.LENGTH_SHORT).show()
                     }) {
-                        Text("Confirmar")
+                        Text(stringResource(R.string.confirmar))
                     }
                 },
                 dismissButton = {
                     TextButton(onClick = { productDetailViewModel.showQuantityDialog(false) }) {
-                        Text("Cancelar")
+                        Text(stringResource(R.string.cancelar))
                     }
                 }
             )
         }
 
-        LazyColumn(modifier = Modifier.fillMaxSize().background(MaterialTheme.colorScheme.background)) {
+        LazyColumn(modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)) {
             item {
                 Image(
                     painter = rememberAsyncImagePainter(producto.painter),
                     contentDescription = producto.contentDescription,
-                    modifier = Modifier.fillMaxWidth().height(300.dp),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(300.dp),
                     contentScale = ContentScale.Crop
                 )
             }
@@ -160,13 +168,15 @@ fun ProductoDetallesScreen(
 
                     Spacer(modifier = Modifier.height(16.dp))
 
-                    Text(text = "Tallas", fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface)
+                    Text(text = stringResource(R.string.tallas), fontSize = 18.sp, color = MaterialTheme.colorScheme.onSurface)
                     Spacer(modifier = Modifier.height(8.dp))
 
                     // Grilla de Tallas
                     LazyVerticalGrid(
                         columns = GridCells.Fixed(6),
-                        modifier = Modifier.fillMaxWidth().height(100.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(100.dp)
                     ) {
                         items(tallas) { talla ->
                             Button(
@@ -185,7 +195,7 @@ fun ProductoDetallesScreen(
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "ESPECIFICACIONES",
+                        text = stringResource(R.string.especificaciones),
                         fontSize = 18.sp,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Bold
@@ -193,26 +203,30 @@ fun ProductoDetallesScreen(
                     Box(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .background(MaterialTheme.colorScheme.secondary, RoundedCornerShape(8.dp))
+                            .background(
+                                MaterialTheme.colorScheme.secondary,
+                                RoundedCornerShape(8.dp)
+                            )
                             .padding(12.dp)
                     ) {
                         Column {
-                            Text("• Corte ajustado", color = MaterialTheme.colorScheme.onSecondary)
-                            Text("• Cuello redondo", color = MaterialTheme.colorScheme.onSecondary)
-                            Text("• 100% en algodón", color = MaterialTheme.colorScheme.onSecondary)
+                            Text(producto.specifications, color = MaterialTheme.colorScheme.onSecondary)
+                            /*Text(stringResource(R.string.corte_ajustado), color = MaterialTheme.colorScheme.onSecondary)
+                            Text(stringResource(R.string.cuello_redondo), color = MaterialTheme.colorScheme.onSecondary)
+                            Text(stringResource(R.string._100_en_algod_n), color = MaterialTheme.colorScheme.onSecondary)*/
                         }
                     }
 
                     Spacer(modifier = Modifier.height(16.dp))
 
                     Text(
-                        text = "CALIFICACIONES",
+                        text = stringResource(R.string.calificaciones),
                         fontSize = 18.sp,
                         color = MaterialTheme.colorScheme.onSurface,
                         fontWeight = FontWeight.Bold
                     )
                     Text(
-                        text = "4.8 ★★★★★",
+                        text = stringResource(R.string._4_8),
                         fontSize = 16.sp,
                         color = MaterialTheme.colorScheme.primary
                     )
@@ -222,20 +236,23 @@ fun ProductoDetallesScreen(
                     Button(
                         onClick = {
                             if (userId == 0) {
-                                Toast.makeText(context, "Debes iniciar sesión para agregar productos al carrito", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context,
+                                    context.getString(R.string.debes_iniciar_sesion), Toast.LENGTH_SHORT).show()
                                 return@Button
                             }
                             if (uiState.selectedSize == null) {
-                                Toast.makeText(context, "Por favor selecciona una talla", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(context, context.getString(R.string.selecciona_una_talla), Toast.LENGTH_SHORT).show()
                                 return@Button
                             }
                             productDetailViewModel.showQuantityDialog(true)
                         },
-                        modifier = Modifier.fillMaxWidth().height(50.dp),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(50.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                     ) {
                         Text(
-                            text = "Agregar al carrito",
+                            text = stringResource(R.string.agregar_al_carrito),
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontSize = 18.sp
                         )
@@ -282,4 +299,3 @@ fun ProductoDetallesScreen(
 //
 //    ProductoDetallesScreen(productId = "1", productList = productList) {}
 //}
-

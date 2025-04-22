@@ -34,12 +34,14 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import co.edu.unicauca.aplimovil.tienda.R
 //import co.edu.unicauca.aplimovil.tienda.NavigationDrawer
 import co.edu.unicauca.aplimovil.tienda.components.ProductItem
 import co.edu.unicauca.aplimovil.tienda.components.NavigationDrawer
@@ -89,7 +91,7 @@ fun ShoppingScreen(
             modifier = Modifier.fillMaxWidth()
         ) {
             Text(
-                text = "Compras",
+                text = stringResource(R.string.compras),
                 fontSize = textTitleLarge,
                 fontWeight = FontWeight.Bold,
                 fontFamily = MaterialTheme.typography.titleLarge.fontFamily,
@@ -103,7 +105,7 @@ fun ShoppingScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Refresh,
-                    contentDescription = "Refrescar",
+                    contentDescription = stringResource(R.string.refrescar),
                     tint = MaterialTheme.colorScheme.primary
                 )
             }
@@ -123,13 +125,13 @@ fun ShoppingScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.MoreVert,
-                        contentDescription = "Bolsa vacía",
+                        contentDescription = stringResource(R.string.bolsa_vac_a),
                         tint = MaterialTheme.colorScheme.secondary,
                         modifier = Modifier.size(48.dp)
                     )
                     Spacer(modifier = Modifier.height(16.dp))
                     Text(
-                        text = uiState.error ?: "No hay compras realizadas",
+                        text = uiState.error ?: stringResource(R.string.no_hay_compras_realizadas),
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                     )
                     Spacer(modifier = Modifier.height(16.dp))

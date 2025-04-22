@@ -26,8 +26,7 @@ fun CampoTexto(
     esPassword: Boolean = false,
     modifier: Modifier = Modifier,
     onValueChange: (String) -> Unit,
-
-    ) {
+) {
     OutlinedTextField(
         value = valor,
         onValueChange = onValueChange,
@@ -47,7 +46,7 @@ fun CampoTexto(
             .fillMaxWidth()
             .padding(4.dp)
 
-        )
+    )
 }
 
 // Preview para ver la pantalla en Android Studio

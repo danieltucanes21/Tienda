@@ -34,8 +34,16 @@ class RegisterViewModel (private val usersRepository: UsersRepository) : ViewMod
 
         val errors = ValidationErrors(
             userNameError = if (user.userName.isBlank()) R.string.error_empty_name else null,
-            emailError = if (user.email.isBlank()) R.string.error_empty_email else null,
-            passwordError = if (user.password.isBlank()) R.string.error_empty_password else null,
+            emailError = when {
+                user.email.isBlank() -> R.string.error_empty_email
+                !android.util.Patterns.EMAIL_ADDRESS.matcher(user.email).matches() -> R.string.error_invalid_email
+                else -> null
+            },
+            passwordError = if (user.password.isBlank()) {
+                R.string.error_empty_password
+            } else if (user.password.length < 8) {
+                R.string.error_short_password
+            } else null,
             confirmPasswordError = if (user.confirmPassword.isBlank()) {
                 R.string.error_empty_confirm_password
             } else if (user.confirmPassword != user.password) {
@@ -85,11 +93,7 @@ data class ValidationErrors(
     val passwordError: Int? = null,
     val confirmPasswordError: Int? = null
 )
-/**
- * Extension function to convert [ItemDetails] to [Item]. If the value of [ItemDetails.price] is
- * not a valid [Double], then the price will be set to 0.0. Similarly if the value of
- * [ItemDetails.quantity] is not a valid [Int], then the quantity will be set to 0
- */
+
 fun UserDetails.toUser(): User = User(
     id = id,
     userName = userName,

@@ -27,10 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
 import co.edu.unicauca.aplimovil.tienda.navigation.Screen
 import co.edu.unicauca.aplimovil.tienda.viewModel.NavigationViewModel
@@ -58,7 +60,7 @@ fun SearchBar(
         onValueChange = onQueryChange,
         placeholder = {
             Text(
-                text = "Buscar en la tienda",
+                text = stringResource(R.string.buscar_en_la_tienda),
                 color = MaterialTheme.colorScheme.secondary,
                 fontSize = textLabelLarge,
                 fontFamily = MaterialTheme.typography.labelLarge.fontFamily
@@ -67,7 +69,7 @@ fun SearchBar(
         leadingIcon = {
             Icon(
                 Icons.Default.Search,
-                contentDescription = "Buscar",
+                contentDescription = stringResource(R.string.buscar),
                 tint = MaterialTheme.colorScheme.primary
             )
         },
@@ -84,7 +86,7 @@ fun SearchBar(
                     ) {
                         Icon(
                             Icons.Default.Close,
-                            contentDescription = "Limpiar búsqueda",
+                            contentDescription = stringResource(R.string.limpiar_busqueda),
                             tint = MaterialTheme.colorScheme.primary
                         )
                     }
@@ -99,7 +101,7 @@ fun SearchBar(
                 ) {
                     Icon(
                         Icons.Default.AccountCircle,
-                        contentDescription = "Perfil",
+                        contentDescription = stringResource(R.string.perfil),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }

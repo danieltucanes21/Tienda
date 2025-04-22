@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Store</string>
+    <string name="app_name">Pixel Plaza</string>
     <string name="new_account">New account</string>
     <string name="description">Fill out the following form with your personal information. Create a password and register an email address.</string>
     <string name="full_name">Full name</string>
@@ -27,4 +27,65 @@
     <string name="error_password_mismatch">Passwords do not match</string>
     <string name="error_empty_confirm_password">Confirm the password</string>
     <string name="ingresar">Enter Store</string>
+    <string name="desarrollado_por">Developed by:</string>
+    <string name="juan_manquillo">Juan Manquillo</string>
+    <string name="daniel_tucanes">Daniel Tucanes</string>
+    <string name="steven_chanchi">Steven Chanchi</string>
+    <string name="cart_item_count" formatted="true">Cart (%1$d items)</string>
+    <string name="monto_total">Total amount:</string>
+    <string name="realizar_compra">Checkout</string>
+    <string name="total_price" formatted="true">$%1$.2f</string>
+    <string name="logo">Logo</string>
+    <string name="fecha_de_vencimiento">Expiration Date</string>
+    <string name="ccv">CCV</string>
+    <string name="confirmar">Confirm</string>
+    <string name="elija_un_m_todo_de_pago">Choose a payment method</string>
+    <string name="tarjeta">Card</string>
+    <string name="efectivo">Cash</string>
+    <string name="criptomoneda">Cryptocurrency</string>
+    <string name="titular_de_la_tarjeta">Cardholder Name</string>
+    <string name="n_mero_de_tarjeta">Card Number</string>
+    <string name="compra_completada">Purchase completed</string>
+    <string name="gracias_por_tu_compra">Thank you for your purchase!</string>
+    <string name="aceptar">Accept</string>
+    <string name="cancelar">Cancel</string>
+    <string name="completa_todos_los_campos">Please fill in all fields correctly</string>
+    <string name="todos">All</string>
+    <string name="mujeres">Women</string>
+    <string name="hombres">Men</string>
+    <string name="ni_os">Children</string>
+    <string name="no_se_encontraron_productos">No products found</string>
+    <string name="background">Background</string>
+    <string name="pixelplaza">PixelPlaza</string>
+    <string name="boutique">Boutique</string>
+    <string name="compras">Purchases</string>
+    <string name="refrescar">Refresh</string>
+    <string name="bolsa_vac_a">Empty bag</string>
+    <string name="no_hay_compras_realizadas">No purchases made</string>
+    <string name="agregar_al_carrito">Add to car</string>
+    <string name="ingresa_la_cantidad_deseada">Enter the desired quantity:</string>
+    <string name="tallas">Sizes</string>
+    <string name="especificaciones">SPECIFICATIONS</string>
+    <string name="corte_ajustado">• Slim fit</string>
+    <string name="cuello_redondo">• Crew neck</string>
+    <string name="_100_en_algod_n">• 100% cotton</string>
+    <string name="calificaciones">RATINGS</string>
+    <string name="_4_8">4.8 ★★★★★</string>
+    <string name="descripcion">Description</string>
+    <string name="descripcion_app">The application is a clothing store that features a simple yet intuitive design for using its various functionalities. It is an educational application developed as part of a microproject focused on applying different techniques for Android app development. As such, payment methods and certain security validations have been left aside in order to focus on building an application that is modifiable, functionally scalable, and user-friendly.</string>
+    <string name="selected_size_label">Selected size: %1$s</string>
+    <string name="debes_iniciar_sesion">You must log in to add products to the cart</string>
+    <string name="selecciona_una_talla">Please select a size</string>
+    <string name="menu">Menu</string>
+    <string name="pixel_plaza">Pixel Plaza</string>
+    <string name="agregar">Add</string>
+    <string name="eliminar">Delete</string>
+    <string name="buscar_en_la_tienda">Search the store</string>
+    <string name="buscar">Search</string>
+    <string name="limpiar_busqueda">Clear search</string>
+    <string name="perfil">Profile</string>
+    <string name="brand_label">Brand: %1$s</string>
+    <string name="color_label">Color: %1$s</string>
+    <string name="error_short_password">Password must be at least 8 characters long</string>
+    <string name="producto_agregado_al_carrito">Product added to cart</string>
 </resources>
