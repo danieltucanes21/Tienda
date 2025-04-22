@@ -52,7 +52,7 @@ fun PixelPlazaScreen(
     ) {
         Image(
             painter = painterResource(R.drawable.inicio), // Reemplázalo con tu URL de imagen
-            contentDescription = "Background",
+            contentDescription = stringResource(R.string.background),
             contentScale = ContentScale.Crop,
             modifier = Modifier.fillMaxSize()
         )
@@ -65,7 +65,7 @@ fun PixelPlazaScreen(
             verticalArrangement = Arrangement.Center
         ) {
             Text(
-                text = "PixelPlaza",
+                text = stringResource(R.string.pixelplaza),
                 fontSize = 32.sp,
                 fontWeight = FontWeight.Bold,
                 color = Color.White
@@ -75,7 +75,7 @@ fun PixelPlazaScreen(
 
             Image(
                 painter = painterResource(id = R.drawable.logo), // Reemplázalo con tu recurso
-                contentDescription = "Logo",
+                contentDescription = stringResource(R.string.logo),
                 modifier = Modifier
                     .size(100.dp)
                     .clip(RoundedCornerShape(12.dp))
@@ -84,7 +84,7 @@ fun PixelPlazaScreen(
             Spacer(modifier = Modifier.height(4.dp))
 
             Text(
-                text = "Boutique",
+                text = stringResource(R.string.boutique),
                 fontSize = 20.sp,
                 color = Color.White
             )

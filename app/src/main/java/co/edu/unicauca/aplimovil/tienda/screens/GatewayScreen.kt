@@ -32,6 +32,7 @@ import co.edu.unicauca.aplimovil.tienda.viewModel.CartViewModel
 import edu.unicauca.apimovil.pixelplaza.user
 import co.edu.unicauca.aplimovil.tienda.data.CreditCard
 import android.widget.Toast
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -90,14 +91,14 @@ fun PasarelaScreen(
             // Logo
             Image(
                 painter = painterResource(id = R.drawable.ic_usuario),
-                contentDescription = "Logo",
+                contentDescription = stringResource(R.string.logo),
                 modifier = Modifier.size(120.dp)
             )
 
             Spacer(modifier = Modifier.height(16.dp))
 
             // Título
-            Text("Elija un método de pago", fontSize = 20.sp, color = MaterialTheme.colorScheme.onBackground)
+            Text(stringResource(R.string.elija_un_m_todo_de_pago), fontSize = 20.sp, color = MaterialTheme.colorScheme.onBackground)
 
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -109,21 +110,21 @@ fun PasarelaScreen(
                 IconButton(onClick = { /* Acción */ }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_card), // Icono de tarjeta
-                        contentDescription = "Tarjeta",
+                        contentDescription = stringResource(R.string.tarjeta),
                         modifier = Modifier.size(40.dp)
                     )
                 }
                 IconButton(onClick = { /* Acción */ }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_cash), // Icono de efectivo
-                        contentDescription = "Efectivo",
+                        contentDescription = stringResource(R.string.efectivo),
                         modifier = Modifier.size(40.dp)
                     )
                 }
                 IconButton(onClick = { /* Acción */ }) {
                     Image(
                         painter = painterResource(id = R.drawable.ic_crypto), // Icono de criptomonedas
-                        contentDescription = "Criptomoneda",
+                        contentDescription = stringResource(R.string.criptomoneda),
                         modifier = Modifier.size(40.dp)
                     )
                 }
@@ -132,9 +133,9 @@ fun PasarelaScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             // Campos de entrada
-            CampoTexto(label = "Titular de la tarjeta", valor = cardHolder) { cardHolder = it }
+            CampoTexto(label = stringResource(R.string.titular_de_la_tarjeta), valor = cardHolder) { cardHolder = it }
             Spacer(modifier = Modifier.height(12.dp))
-            CampoTexto(label = "Número de tarjeta", valor = cardNumber, keyboardType = KeyboardType.Number) { cardNumber = it }
+            CampoTexto(label = stringResource(R.string.n_mero_de_tarjeta), valor = cardNumber, keyboardType = KeyboardType.Number) { cardNumber = it }
             Spacer(modifier = Modifier.height(12.dp))
 
             Row(
@@ -142,12 +143,12 @@ fun PasarelaScreen(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 CampoTexto(
-                    label = "Fecha de vencimiento",
+                    label = stringResource(R.string.fecha_de_vencimiento),
                     valor = expiryDate,
                     keyboardType = KeyboardType.Number,
                     modifier = Modifier.weight(0.7f)
                 ) {// expiryDate = it
-                    input ->
+                        input ->
                     // Filtrar solo dígitos
                     val digitsOnly = input.filter { it.isDigit() }
                     // Formatear como MM/AA
@@ -164,7 +165,7 @@ fun PasarelaScreen(
                 Spacer(modifier = Modifier.width(8.dp))
 
                 CampoTexto(
-                    label = "CCV",
+                    label = stringResource(R.string.ccv),
                     valor = ccv,
                     keyboardType = KeyboardType.NumberPassword,
                     isPassword = true,
@@ -180,7 +181,8 @@ fun PasarelaScreen(
             Button(
                 onClick = {
                     if (cardHolder.isBlank() || cardNumber.length != 16 || expiryDate.length != 5 || ccv.length != 3) {
-                        Toast.makeText(context, "Por favor completa todos los campos correctamente", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(context,
+                            context.getString(R.string.completa_todos_los_campos), Toast.LENGTH_SHORT).show()
                         return@Button
                     }
 
@@ -208,7 +210,7 @@ fun PasarelaScreen(
                     .height(50.dp)
             ) {
                 Text(
-                    text = "Confirmar",
+                    text = stringResource(R.string.confirmar),
                     color = MaterialTheme.colorScheme.onPrimary,
                     fontSize = 18.sp
                 )
@@ -267,16 +269,16 @@ fun CampoTexto(
 fun CheckoutCompleteDialog(onAccept: () -> Unit, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
-        title = { Text(text = "Compra completada") },
-        text = { Text(text = "¡Gracias por tu compra!") },
+        title = { Text(text = stringResource(R.string.compra_completada)) },
+        text = { Text(text = stringResource(R.string.gracias_por_tu_compra)) },
         confirmButton = {
             Button(onClick = onAccept) {
-                Text(text = "Aceptar")
+                Text(text = stringResource(R.string.aceptar))
             }
         },
         dismissButton = {
             Button(onClick = onDismiss) {
-                Text(text = "Cancelar")
+                Text(text = stringResource(R.string.cancelar))
             }
         }
     )

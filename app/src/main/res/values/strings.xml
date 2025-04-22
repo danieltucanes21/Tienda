@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Tienda</string>
+    <string name="app_name">Pixel Plaza</string>
 
     <string name="new_account">Nueva Cuenta</string>
     <string name="description">Llena el siguiente formulario con tus datos personales. Crea una contraseña y registra una cuenta de correo electrónico.</string>
@@ -27,4 +27,67 @@
     <string name="error_password_mismatch">Las contraseñas no coinciden</string>
     <string name="error_empty_confirm_password">Confirma la contraseña</string>
     <string name="ingresar">Ingresar</string>
+    <string name="desarrollado_por">Desarrollado por:</string>
+    <string name="juan_manquillo">Juan Manquillo</string>
+    <string name="daniel_tucanes">Daniel Tucanes</string>
+    <string name="steven_chanchi">Steven Chanchi</string>
+    <string name="cart_item_count" formatted="true">Carrito (%1$d artículos)</string>
+    <string name="monto_total">Monto total:</string>
+    <string name="realizar_compra">Realizar compra</string>
+    <string name="total_price" formatted="true">$%1$.2f</string>
+    <string name="logo">Logo</string>
+    <string name="elija_un_m_todo_de_pago">Elija un método de pago</string>
+    <string name="tarjeta">Tarjeta</string>
+    <string name="efectivo">Efectivo</string>
+    <string name="criptomoneda">Criptomoneda</string>
+    <string name="titular_de_la_tarjeta">Titular de la tarjeta</string>
+    <string name="n_mero_de_tarjeta">Número de tarjeta</string>
+    <string name="fecha_de_vencimiento">Fecha de vencimiento</string>
+    <string name="ccv">CCV</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="compra_completada">Compra completada</string>
+    <string name="gracias_por_tu_compra">¡Gracias por tu compra!</string>
+    <string name="aceptar">Aceptar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="completa_todos_los_campos">Por favor completa todos los campos correctamente</string>
+    <string name="todos">Todos</string>
+    <string name="mujeres">Mujeres</string>
+    <string name="hombres">Hombres</string>
+    <string name="ni_os">Niños</string>
+    <string name="no_se_encontraron_productos">No se encontraron productos</string>
+    <string name="background">Background</string>
+    <string name="pixelplaza">PixelPlaza</string>
+    <string name="boutique">Boutique</string>
+    <string name="compras">Compras</string>
+    <string name="refrescar">Refrescar</string>
+    <string name="bolsa_vac_a">Bolsa vacía</string>
+    <string name="no_hay_compras_realizadas">No hay compras realizadas</string>
+    <string name="agregar_al_carrito">Agregar al carrito</string>
+    <string name="ingresa_la_cantidad_deseada">Ingresa la cantidad deseada:</string>
+    <string name="tallas">Tallas</string>
+    <string name="especificaciones">ESPECIFICACIONES</string>
+    <string name="corte_ajustado">• Corte ajustado</string>
+    <string name="cuello_redondo">• Cuello redondo</string>
+    <string name="_100_en_algod_n">• 100% en algodón</string>
+    <string name="calificaciones">CALIFICACIONES</string>
+    <string name="_4_8">4.8 ★★★★★</string>
+    <string name="descripcion">Descripción</string>
+    <string name="descripcion_app">La aplicación es una tienda de ropa, que propone un diseño simple pero intuitivo a la hora de usar las diferentes funcionalidades. La aplicación es de carácter educativo en un microproyecto cuyo enfoque ha sido emplear diferentes técnicas para el desarrollo de aplicaciones Android, por lo que los métodos de pago, así como algunas validaciones en cuanto al manejo de seguridad han sido dejadas a un lado para centrarse en crear una aplicación modificable, escalable en funcionalidades y usable.</string>
+    <string name="selected_size_label">Talla seleccionada: %1$s</string>
+    <string name="debes_iniciar_sesion">Debes iniciar sesión para agregar productos al carrito</string>
+    <string name="selecciona_una_talla">Por favor selecciona una talla</string>
+    <string name="menu">Menú</string>
+    <string name="pixel_plaza">Pixel Plaza</string>
+    <string name="agregar">Agregar</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="buscar_en_la_tienda">Buscar en la tienda</string>
+    <string name="buscar">Buscar</string>
+    <string name="limpiar_busqueda">Limpiar búsqueda</string>
+    <string name="perfil">Perfil</string>
+    <string name="brand_label">Marca: %1$s</string>
+    <string name="color_label">Color: %1$s</string>
+    <string name="error_short_password">La contraseña debe tener al menos 8 caracteres</string>
+    <string name="producto_agregado_al_carrito">Producto agregado al carrito</string>
+
+
 </resources>

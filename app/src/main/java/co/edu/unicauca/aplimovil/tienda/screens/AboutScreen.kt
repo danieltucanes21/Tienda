@@ -17,11 +17,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.edu.unicauca.aplimovil.tienda.R
 import androidx.compose.material3.MaterialTheme as MaterialTheme1
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -54,7 +56,7 @@ fun AboutScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Desarrollado por:",
+                    text = stringResource(R.string.desarrollado_por),
                     style = MaterialTheme1.typography.titleLarge.copy( // Tamaño más grande
                         fontWeight = FontWeight.Bold
                     ),
@@ -77,21 +79,21 @@ fun AboutScreen(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "Juan Manquillo",
+                        text = stringResource(R.string.juan_manquillo),
                         style = MaterialTheme1.typography.titleMedium, // Tamaño mediano
                         color = MaterialTheme1.colorScheme.onSurface,
                         textAlign = TextAlign.Center
                     )
 
                     Text(
-                        text = "Daniel Tucanes",
+                        text = stringResource(R.string.daniel_tucanes),
                         style = MaterialTheme1.typography.titleMedium,
                         color = MaterialTheme1.colorScheme.onSurface,
                         textAlign = TextAlign.Center
                     )
 
                     Text(
-                        text = "Steven Chanchi",
+                        text = stringResource(R.string.steven_chanchi),
                         style = MaterialTheme1.typography.titleMedium,
                         color = MaterialTheme1.colorScheme.onSurface,
                         textAlign = TextAlign.Center
@@ -115,11 +117,11 @@ fun AboutScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Descripción",
+                    text = stringResource(R.string.descripcion),
                     style = MaterialTheme1.run {
                         typography.titleLarge.copy(
-                                        fontWeight = FontWeight.Bold
-                                    )
+                            fontWeight = FontWeight.Bold
+                        )
                     },
                     color = MaterialTheme1.colorScheme.primary,
                     textAlign = TextAlign.Center,
@@ -135,7 +137,7 @@ fun AboutScreen(
                 )
 
                 Text(
-                    text = "La aplicación es una tienda de ropa, que propone un diseño simple pero intuitivo a la hora de usar las diferentes funcionalidades. La aplicación es de carácter educativo en un microproyecto cuyo enfoque ha sido emplear diferentes técnicas para el desarrollo de aplicaciones android, por lo que los métodos de pago, así como algunas validaciones en cuanto al manejo de seguridad han sido dejadas a un lado para centrarse en crear una aplicación modificable, escalable en funcionalidades y usable.",
+                    text = stringResource(R.string.descripcion_app),
                     style = MaterialTheme1.typography.bodyLarge, // Tamaño más grande
                     color = MaterialTheme1.colorScheme.onSurfaceVariant,
                     textAlign = TextAlign.Justify,

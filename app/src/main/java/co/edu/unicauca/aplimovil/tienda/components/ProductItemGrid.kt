@@ -39,6 +39,7 @@ import java.util.Calendar
 import android.R.attr.contentDescription
 import androidx.compose.foundation.clickable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.res.stringResource
 import coil.compose.rememberAsyncImagePainter
 
 
@@ -101,7 +102,7 @@ fun ProductItemGridCard(product: ProductInfo, modifier: Modifier = Modifier, onA
         ) {
             Icon(
                 imageVector = Icons.Default.AddCircle,
-                contentDescription = "Agregar",
+                contentDescription = stringResource(R.string.agregar),
                 tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(48.dp)
             )
@@ -129,6 +130,8 @@ fun ProductItemGridCardPreview () {
             publicType = PublicType.WOMEN
         ),
         onAddClick = {/* TO DO */},
-        modifier = Modifier.fillMaxWidth(0.5f).height(300.dp) // Ajusta el tamaño del preview
+        modifier = Modifier
+            .fillMaxWidth(0.5f)
+            .height(300.dp) // Ajusta el tamaño del preview
     )
 }

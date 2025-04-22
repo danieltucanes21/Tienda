@@ -24,9 +24,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import co.edu.unicauca.aplimovil.tienda.R
 import co.edu.unicauca.aplimovil.tienda.components.ProductItem
 import co.edu.unicauca.aplimovil.tienda.models.ProductCart
 import co.edu.unicauca.aplimovil.tienda.navigation.Navigator
@@ -53,7 +55,7 @@ fun CartScreen(
             .padding(16.dp)
     ) {
         Text(
-            text = "Carrito (${cartUiState.itemCount} items)",
+            text =  stringResource(R.string.cart_item_count, cartUiState.itemCount),
             fontSize = textTitleLarge,
             fontWeight = FontWeight.Bold,
             modifier = Modifier
@@ -98,13 +100,13 @@ fun CartTotalSection(
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Text(
-                text = "Monto total:",
+                text = stringResource(R.string.monto_total),
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = textLabelLarge,
                 fontFamily = MaterialTheme.typography.labelLarge.fontFamily
             )
             Text(
-                text = "$${"%.2f".format(total)}",
+                text = stringResource(R.string.total_price, total),
                 color = MaterialTheme.colorScheme.onSurface,
                 fontSize = textLabelLarge,
                 fontWeight = FontWeight.Bold,
@@ -123,7 +125,7 @@ fun CartTotalSection(
             if (isLoading) {
                 CircularProgressIndicator(color = MaterialTheme.colorScheme.onPrimary)
             } else {
-                Text(text = "Realizar compra", color = MaterialTheme.colorScheme.onPrimary)
+                Text(text = stringResource(R.string.realizar_compra), color = MaterialTheme.colorScheme.onPrimary)
             }
         }
     }

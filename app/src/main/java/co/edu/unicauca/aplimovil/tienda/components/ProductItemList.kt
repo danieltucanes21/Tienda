@@ -29,6 +29,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -63,7 +64,10 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onRemove: (
                 modifier = Modifier
                     .fillMaxHeight()
                     .width(120.dp)
-                    .background(Color.Gray, shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)) // Fondo
+                    .background(
+                        Color.Gray,
+                        shape = RoundedCornerShape(topStart = 12.dp, bottomStart = 12.dp)
+                    ) // Fondo
             ) {
                 Image(
                     //painter = product.painter,
@@ -92,12 +96,12 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onRemove: (
                     overflow = TextOverflow.Ellipsis
                 )
                 Text(
-                    text = "Brand: ${product.brand}",
+                    text = stringResource(R.string.brand_label, product.brand),
                     fontSize = textBodySmall,
                     color = MaterialTheme.colorScheme.onSecondaryContainer
                 )
                 Text(
-                    text = "Color: ${product.color}",
+                    text = stringResource(R.string.color_label, product.color),
                     fontSize = textBodySmall,
                     color = MaterialTheme.colorScheme.onSecondaryContainer,
                 )
@@ -117,7 +121,7 @@ fun ProductItem(product: ProductInfo, modifier: Modifier = Modifier, onRemove: (
             ) {
                 Icon(
                     imageVector = Icons.Default.Delete,
-                    contentDescription = "Eliminar",
+                    contentDescription = stringResource(R.string.eliminar),
                     tint = MaterialTheme.colorScheme.onSecondaryContainer
                 )
             }
